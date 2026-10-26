@@ -21,14 +21,14 @@ const PRODUCTS = [
     { id: 15, brand: 'H&M', name: 'Slim Fit Jeans', price: 3990, img: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&q=80', desc: 'Slim fit жинсэн өмд.' },
     { id: 16, brand: 'H&M', name: 'Cotton Hoodie', price: 3490, img: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&q=80', desc: '100% хөвөн hoodie.' },
     { id: 17, brand: 'H&M', name: 'Summer Dress', price: 4490, img: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&q=80', desc: 'Зуны хөнгөн даашинз.' },
-    { id: 18, brand: 'GAP', name: 'ヘビーウェイト フレンチテリー GAPロゴ バギースウェットパンツ', price: 3999, img: 'https://www2.assets-gap.com/webcontent/0063/087/043/cn63087043.jpg?q=h&w=655', desc: 'Зузаан френч терри өмд, GAP логотой, сул загвар. (GAP Japan албан ёсны дэлгүүр)', colors: ['ライトヘザーグレー', 'ネイビー', 'モダンレッド', 'カールストーン'], url: 'https://www.gap.co.jp/gap/heavyweight-french-terry-gap-logo-baggy-sweatpants/911044006.html?dwvar_911044006_color=911044006&cid=1177311' },
-    { id: 19, brand: 'GAP', name: 'デニム ミディ ペンシルスカート', price: 2999, img: 'https://www2.assets-gap.com/webcontent/0063/423/500/cn63423500.jpg?q=h&w=655', desc: 'Деним миди урт харандаа юбка. (GAP Japan албан ёсны дэлгүүр)', colors: ['ダークウォッシュ'], url: 'https://www.gap.co.jp/gap/denim-midi-pencil-skirt/1180244006.html?dwvar_1180244006_color=1180244006&cid=1177311' },
-    { id: 20, brand: 'GAP', name: 'モダンリブ ヘンリーネック マキシワンピース', price: 2999, img: 'https://www2.assets-gap.com/webcontent/0063/283/438/cn63283438.jpg?q=h&w=655', desc: 'Рип даавуун, хэнли хүзүүтэй урт даашинз. (GAP Japan албан ёсны дэлгүүр)', colors: ['トゥルーブラック', 'テラブラウン'], url: 'https://www.gap.co.jp/gap/modern-rib-henley-maxi-dress/912664016.html?dwvar_912664016_color=912664016&cid=1177311' },
-    { id: 23, brand: 'GAP', name: 'ハイライズ ミニ ユーティリティ ミニスカート・スコート', price: 2999, img: 'https://www2.assets-gap.com/webcontent/0063/087/225/cn63087225.jpg?q=h&w=655', desc: 'Өндөр суудалтай мини юбка-шорт. Үлдэгдэл бага. (GAP Japan албан ёсны дэлгүүр)', colors: ['ブラックモスグリーン', 'トゥルーブラック', 'ウィッカータン'], url: 'https://www.gap.co.jp/gap/high-rise-mini-utility-skort/898546036.html?dwvar_898546036_color=898546036&cid=1177311' },
-    { id: 24, brand: 'GAP', name: 'ミッドライズ ベルト バギーデニム', price: 4999, img: 'https://www2.assets-gap.com/webcontent/0062/132/779/cn62132779.jpg?q=h&w=655', desc: 'Бүстэй, сул загварын баги деним жийнс. (GAP Japan албан ёсны дэлгүүр)', colors: ['ライトインディゴ'], url: 'https://www.gap.co.jp/gap/mid-rise-belted-baggy-jeans/893789006.html?dwvar_893789006_color=893789006&cid=1177311' },
-    { id: 25, brand: 'GAP', name: 'オーガニックコットン ポプリン スクープネック トップス', price: 2999, img: 'https://www2.assets-gap.com/webcontent/0063/290/455/cn63290455.jpg?q=h&w=655', desc: 'Органик хөвөн поплин топ. (GAP Japan албан ёсны дэлгүүр)', colors: ['ブラック', 'ニューオフホワイト'], url: 'https://www.gap.co.jp/gap/organic-cotton-poplin-scoop-neck-top/913904006.html?dwvar_913904006_color=913904006&cid=1177311' },
-    { id: 26, brand: 'GAP', name: 'リラックスフィット ピケ クロップド ポロシャツ', price: 1499, img: 'https://www2.assets-gap.com/webcontent/0061/830/553/cn61830553.jpg?q=h&w=655', desc: 'Сул загварын богино поло цамц. (GAP Japan албан ёсны дэлгүүр)', colors: ['ポーセリンブルー', 'オプティックホワイト', 'ブルー', 'ムーンレスナイト'], url: 'https://www.gap.co.jp/gap/relaxed-pique-crop-polo/867536046.html?dwvar_867536046_color=867536046&cid=1177311' },
-    { id: 27, brand: 'GAP', name: 'ボクシーフィット オックスフォードシャツ', price: 2999, img: 'https://www2.assets-gap.com/webcontent/0061/220/296/cn61220296.jpg?q=h&w=655', desc: 'Бокси загварын оксфорд цамц. (GAP Japan албан ёсны дэлгүүр)', colors: ['ブラウンプレイド'], url: 'https://www.gap.co.jp/gap/oxford-shirt-in-boxy-fit/888336036.html?dwvar_888336036_color=888336036&cid=1177311' },
+    { id: 18, brand: 'GAP', name: 'ヘビーウェイト フレンチテリー GAPロゴ バギースウェットパンツ', price: 3999, img: 'https://www2.assets-gap.com/webcontent/0063/087/043/cn63087043.jpg?q=h&w=655', desc: 'Зузаан френч терри өмд, GAP логотой, сул загвар. (GAP Japan албан ёсны дэлгүүр)', colors: ['ライトヘザーグレー', 'ネイビー', 'モダンレッド', 'カールストーン'], url: 'https://www.gap.co.jp/gap/heavyweight-french-terry-gap-logo-baggy-sweatpants/911044006.html?dwvar_911044006_color=911044006&cid=1177311' , sizes: ['XXS', 'XS', 'S', 'M', 'L'], swatches: {'ライトヘザーグレー': 'https://www2.assets-gap.com/webcontent/0063/087/043/cn63087043.jpg?q=h&w=105', 'ネイビー': 'https://www2.assets-gap.com/webcontent/0062/898/692/cn62898692.jpg?q=h&w=105', 'モダンレッド': 'https://www2.assets-gap.com/webcontent/0062/764/801/cn62764801.jpg?q=h&w=105', 'カールストーン': 'https://www2.assets-gap.com/webcontent/0063/099/553/cn63099553.jpg?q=h&w=105'}, images: ['https://www2.assets-gap.com/webcontent/0063/087/043/cn63087043.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/087/067/cn63087067.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/087/047/cn63087047.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/087/080/cn63087080.jpg?q=h&w=655'] },
+    { id: 19, brand: 'GAP', name: 'デニム ミディ ペンシルスカート', price: 2999, img: 'https://www2.assets-gap.com/webcontent/0063/423/500/cn63423500.jpg?q=h&w=655', desc: 'Деним миди урт харандаа юбка. (GAP Japan албан ёсны дэлгүүр)', colors: ['ダークウォッシュ'], url: 'https://www.gap.co.jp/gap/denim-midi-pencil-skirt/1180244006.html?dwvar_1180244006_color=1180244006&cid=1177311' , sizes: ['23', '24', '25', '26', '27', '28', '29'], swatches: {'ダークウォッシュ': 'https://www2.assets-gap.com/webcontent/0063/423/500/cn63423500.jpg?q=h&w=105'}, images: ['https://www2.assets-gap.com/webcontent/0063/423/500/cn63423500.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/211/327/cn63211327.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/211/334/cn63211334.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/423/562/cn63423562.jpg?q=h&w=655'] },
+    { id: 20, brand: 'GAP', name: 'モダンリブ ヘンリーネック マキシワンピース', price: 2999, img: 'https://www2.assets-gap.com/webcontent/0063/283/438/cn63283438.jpg?q=h&w=655', desc: 'Рип даавуун, хэнли хүзүүтэй урт даашинз. (GAP Japan албан ёсны дэлгүүр)', colors: ['トゥルーブラック', 'テラブラウン'], url: 'https://www.gap.co.jp/gap/modern-rib-henley-maxi-dress/912664016.html?dwvar_912664016_color=912664016&cid=1177311' , sizes: ['XXS', 'XS', 'S', 'M', 'L'], swatches: {'トゥルーブラック': 'https://www2.assets-gap.com/webcontent/0063/283/438/cn63283438.jpg?q=h&w=105', 'テラブラウン': 'https://www2.assets-gap.com/webcontent/0062/913/721/cn62913721.jpg?q=h&w=105'}, images: ['https://www2.assets-gap.com/webcontent/0063/283/438/cn63283438.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/277/285/cn63277285.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/277/318/cn63277318.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/277/367/cn63277367.jpg?q=h&w=655'] },
+    { id: 23, brand: 'GAP', name: 'ハイライズ ミニ ユーティリティ ミニスカート・スコート', price: 2999, img: 'https://www2.assets-gap.com/webcontent/0063/087/225/cn63087225.jpg?q=h&w=655', desc: 'Өндөр суудалтай мини юбка-шорт. Үлдэгдэл бага. (GAP Japan албан ёсны дэлгүүр)', colors: ['トゥルーブラック', 'ウィッカータン', 'ブラックモスグリーン'], url: 'https://www.gap.co.jp/gap/high-rise-mini-utility-skort/898546036.html?dwvar_898546036_color=898546036&cid=1177311' , sizes: ['XXS', 'XS', 'S', 'M', 'L'], swatches: {'トゥルーブラック': 'https://www2.assets-gap.com/webcontent/0063/087/225/cn63087225.jpg?q=h&w=105', 'ウィッカータン': 'https://www2.assets-gap.com/webcontent/0063/078/835/cn63078835.jpg?q=h&w=105'}, images: ['https://www2.assets-gap.com/webcontent/0063/087/225/cn63087225.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/087/230/cn63087230.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/147/077/cn63147077.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/087/336/cn63087336.jpg?q=h&w=655'] },
+    { id: 24, brand: 'GAP', name: 'ミッドライズ ベルト バギーデニム', price: 4999, img: 'https://www2.assets-gap.com/webcontent/0062/132/779/cn62132779.jpg?q=h&w=655', desc: 'Бүстэй, сул загварын баги деним жийнс. (GAP Japan албан ёсны дэлгүүр)', colors: ['ライトインディゴ'], url: 'https://www.gap.co.jp/gap/mid-rise-belted-baggy-jeans/893789006.html?dwvar_893789006_color=893789006&cid=1177311' , sizes: ['23', '24', '25', '26', '27', '28', '29', '30'], swatches: {'ライトインディゴ': 'https://www2.assets-gap.com/webcontent/0062/132/779/cn62132779.jpg?q=h&w=105'}, images: ['https://www2.assets-gap.com/webcontent/0062/132/779/cn62132779.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0062/131/852/cn62131852.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0062/131/876/cn62131876.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0062/131/928/cn62131928.jpg?q=h&w=655'] },
+    { id: 25, brand: 'GAP', name: 'オーガニックコットン ポプリン スクープネック トップス', price: 2999, img: 'https://www2.assets-gap.com/webcontent/0063/290/455/cn63290455.jpg?q=h&w=655', desc: 'Органик хөвөн поплин топ. (GAP Japan албан ёсны дэлгүүр)', colors: ['ブラック', 'ニューオフホワイト'], url: 'https://www.gap.co.jp/gap/organic-cotton-poplin-scoop-neck-top/913904006.html?dwvar_913904006_color=913904006&cid=1177311' , sizes: ['XXS', 'XS', 'S', 'M', 'L'], swatches: {'ブラック': 'https://www2.assets-gap.com/webcontent/0063/290/455/cn63290455.jpg?q=h&w=105', 'ニューオフホワイト': 'https://www2.assets-gap.com/webcontent/0062/913/629/cn62913629.jpg?q=h&w=105'}, images: ['https://www2.assets-gap.com/webcontent/0063/290/455/cn63290455.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/289/270/cn63289270.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/289/267/cn63289267.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/289/302/cn63289302.jpg?q=h&w=655'] },
+    { id: 26, brand: 'GAP', name: 'リラックスフィット ピケ クロップド ポロシャツ', price: 1499, img: 'https://www2.assets-gap.com/webcontent/0061/830/553/cn61830553.jpg?q=h&w=655', desc: 'Сул загварын богино поло цамц. (GAP Japan албан ёсны дэлгүүр)', colors: ['ポーセリンブルー', 'オプティックホワイト', 'ブルー', 'ムーンレスナイト'], url: 'https://www.gap.co.jp/gap/relaxed-pique-crop-polo/867536046.html?dwvar_867536046_color=867536046&cid=1177311' , sizes: ['XS', 'S', 'M', 'L', 'XL'], swatches: {'ポーセリンブルー': 'https://www2.assets-gap.com/webcontent/0062/001/381/cn62001381.jpg?q=h&w=105', 'オプティックホワイト': 'https://www2.assets-gap.com/webcontent/0061/830/553/cn61830553.jpg?q=h&w=105', 'ブルー': 'https://www2.assets-gap.com/webcontent/0061/791/414/cn61791414.jpg?q=h&w=105', 'ムーンレスナイト': 'https://www2.assets-gap.com/webcontent/0061/791/429/cn61791429.jpg?q=h&w=105'}, images: ['https://www2.assets-gap.com/webcontent/0061/830/553/cn61830553.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0061/829/888/cn61829888.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0061/829/887/cn61829887.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0061/828/880/cn61828880.jpg?q=h&w=655'] },
+    { id: 27, brand: 'GAP', name: 'ボクシーフィット オックスフォードシャツ', price: 2999, img: 'https://www2.assets-gap.com/webcontent/0061/220/296/cn61220296.jpg?q=h&w=655', desc: 'Бокси загварын оксфорд цамц. (GAP Japan албан ёсны дэлгүүр)', colors: ['ブラウンプレイド'], url: 'https://www.gap.co.jp/gap/oxford-shirt-in-boxy-fit/888336036.html?dwvar_888336036_color=888336036&cid=1177311' , sizes: ['XS', 'S', 'M', 'L', 'XL'], swatches: {'ブラウンプレイド': 'https://www2.assets-gap.com/webcontent/0061/220/296/cn61220296.jpg?q=h&w=105'}, images: ['https://www2.assets-gap.com/webcontent/0061/220/296/cn61220296.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0061/220/317/cn61220317.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0061/220/331/cn61220331.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0061/220/358/cn61220358.jpg?q=h&w=655'] },
     { id: 21, brand: 'MICHAEL KORS', name: 'Leather Tote Bag', price: 38500, img: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80', desc: 'Жинхэнэ арьсан, багтаамжтай өдөр тутмын цүнх.' },
     { id: 22, brand: 'MICHAEL KORS', name: 'Leather Wallet', price: 16500, img: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80', desc: 'Жинхэнэ арьсан түрийвч, картны олон халаастай.' }
 ];
@@ -576,7 +576,7 @@ function openProductDetail(id, keepOpen = false) {
 
     selectedProduct = p;
     if (!keepOpen) {
-        selectedSize = 'M';
+        selectedSize = (p.sizes && p.sizes.length) ? (p.sizes.includes('M') ? 'M' : p.sizes[0]) : 'M';
         selectedColor = (p.colors && p.colors.length) ? p.colors[0] : 'black';
         selectedQty = 1;
     }
@@ -586,12 +586,28 @@ function openProductDetail(id, keepOpen = false) {
         { name: 'gray', hex: '#888888' }, { name: 'navy', hex: '#1a237e' },
         { name: 'red', hex: '#c0392b' }
     ];
-    const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+    const sizes = (p.sizes && p.sizes.length) ? p.sizes : ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+    const gallery = (p.images && p.images.length) ? p.images : [p.img];
     const t = translations[currentLang];
+
+    const colorOptionsHtml = (p.colors && p.colors.length)
+        ? p.colors.map(c => (p.swatches && p.swatches[c]) ? `
+            <button type="button" class="color-swatch ${c === selectedColor ? 'active' : ''}" data-full="${p.swatches[c].replace('w=105', 'w=655')}" onclick="selectColorUI(this, '${c}')" title="${c}"><img src="${p.swatches[c]}" alt="${c}"></button>
+        ` : `
+            <button type="button" class="color-chip ${c === selectedColor ? 'active' : ''}" onclick="selectColorUI(this, '${c}')"><span class="dot" style="background:${JP_COLOR_HEX[c] || '#ccc'}"></span>${c}</button>
+        `).join('')
+        : colors.map(c => `
+            <div class="color-circle ${c.name === selectedColor ? 'active' : ''}"
+                 style="background:${c.hex};${c.name === 'white' ? 'border:2px solid #ddd;' : ''}"
+                 onclick="selectColor(this, '${c.name}')" title="${c.name}"></div>
+        `).join('');
 
     $('product-detail-content').innerHTML = `
         <div class="detail-layout">
-            <img src="${p.img}" alt="${p.name}" class="detail-img">
+            <div class="detail-gallery">
+                <img id="detail-main-img" src="${gallery[0]}" alt="${p.name}" class="detail-img">
+                ${gallery.length > 1 ? `<div class="detail-thumbs">${gallery.map((src, i) => `<img src="${src}" class="detail-thumb ${i === 0 ? 'active' : ''}" onclick="selectThumb(this, '${src}')" alt="">`).join('')}</div>` : ''}
+            </div>
             <div class="detail-info">
                 <p class="brand-tag">${p.brand}</p>
                 <h2>${p.name}</h2>
@@ -600,22 +616,16 @@ function openProductDetail(id, keepOpen = false) {
                 ${p.url ? `<a class="official-link" href="${p.url}" target="_blank" rel="noopener">🔗 ${t.official_store}</a>` : ''}
 
                 <div class="selector-group">
-                    <label>${t.detail_size}</label>
-                    <div class="size-options">
-                        ${sizes.map(s => `<button class="size-btn ${s === selectedSize ? 'active' : ''}" onclick="selectSize(this, '${s}')">${s}</button>`).join('')}
+                    <label>${t.detail_color}: <span id="selected-color-name" class="selected-value">${selectedColor}</span></label>
+                    <div class="color-options">
+                        ${colorOptionsHtml}
                     </div>
                 </div>
 
                 <div class="selector-group">
-                    <label>${t.detail_color}</label>
-                    <div class="color-options">
-                        ${(p.colors && p.colors.length) ? p.colors.map(c => `
-                            <button type="button" class="color-chip ${c === selectedColor ? 'active' : ''}" onclick="selectColorChip(this, '${c}')">${c}</button>
-                        `).join('') : colors.map(c => `
-                            <div class="color-circle ${c.name === selectedColor ? 'active' : ''}"
-                                 style="background:${c.hex};${c.name === 'white' ? 'border:2px solid #ddd;' : ''}"
-                                 onclick="selectColor(this, '${c.name}')" title="${c.name}"></div>
-                        `).join('')}
+                    <label>${t.detail_size}</label>
+                    <div class="size-options">
+                        ${sizes.map(s => `<button class="size-btn ${s === selectedSize ? 'active' : ''}" onclick="selectSize(this, '${s}')">${s}</button>`).join('')}
                     </div>
                 </div>
 
@@ -628,7 +638,7 @@ function openProductDetail(id, keepOpen = false) {
                     </div>
                 </div>
 
-                <button class="btn btn-primary w-100" onclick="addToCartFromDetail()">
+                <button class="btn btn-primary w-100 detail-add-btn" onclick="addToCartFromDetail()">
                     🛒 ${t.btn_add_cart}
                 </button>
             </div>
@@ -653,16 +663,45 @@ function selectSize(btn, size) {
     selectedSize = size;
 }
 
-function selectColorChip(el, name) {
-    document.querySelectorAll('.color-chip').forEach(c => c.classList.remove('active'));
+const JP_COLOR_HEX = {
+    'ブラック': '#151515', 'トゥルーブラック': '#151515', 'ホワイト': '#ffffff',
+    'オプティックホワイト': '#ffffff', 'ニューオフホワイト': '#f3eee3',
+    'グレー': '#8a8a8a', 'ライトヘザーグレー': '#bcbcbc', 'ネイビー': '#1a237e',
+    'レッド': '#c0392b', 'モダンレッド': '#d21f2b', 'ブルー': '#2b5ea7',
+    'ポーセリンブルー': '#a8c4e0', 'ムーンレスナイト': '#23283b',
+    'ブラウン': '#6d4c41', 'テラブラウン': '#9a5b43', 'ブラウンプレイド': '#8a6d4f',
+    'ライトインディゴ': '#7fa3c7', 'ダークウォッシュ': '#2c3e50',
+    'ブラックモスグリーン': '#4a5548', 'ウィッカータン': '#c8a165', 'カールストーン': '#cfc8bb'
+};
+
+function selectColorUI(el, name) {
+    document.querySelectorAll('.color-chip, .color-swatch').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
     selectedColor = name;
+    const lbl = $('selected-color-name');
+    if (lbl) lbl.textContent = name;
+    const full = el.getAttribute('data-full');
+    if (full) {
+        const main = $('detail-main-img');
+        if (main) main.src = full;
+    }
 }
+
+function selectThumb(el, src) {
+    document.querySelectorAll('.detail-thumb').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    const main = $('detail-main-img');
+    if (main) main.src = src;
+}
+
+function selectColorChip(el, name) { selectColorUI(el, name); }
 
 function selectColor(el, color) {
     document.querySelectorAll('.color-circle').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
     selectedColor = color;
+    const lbl = $('selected-color-name');
+    if (lbl) lbl.textContent = color;
 }
 
 function changeQty(delta) {
