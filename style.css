@@ -1420,6 +1420,24 @@ button, input, select {
     margin-top: 6px;
 }
 
+.detail-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.detail-actions .btn { flex: 1; }
+
+.btn-buy-now {
+    background-color: #111827;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all var(--transition);
+}
+
+.btn-buy-now:hover { background-color: #000; }
+
 .color-chip {
     padding: 7px 13px;
     border: 1.5px solid var(--border-color);
