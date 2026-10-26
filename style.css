@@ -1361,6 +1361,47 @@ button, input, select {
     flex-wrap: wrap;
 }
 
+.color-chip {
+    padding: 7px 13px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 999px;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 0.82rem;
+    transition: all var(--transition);
+}
+
+.color-chip.active {
+    border-color: var(--primary-color);
+    background: var(--primary-light);
+    font-weight: 700;
+}
+
+.official-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.official-link:hover { text-decoration: underline; }
+
+.official-badge {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    background: rgba(0, 20, 137, 0.92);
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    padding: 3px 8px;
+    border-radius: 999px;
+}
+
 .size-btn {
     padding: 8px 16px;
     border: 1.5px solid var(--border-color);
