@@ -1301,7 +1301,10 @@ button, input, select {
 .product-modal-content {
     max-width: 520px;
     padding: 0;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 }
 
 .detail-layout {
