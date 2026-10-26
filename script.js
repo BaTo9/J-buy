@@ -109,6 +109,7 @@ const translations = {
         cart_total: 'Нийт дүн', btn_checkout: 'Төлбөр тооцоо', btn_continue: 'Худалдан авалт үргэлжлүүлэх',
         btn_add_cart: 'Сагсанд нэмэх',
         official_store: 'Албан ёсны дэлгүүрт харах',
+        btn_buy_now: 'Худалдаж авах',
         // Product detail
         detail_size: 'Размер', detail_color: 'Өнгө', detail_qty: 'Тоо ширхэг',
         // Success
@@ -172,6 +173,7 @@ const translations = {
         cart_total: 'Total', btn_checkout: 'Checkout', btn_continue: 'Continue Shopping',
         btn_add_cart: 'Add to Cart',
         official_store: 'View at official store',
+        btn_buy_now: 'Buy Now',
         detail_size: 'Size', detail_color: 'Color', detail_qty: 'Quantity',
         success_title: 'Order Successfully Placed!',
         success_order_label: 'Order number:',
@@ -232,6 +234,7 @@ const translations = {
         cart_total: '合計', btn_checkout: 'お支払い', btn_continue: '買い物を続ける',
         btn_add_cart: 'カートに追加',
         official_store: '公式ストアで見る',
+        btn_buy_now: '今すぐ購入',
         detail_size: 'サイズ', detail_color: '色', detail_qty: '数量',
         success_title: 'ご注文ありがとうございました！',
         success_order_label: '注文番号:',
@@ -638,9 +641,14 @@ function openProductDetail(id, keepOpen = false) {
                     </div>
                 </div>
 
-                <button class="btn btn-primary w-100 detail-add-btn" onclick="addToCartFromDetail()">
-                    🛒 ${t.btn_add_cart}
-                </button>
+                <div class="detail-actions">
+                    <button class="btn btn-primary detail-add-btn" onclick="addToCartFromDetail()">
+                        🛒 ${t.btn_add_cart}
+                    </button>
+                    <button class="btn btn-buy-now detail-add-btn" onclick="buyNowFromDetail()">
+                        ⚡ ${t.btn_buy_now}
+                    </button>
+                </div>
             </div>
         </div>
     `;
@@ -710,8 +718,8 @@ function changeQty(delta) {
     if (el) el.textContent = selectedQty;
 }
 
-function addToCartFromDetail() {
-    if (!selectedProduct) return;
+function addSelectedToCart() {
+    if (!selectedProduct) return false;
     const existing = cart.find(i => i.id === selectedProduct.id && i.size === selectedSize && i.color === selectedColor);
     if (existing) existing.qty += selectedQty;
     else cart.push({
@@ -720,8 +728,19 @@ function addToCartFromDetail() {
         size: selectedSize, color: selectedColor, qty: selectedQty
     });
     saveCart();
+    return true;
+}
+
+function addToCartFromDetail() {
+    if (!addSelectedToCart()) return;
     closeProductModal();
     showToast(translations[currentLang].msg_added_to_cart, 'success');
+}
+
+function buyNowFromDetail() {
+    if (!addSelectedToCart()) return;
+    closeProductModal();
+    goToCheckout();
 }
 
 function quickAddToCart(id) {
