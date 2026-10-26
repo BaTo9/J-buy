@@ -23,12 +23,14 @@ const PRODUCTS = [
     { id: 17, brand: 'H&M', name: 'Summer Dress', price: 4490, img: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&q=80', desc: 'Зуны хөнгөн даашинз.' },
     { id: 18, brand: 'GAP', name: 'Logo Hoodie', price: 4990, img: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&q=80', desc: 'GAP логотой сонгодог hoodie.' },
     { id: 19, brand: 'GAP', name: 'Khaki Pants', price: 4490, img: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400&q=80', desc: 'Сонгодог khaki өмд.' },
-    { id: 20, brand: 'GAP', name: 'Denim Shirt', price: 3990, img: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&q=80', desc: 'Denim цамц.' }
+    { id: 20, brand: 'GAP', name: 'Denim Shirt', price: 3990, img: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&q=80', desc: 'Denim цамц.' },
+    { id: 21, brand: 'MICHAEL KORS', name: 'Leather Tote Bag', price: 38500, img: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80', desc: 'Жинхэнэ арьсан, багтаамжтай өдөр тутмын цүнх.' },
+    { id: 22, brand: 'MICHAEL KORS', name: 'Leather Wallet', price: 16500, img: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80', desc: 'Жинхэнэ арьсан түрийвч, картны олон халаастай.' }
 ];
 
 const BRAND_COLORS = {
     'UNIQLO': '#FF0000', 'GU': '#0033A0', 'ZARA': '#000000',
-    'H&M': '#E50010', 'GAP': '#002F6C'
+    'H&M': '#E50010', 'GAP': '#002F6C', 'MICHAEL KORS': '#8A6D3B'
 };
 
 const SHIPPING_FEE = 1500;
