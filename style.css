@@ -1361,6 +1361,62 @@ button, input, select {
     flex-wrap: wrap;
 }
 
+.detail-thumbs {
+    display: flex;
+    gap: 8px;
+    padding: 10px 14px 2px;
+    overflow-x: auto;
+}
+
+.detail-thumb {
+    width: 54px;
+    height: 66px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.detail-thumb.active { border-color: var(--text-primary); }
+
+.selected-value { font-weight: 700; }
+
+.color-swatch {
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.color-swatch img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.color-swatch.active {
+    border-color: var(--text-primary);
+    box-shadow: 0 0 0 1.5px var(--text-primary);
+}
+
+.color-chip .dot {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    margin-right: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    vertical-align: -1px;
+}
+
+.detail-add-btn {
+    padding: 15px;
+    font-size: 1rem;
+    border-radius: 10px;
+    margin-top: 6px;
+}
+
 .color-chip {
     padding: 7px 13px;
     border: 1.5px solid var(--border-color);
