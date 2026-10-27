@@ -1138,7 +1138,7 @@ const PAYPAY_QR_URL = 'paypay-qr.jpg';
 // Банкны данснууд — шилжүүлгийн хэсэгт харагдана
 const BANK_ACCOUNTS = {
     mn: { bank: 'М Банк', number: 'MN970039008000004436', holder: 'Дармаа Батдэлгэр' },
-    jp: { bank: 'Sony Bank', branch: '001', number: '7403210', holder: 'DARMAA BATDELGER' }
+    jp: { bank: 'ソニー銀行', branch: '001', number: '7403210', holder: 'ダルマー バタデルゲル' }
 };
 
 function copyText(elId) {
