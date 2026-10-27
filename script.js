@@ -3,6 +3,9 @@
  *  JAPANBUY - Product Config (ЭНД ЗӨВХӨН ӨӨРЧИЛНӨ)
  * ============================================================
  */
+const ICON_SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>';
+const ICON_MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+
 const PRODUCTS = [
     { id: 18, brand: 'GAP', cat: 'women', name: 'ヘビーウェイト フレンチテリー GAPロゴ バギースウェットパンツ', nameMn: 'GAP логотой өргөн свит өмд', nameEn: 'Heavyweight French Terry GAP Logo Baggy Sweatpants', price: 3999, img: 'https://www2.assets-gap.com/webcontent/0063/087/043/cn63087043.jpg?q=h&w=655', desc: 'Зузаан френч терри өмд, GAP логотой, сул загвар. (GAP Japan албан ёсны дэлгүүр)', colors: ['ライトヘザーグレー', 'ネイビー', 'モダンレッド', 'カールストーン'], url: 'https://www.gap.co.jp/gap/heavyweight-french-terry-gap-logo-baggy-sweatpants/911044006.html?dwvar_911044006_color=911044006&cid=1177311' , sizes: ['XXS', 'XS', 'S', 'M', 'L'], swatches: {'ライトヘザーグレー': 'https://www2.assets-gap.com/webcontent/0063/087/043/cn63087043.jpg?q=h&w=105', 'ネイビー': 'https://www2.assets-gap.com/webcontent/0062/898/692/cn62898692.jpg?q=h&w=105', 'モダンレッド': 'https://www2.assets-gap.com/webcontent/0062/764/801/cn62764801.jpg?q=h&w=105', 'カールストーン': 'https://www2.assets-gap.com/webcontent/0063/099/553/cn63099553.jpg?q=h&w=105'}, images: ['https://www2.assets-gap.com/webcontent/0063/087/043/cn63087043.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/087/067/cn63087067.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/087/047/cn63087047.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/087/080/cn63087080.jpg?q=h&w=655'] },
     { id: 19, brand: 'GAP', cat: 'women', name: 'デニム ミディ ペンシルスカート', nameMn: 'Жинсэн миди харандаа юбка', nameEn: 'Denim Midi Pencil Skirt', price: 2999, img: 'https://www2.assets-gap.com/webcontent/0063/423/500/cn63423500.jpg?q=h&w=655', desc: 'Деним миди урт харандаа юбка. (GAP Japan албан ёсны дэлгүүр)', colors: ['ダークウォッシュ'], url: 'https://www.gap.co.jp/gap/denim-midi-pencil-skirt/1180244006.html?dwvar_1180244006_color=1180244006&cid=1177311' , sizes: ['23', '24', '25', '26', '27', '28', '29'], swatches: {'ダークウォッシュ': 'https://www2.assets-gap.com/webcontent/0063/423/500/cn63423500.jpg?q=h&w=105'}, images: ['https://www2.assets-gap.com/webcontent/0063/423/500/cn63423500.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/211/327/cn63211327.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/211/334/cn63211334.jpg?q=h&w=655', 'https://www2.assets-gap.com/webcontent/0063/423/562/cn63423562.jpg?q=h&w=655'] },
@@ -474,11 +477,11 @@ function syncMenuControls() {
         b.classList.toggle('active', b.dataset.lang === currentLang);
     });
     const themeBtn = $('menu-theme-btn');
-    if (themeBtn) themeBtn.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+    if (themeBtn) themeBtn.innerHTML = currentTheme === 'dark' ? ICON_MOON : ICON_SUN;
 }
 
 function updateThemeIcon() {
-    themeToggleBtn.textContent = currentTheme === 'dark' ? '🌞' : '🌛';
+    themeToggleBtn.innerHTML = currentTheme === 'dark' ? ICON_SUN : ICON_MOON;
 }
 
 // ================= LANGUAGE (САЙЖРУУЛСАН) =================
