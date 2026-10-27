@@ -2250,6 +2250,7 @@ body {
     display: flex;
     gap: 28px;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .desktop-nav a {
@@ -2271,6 +2272,15 @@ body {
     .desktop-nav {
         display: block;
         border-top: 1px solid var(--border-color);
+    }
+
+    html { background: #d7dee9; }
+    html[data-theme="dark"] { background: #0b1120; }
+
+    body {
+        max-width: 1280px;
+        margin: 0 auto;
+        box-shadow: 0 0 45px rgba(15, 35, 70, 0.18);
     }
 
     .hamburger-menu { display: none; }
