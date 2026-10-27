@@ -630,6 +630,25 @@ button, input, select {
 
 .bank-account p strong { color: var(--text-primary); }
 
+.copy-btn {
+    margin-left: 8px;
+    padding: 3px 11px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1.5px solid var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+    border-radius: 999px;
+    cursor: pointer;
+    vertical-align: 1px;
+    transition: all var(--transition);
+}
+
+.copy-btn:active {
+    background: var(--primary-color);
+    color: #fff;
+}
+
 /* ================= PRODUCT GRID ================= */
 .product-grid {
     display: grid;
