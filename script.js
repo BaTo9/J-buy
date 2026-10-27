@@ -767,8 +767,8 @@ function updateAuthUI() {
     } else {
         userBtn.title = t.btn_login;
         if (mobileLoginLabel) mobileLoginLabel.textContent = t.btn_login;
-        loginPrompt.classList.remove('hidden');
-        productsWrapper.classList.add('hidden');
+        loginPrompt.classList.add('hidden');
+        productsWrapper.classList.remove('hidden');
     }
 }
 
@@ -785,7 +785,6 @@ function iname(item) {
 }
 
 function renderProducts() {
-    if (!isLoggedIn) return;
 
     let filtered = PRODUCTS;
     if (currentBrandFilter !== 'all') filtered = filtered.filter(p => p.brand === currentBrandFilter);
@@ -838,10 +837,6 @@ function searchProducts() { /* input event handles */ }
 
 // ================= PRODUCT DETAIL =================
 function openProductDetail(id, keepOpen = false) {
-    if (!isLoggedIn) {
-        openAuthModal('login');
-        return;
-    }
 
     const p = PRODUCTS.find(x => x.id === id);
     if (!p) return;
@@ -1062,7 +1057,6 @@ function bnavGo(action) {
 }
 
 function openCart() {
-    if (!isLoggedIn) { openAuthModal('login'); return; }
     renderCart();
     cartModal.classList.add('active');
     document.body.style.overflow = 'hidden';
