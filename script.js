@@ -66,6 +66,13 @@ const EXCHANGE_RATE = 70; // 1 JPY ≈ 70 MNT
 let currentLang = localStorage.getItem('lang') || 'mn';
 let currentTheme = localStorage.getItem('theme') || 'light';
 let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+// ===== SUPABASE (жинхэнэ бүртгэл) — URL ба ANON KEY оруулбал идэвхжинэ =====
+const SUPABASE_URL = '';
+const SUPABASE_ANON_KEY = '';
+const USE_SUPABASE = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
+let sb = null;
+let currentUser = null; // { id, email, name, role }
 let currentBrandFilter = 'all';
 let currentCategory = 'all';
 let currentSearchQuery = '';
@@ -129,6 +136,17 @@ const translations = {
         menu_title: 'Цэс', menu_lang_label: 'ХЭЛ', menu_theme_label: 'ЗАГВАР',
         theme_light: 'Гэрэл', theme_dark: 'Харанхуй', nav_cart: 'Миний сагс',
         nav_cart_short: 'Сагс', nav_account: 'Бүртгэл',
+        nav_admin: 'Админ', forgot_password: 'Нууц үгээ мартсан уу?',
+        form_new_password: 'Шинэ нууц үг', btn_set_password: 'Нууц үг шинэчлэх',
+        msg_check_email: 'Бүртгэл үүслээ! Имэйл рүү тань очсон холбоосоор баталгаажуулна уу.',
+        msg_reset_sent: 'Нууц үг сэргээх холбоосыг имэйл рүү тань явууллаа.',
+        msg_fill_email: 'Эхлээд имэйлээ бичнэ үү',
+        msg_reset_unavailable: 'Энэ боломж жинхэнэ бүртгэл идэвхжсэний дараа ажиллана.',
+        msg_password_updated: 'Нууц үг шинэчлэгдлээ', msg_login_error: 'Имэйл эсвэл нууц үг буруу байна',
+        msg_order_error: 'Захиалга хадгалахад алдаа гарлаа. Дахин оролдоно уу.',
+        admin_orders_title: 'Захиалгууд (Админ)', admin_no_orders: 'Захиалга одоогоор алга',
+        msg_status_updated: 'Төлөв шинэчлэгдлээ', btn_back_home: 'Нүүр хуудас руу буцах',
+        st_new: 'Шинэ', st_paid: 'Төлбөр төлөгдсөн', st_shipped: 'Илгээгдсэн', st_done: 'Дууссан', st_cancelled: 'Цуцлагдсан',
         pay_paypay_note: 'PayPay QR код энд гарна',
         pay_paypay_hint: 'QR кодыг PayPay аппаараа уншуулж төлбөрөө хийгээд, захиалгаа баталгаажуулна уу.',
         form_name: 'Овог нэр *', form_phone: 'Утас *', form_address: 'Хаяг *',
@@ -205,6 +223,17 @@ const translations = {
         menu_title: 'Menu', menu_lang_label: 'LANGUAGE', menu_theme_label: 'THEME',
         theme_light: 'Light', theme_dark: 'Dark', nav_cart: 'My Cart',
         nav_cart_short: 'Cart', nav_account: 'Account',
+        nav_admin: 'Admin', forgot_password: 'Forgot your password?',
+        form_new_password: 'New password', btn_set_password: 'Update password',
+        msg_check_email: 'Account created! Please confirm via the link sent to your email.',
+        msg_reset_sent: 'A password reset link was sent to your email.',
+        msg_fill_email: 'Please enter your email first',
+        msg_reset_unavailable: 'Available once real accounts are enabled.',
+        msg_password_updated: 'Password updated', msg_login_error: 'Wrong email or password',
+        msg_order_error: 'Could not save the order. Please try again.',
+        admin_orders_title: 'Orders (Admin)', admin_no_orders: 'No orders yet',
+        msg_status_updated: 'Status updated', btn_back_home: 'Back to home',
+        st_new: 'New', st_paid: 'Paid', st_shipped: 'Shipped', st_done: 'Done', st_cancelled: 'Cancelled',
         pay_paypay_note: 'PayPay QR code will appear here',
         pay_paypay_hint: 'Scan the QR code with your PayPay app to pay, then confirm your order.',
         form_name: 'Full Name *', form_phone: 'Phone *', form_address: 'Address *',
@@ -277,6 +306,17 @@ const translations = {
         menu_title: 'メニュー', menu_lang_label: '言語', menu_theme_label: 'テーマ',
         theme_light: 'ライト', theme_dark: 'ダーク', nav_cart: 'カート',
         nav_cart_short: 'カート', nav_account: 'アカウント',
+        nav_admin: '管理者', forgot_password: 'パスワードをお忘れですか？',
+        form_new_password: '新しいパスワード', btn_set_password: 'パスワードを更新',
+        msg_check_email: '登録しました！メールに届いたリンクで確認してください。',
+        msg_reset_sent: 'パスワード再設定リンクをメールに送りました。',
+        msg_fill_email: 'まずメールアドレスを入力してください',
+        msg_reset_unavailable: '本登録が有効になると使えます。',
+        msg_password_updated: 'パスワードを更新しました', msg_login_error: 'メールまたはパスワードが違います',
+        msg_order_error: '注文を保存できませんでした。もう一度お試しください。',
+        admin_orders_title: '注文一覧（管理者）', admin_no_orders: '注文はまだありません',
+        msg_status_updated: 'ステータスを更新しました', btn_back_home: 'ホームに戻る',
+        st_new: '新規', st_paid: '支払済', st_shipped: '発送済', st_done: '完了', st_cancelled: 'キャンセル',
         pay_paypay_note: 'PayPay QRコードがここに表示されます',
         pay_paypay_hint: 'PayPayアプリでQRコードを読み取ってお支払い後、注文を確定してください。',
         form_name: '氏名 *', form_phone: '電話 *', form_address: '住所 *',
@@ -358,6 +398,7 @@ function init() {
     renderProducts();
     setupEventListeners();
     syncMenuControls();
+    initSupabase();
 }
 init();
 
@@ -543,11 +584,13 @@ function toggleMobileMenu(open) {
 }
 
 // ================= AUTH =================
-function handleUserClick() {
+async function handleUserClick() {
     if (isLoggedIn) {
         const t = translations[currentLang];
         if (confirm(t.msg_confirm_logout)) {
+            if (USE_SUPABASE && sb) { try { await sb.auth.signOut(); } catch (err) {} }
             isLoggedIn = false;
+            currentUser = null;
             localStorage.setItem('isLoggedIn', 'false');
             updateAuthUI();
             renderProducts();
@@ -556,6 +599,79 @@ function handleUserClick() {
     } else {
         openAuthModal('login');
     }
+}
+
+async function applySession(session) {
+    if (!session || !session.user) {
+        currentUser = null;
+        isLoggedIn = false;
+        localStorage.setItem('isLoggedIn', 'false');
+        updateAuthUI();
+        renderProducts();
+        return;
+    }
+    let profile = null;
+    try {
+        const { data } = await sb.from('profiles').select('name, role').eq('id', session.user.id).single();
+        profile = data;
+    } catch (err) { /* profile байхгүй бол энгийн хэрэглэгч */ }
+    currentUser = {
+        id: session.user.id,
+        email: session.user.email,
+        name: (profile && profile.name) || (session.user.user_metadata && session.user.user_metadata.name) || '',
+        role: (profile && profile.role) || 'user'
+    };
+    isLoggedIn = true;
+    localStorage.setItem('isLoggedIn', 'true');
+    updateAuthUI();
+    renderProducts();
+}
+
+async function initSupabase() {
+    if (!USE_SUPABASE || !window.supabase) return;
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    try {
+        const { data } = await sb.auth.getSession();
+        if (data && data.session) await applySession(data.session);
+    } catch (err) { /* сүлжээний алдаа бол демо горимоор үлдэнэ */ }
+    sb.auth.onAuthStateChange(async (event, session) => {
+        if (event === 'PASSWORD_RECOVERY') openResetForm();
+        else if (event === 'SIGNED_OUT') await applySession(null);
+        else if (event === 'SIGNED_IN' && session) await applySession(session);
+    });
+}
+
+async function handleForgotPassword() {
+    const t = translations[currentLang];
+    if (!(USE_SUPABASE && sb)) { showToast(t.msg_reset_unavailable, 'info'); return; }
+    const email = $('login-email').value.trim();
+    if (!email) { showToast(t.msg_fill_email, 'warning'); return; }
+    const { error } = await sb.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + window.location.pathname
+    });
+    if (error) { showToast(error.message, 'error'); return; }
+    showToast(t.msg_reset_sent, 'success');
+}
+
+function openResetForm() {
+    authModal.classList.add('active');
+    loginForm.classList.remove('active');
+    registerForm.classList.remove('active');
+    $('reset-form').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+async function handleResetPassword(e) {
+    e.preventDefault();
+    const t = translations[currentLang];
+    if (!(USE_SUPABASE && sb)) return;
+    const password = $('reset-password').value;
+    const { error } = await sb.auth.updateUser({ password });
+    if (error) { showToast(error.message, 'error'); return; }
+    $('reset-form').classList.remove('active');
+    $('reset-form').reset();
+    closeAuthModal();
+    showToast(t.msg_password_updated, 'success');
 }
 
 function openAuthModal(tab = 'login') {
@@ -571,6 +687,8 @@ function openAuthModal(tab = 'login') {
 function closeAuthModal() {
     authModal.classList.remove('active');
     document.body.style.overflow = '';
+    const rf = $('reset-form');
+    if (rf) rf.classList.remove('active');
 }
 
 function switchAuthTab(tab) {
@@ -579,32 +697,66 @@ function switchAuthTab(tab) {
     tabRegister.classList.toggle('active', !isLogin);
     loginForm.classList.toggle('active', isLogin);
     registerForm.classList.toggle('active', !isLogin);
+    const rf = $('reset-form');
+    if (rf) rf.classList.remove('active');
 }
 
-function handleLogin(e) {
+async function handleLogin(e) {
     e.preventDefault();
+    const t = translations[currentLang];
+    if (USE_SUPABASE && sb) {
+        const email = $('login-email').value.trim();
+        const password = $('login-password').value;
+        const { data, error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) { showToast(t.msg_login_error, 'error'); return; }
+        await applySession(data.session);
+        closeAuthModal();
+        showToast(t.msg_login_success, 'success');
+        loginForm.reset();
+        return;
+    }
     isLoggedIn = true;
     localStorage.setItem('isLoggedIn', 'true');
     updateAuthUI();
     closeAuthModal();
     renderProducts();
-    showToast(translations[currentLang].msg_login_success, 'success');
+    showToast(t.msg_login_success, 'success');
     loginForm.reset();
 }
 
-function handleRegister(e) {
+async function handleRegister(e) {
     e.preventDefault();
+    const t = translations[currentLang];
+    if (USE_SUPABASE && sb) {
+        const name = $('reg-name').value.trim();
+        const email = $('reg-email').value.trim();
+        const password = $('reg-password').value;
+        const { data, error } = await sb.auth.signUp({ email, password, options: { data: { name } } });
+        if (error) { showToast(error.message, 'error'); return; }
+        if (data.session) {
+            await applySession(data.session);
+            closeAuthModal();
+            showToast(t.msg_register_success, 'success');
+        } else {
+            closeAuthModal();
+            showToast(t.msg_check_email, 'info');
+        }
+        registerForm.reset();
+        return;
+    }
     isLoggedIn = true;
     localStorage.setItem('isLoggedIn', 'true');
     updateAuthUI();
     closeAuthModal();
     renderProducts();
-    showToast(translations[currentLang].msg_register_success, 'success');
+    showToast(t.msg_register_success, 'success');
     registerForm.reset();
 }
 
 function updateAuthUI() {
     const t = translations[currentLang];
+    const adminItem = $('admin-nav-item');
+    if (adminItem) adminItem.style.display = (isLoggedIn && currentUser && currentUser.role === 'admin') ? '' : 'none';
     if (isLoggedIn) {
         userBtn.title = currentLang === 'jp' ? 'ログアウト' : currentLang === 'en' ? 'Logout' : 'Гарах';
         if (mobileLoginLabel) mobileLoginLabel.textContent = currentLang === 'jp' ? 'ログアウト' : currentLang === 'en' ? 'Logout' : 'Гарах';
@@ -1099,7 +1251,7 @@ function renderCheckout() {
 }
 
 // ================= PAYMENT =================
-function processPayment() {
+async function processPayment() {
     const t = translations[currentLang];
     if (!isLoggedIn) { openAuthModal('login'); return; }
     if (cart.length === 0) { showToast(t.msg_cart_empty, 'warning'); return; }
@@ -1121,6 +1273,16 @@ function processPayment() {
             showToast(t.msg_fill_fields, 'error');
             return;
         }
+    }
+
+    if (USE_SUPABASE && sb && currentUser) {
+        const items = cart.map(i => ({ id: i.id, name: iname(i), size: i.size || '', color: i.color || '', qty: i.qty, price: i.price }));
+        const total = cart.reduce((s, i) => s + i.price * i.qty, 0) + SHIPPING_FEE;
+        const { error } = await sb.from('orders').insert({
+            user_id: currentUser.id, email: currentUser.email,
+            name, phone, address, items, total, payment_method: selectedPaymentMethod
+        });
+        if (error) { showToast(t.msg_order_error, 'error'); return; }
     }
 
     const orderNum = '#JB' + Date.now().toString().slice(-8);
@@ -1154,10 +1316,16 @@ function finishOrder() {
 function navigateTo(viewName) {
     homeView.classList.remove('active');
     checkoutView.classList.remove('active');
+    const adminView = $('admin-view');
+    if (adminView) adminView.classList.remove('active');
     if (viewName === 'home') { homeView.classList.add('active'); setBnavActive('home'); }
     if (viewName === 'checkout') {
         checkoutView.classList.add('active');
         renderCheckout();
+    }
+    if (viewName === 'admin' && adminView) {
+        adminView.classList.add('active');
+        loadAdminOrders();
     }
     toggleMobileMenu(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1167,6 +1335,45 @@ function closeModal(modal) {
     if (!modal) return;
     modal.classList.remove('active');
     document.body.style.overflow = '';
+}
+
+// ================= ADMIN =================
+function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+const ORDER_STATUSES = ['new', 'paid', 'shipped', 'done', 'cancelled'];
+
+async function loadAdminOrders() {
+    const box = $('admin-orders');
+    if (!box) return;
+    const t = translations[currentLang];
+    if (!(USE_SUPABASE && sb)) { box.innerHTML = ''; return; }
+    box.innerHTML = '<p class="admin-note">...</p>';
+    const { data, error } = await sb.from('orders').select('*').order('created_at', { ascending: false }).limit(100);
+    if (error) { box.innerHTML = '<p class="admin-note">' + esc(t.msg_order_error) + '</p>'; return; }
+    if (!data || data.length === 0) { box.innerHTML = '<p class="admin-note">' + esc(t.admin_no_orders) + '</p>'; return; }
+    box.innerHTML = data.map(o => {
+        const itemsHtml = (o.items || []).map(i =>
+            `<div class="admin-item"><span>${esc(i.name)} (${esc(i.size)} ${esc(i.color)}) × ${i.qty}</span><span>¥${(i.price * i.qty).toLocaleString()}</span></div>`
+        ).join('');
+        const opts = ORDER_STATUSES.map(s => `<option value="${s}" ${s === o.status ? 'selected' : ''}>${esc(t['st_' + s] || s)}</option>`).join('');
+        const date = new Date(o.created_at).toLocaleString();
+        return `<div class="admin-order">
+            <div class="admin-order-head"><strong>#${o.id}</strong><span>${esc(date)}</span></div>
+            <div class="admin-order-meta">${esc(o.name)} · ${esc(o.phone)} · ${esc(o.address)}</div>
+            <div class="admin-order-meta">${esc(o.email)} · ${esc(o.payment_method)}</div>
+            ${itemsHtml}
+            <div class="admin-order-foot"><strong>¥${(o.total || 0).toLocaleString()}</strong>
+            <select onchange="updateOrderStatus(${o.id}, this.value)">${opts}</select></div>
+        </div>`;
+    }).join('');
+}
+
+async function updateOrderStatus(id, status) {
+    if (!(USE_SUPABASE && sb)) return;
+    const { error } = await sb.from('orders').update({ status }).eq('id', id);
+    if (!error) showToast(translations[currentLang].msg_status_updated, 'success');
 }
 
 console.log('✅ JAPANBUY ачаалагдлаа! Хэл:', currentLang, '| Бүтээгдэхүүн:', PRODUCTS.length);
