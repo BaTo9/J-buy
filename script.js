@@ -98,6 +98,10 @@ const translations = {
         checkout_subtotal: 'Дэд бараа үнэ', checkout_total: 'Нийт дүн (JPY)',
         free_shipping: 'Карго (олирлоор)',
         ship_info: 'Хүргэлтийн мэдээлэл', pay_info: 'Төлбөрийн мэдээлэл',
+        pay_visa: 'Visa карт', pay_bank: 'Банкны шилжүүлэг', pay_method_label: 'Төлбөрийн хэлбэр:',
+        pay_bank_note: 'Захиалга баталгаажуулсны дараа шилжүүлэх дансны мэдээллийг танд илгээнэ. Шилжүүлэг хийгдсэний дараа таны захиалга баталгаажна.',
+        pay_paypay_note: 'PayPay QR код энд гарна',
+        pay_paypay_hint: 'QR кодыг PayPay аппаараа уншуулж төлбөрөө хийгээд, захиалгаа баталгаажуулна уу.',
         form_name: 'Овог нэр *', form_phone: 'Утас *', form_address: 'Хаяг *',
         form_card_number: 'Картын дугаар', form_expiry: 'Хугацаа',
         placeholder_phone: '0901234567', placeholder_address: 'Улаанбаатар, Сүхбаатар дүүрэг...',
@@ -163,6 +167,10 @@ const translations = {
         checkout_subtotal: 'Subtotal', checkout_total: 'Total (JPY)',
         free_shipping: 'Shipping (approx.)',
         ship_info: 'Shipping Information', pay_info: 'Payment Information',
+        pay_visa: 'Visa card', pay_bank: 'Bank transfer', pay_method_label: 'Payment method:',
+        pay_bank_note: 'After you confirm the order, we will send you the bank account details. Your order is confirmed once the transfer arrives.',
+        pay_paypay_note: 'PayPay QR code will appear here',
+        pay_paypay_hint: 'Scan the QR code with your PayPay app to pay, then confirm your order.',
         form_name: 'Full Name *', form_phone: 'Phone *', form_address: 'Address *',
         form_card_number: 'Card Number', form_expiry: 'Expiry',
         placeholder_phone: '0901234567', placeholder_address: 'Ulaanbaatar, Sukhbaatar district...',
@@ -224,6 +232,10 @@ const translations = {
         checkout_subtotal: '小計', checkout_total: '合計 (JPY)',
         free_shipping: '送料（概算）',
         ship_info: '配送情報', pay_info: 'お支払い情報',
+        pay_visa: 'Visaカード', pay_bank: '銀行振込', pay_method_label: 'お支払い方法:',
+        pay_bank_note: 'ご注文確定後、振込先の口座情報をお送りします。お振込み確認後に注文が確定します。',
+        pay_paypay_note: 'PayPay QRコードがここに表示されます',
+        pay_paypay_hint: 'PayPayアプリでQRコードを読み取ってお支払い後、注文を確定してください。',
         form_name: '氏名 *', form_phone: '電話 *', form_address: '住所 *',
         form_card_number: 'カード番号', form_expiry: '有効期限',
         placeholder_phone: '0901234567', placeholder_address: 'ウランバートル、スフバートル区...',
@@ -840,8 +852,28 @@ function goToCheckout() {
 }
 
 // ================= CHECKOUT =================
+// PayPay QR зургийн хаяг (хоосон бол placeholder харагдана)
+const PAYPAY_QR_URL = '';
+let selectedPaymentMethod = 'visa';
+
+function selectPaymentMethod(method, el) {
+    selectedPaymentMethod = method;
+    document.querySelectorAll('.pay-method').forEach(b => b.classList.toggle('active', b.dataset.method === method));
+    ['visa', 'bank', 'paypay'].forEach(m => {
+        const p = $('pay-panel-' + m);
+        if (p) p.classList.toggle('hidden', m !== method);
+    });
+}
+
 function renderCheckout() {
     const t = translations[currentLang];
+
+    if (PAYPAY_QR_URL) {
+        const img = $('paypay-qr-img');
+        const note = $('paypay-qr-note');
+        if (img) { img.src = PAYPAY_QR_URL; img.style.display = 'block'; }
+        if (note) note.style.display = 'none';
+    }
 
     if (cart.length === 0) {
         checkoutItems.innerHTML = `<p style="text-align:center;color:var(--text-secondary);padding:20px;">${t.msg_cart_empty}</p>`;
@@ -888,8 +920,20 @@ function processPayment() {
         return;
     }
 
+    if (selectedPaymentMethod === 'visa') {
+        const num = $('card-number').value.replace(/\s/g, '');
+        const exp = $('card-expiry').value.trim();
+        const cvv = $('card-cvv').value.trim();
+        if (num.length < 12 || !exp || cvv.length < 3) {
+            showToast(t.msg_fill_fields, 'error');
+            return;
+        }
+    }
+
     const orderNum = '#JB' + Date.now().toString().slice(-8);
     $('order-number').textContent = orderNum;
+    const payEl = $('order-payment');
+    if (payEl) payEl.textContent = selectedPaymentMethod === 'visa' ? t.pay_visa : selectedPaymentMethod === 'bank' ? t.pay_bank : 'PayPay QR';
 
     cart = [];
     saveCart();
