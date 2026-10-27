@@ -68,8 +68,8 @@ let currentTheme = localStorage.getItem('theme') || 'light';
 let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
 // ===== SUPABASE (жинхэнэ бүртгэл) — URL ба ANON KEY оруулбал идэвхжинэ =====
-const SUPABASE_URL = '';
-const SUPABASE_ANON_KEY = '';
+const SUPABASE_URL = 'https://ozxfjkyefczertdflrca.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im96eGZqa3llZmN6ZXJ0ZGZscmNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMwODUyODIsImV4cCI6MjEwODY2MTI4Mn0.vwCnbVuHlxMGk2OVJZa_7_hSdvjIuO0FcJQzQrQw8dM';
 const USE_SUPABASE = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
 let sb = null;
 let currentUser = null; // { id, email, name, role }
