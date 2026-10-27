@@ -99,7 +99,9 @@ const translations = {
         free_shipping: 'Карго (олирлоор)',
         ship_info: 'Хүргэлтийн мэдээлэл', pay_info: 'Төлбөрийн мэдээлэл',
         pay_visa: 'Visa карт', pay_bank: 'Банкны шилжүүлэг', pay_method_label: 'Төлбөрийн хэлбэр:',
-        pay_bank_note: 'Захиалга баталгаажуулсны дараа шилжүүлэх дансны мэдээллийг танд илгээнэ. Шилжүүлэг хийгдсэний дараа таны захиалга баталгаажна.',
+        pay_bank_note: 'Дээрх данснуудын аль нэг рүү шилжүүлэг хийнэ үү. Шилжүүлэг хийгдсэний дараа таны захиалга баталгаажна.',
+        bank_mn_title: 'Монгол банк', bank_jp_title: 'Япон банк',
+        bank_label_bank: 'Банк', bank_label_branch: 'Салбар', bank_label_number: 'Дансны дугаар', bank_label_holder: 'Дансны нэр',
         pay_paypay_note: 'PayPay QR код энд гарна',
         pay_paypay_hint: 'QR кодыг PayPay аппаараа уншуулж төлбөрөө хийгээд, захиалгаа баталгаажуулна уу.',
         form_name: 'Овог нэр *', form_phone: 'Утас *', form_address: 'Хаяг *',
@@ -168,7 +170,9 @@ const translations = {
         free_shipping: 'Shipping (approx.)',
         ship_info: 'Shipping Information', pay_info: 'Payment Information',
         pay_visa: 'Visa card', pay_bank: 'Bank transfer', pay_method_label: 'Payment method:',
-        pay_bank_note: 'After you confirm the order, we will send you the bank account details. Your order is confirmed once the transfer arrives.',
+        pay_bank_note: 'Please transfer to one of the accounts above. Your order is confirmed once the transfer arrives.',
+        bank_mn_title: 'Mongolian bank', bank_jp_title: 'Japanese bank',
+        bank_label_bank: 'Bank', bank_label_branch: 'Branch', bank_label_number: 'Account number', bank_label_holder: 'Account name',
         pay_paypay_note: 'PayPay QR code will appear here',
         pay_paypay_hint: 'Scan the QR code with your PayPay app to pay, then confirm your order.',
         form_name: 'Full Name *', form_phone: 'Phone *', form_address: 'Address *',
@@ -233,7 +237,9 @@ const translations = {
         free_shipping: '送料（概算）',
         ship_info: '配送情報', pay_info: 'お支払い情報',
         pay_visa: 'Visaカード', pay_bank: '銀行振込', pay_method_label: 'お支払い方法:',
-        pay_bank_note: 'ご注文確定後、振込先の口座情報をお送りします。お振込み確認後に注文が確定します。',
+        pay_bank_note: '上記の口座のいずれかにお振込みください。お振込み確認後に注文が確定します。',
+        bank_mn_title: 'モンゴルの銀行', bank_jp_title: '日本の銀行',
+        bank_label_bank: '銀行', bank_label_branch: '支店', bank_label_number: '口座番号', bank_label_holder: '口座名義',
         pay_paypay_note: 'PayPay QRコードがここに表示されます',
         pay_paypay_hint: 'PayPayアプリでQRコードを読み取ってお支払い後、注文を確定してください。',
         form_name: '氏名 *', form_phone: '電話 *', form_address: '住所 *',
@@ -854,6 +860,23 @@ function goToCheckout() {
 // ================= CHECKOUT =================
 // PayPay QR зургийн хаяг (хоосон бол placeholder харагдана)
 const PAYPAY_QR_URL = '';
+
+// Банкны данснууд — шилжүүлгийн хэсэгт харагдана
+const BANK_ACCOUNTS = {
+    mn: { bank: '', number: '', holder: '' },
+    jp: { bank: '', branch: '', number: '', holder: '' }
+};
+
+function fillBankDetails() {
+    const set = (id, v) => { const el = $(id); if (el) el.textContent = v || '—'; };
+    set('bank-mn-bank', BANK_ACCOUNTS.mn.bank);
+    set('bank-mn-number', BANK_ACCOUNTS.mn.number);
+    set('bank-mn-holder', BANK_ACCOUNTS.mn.holder);
+    set('bank-jp-bank', BANK_ACCOUNTS.jp.bank);
+    set('bank-jp-branch', BANK_ACCOUNTS.jp.branch);
+    set('bank-jp-number', BANK_ACCOUNTS.jp.number);
+    set('bank-jp-holder', BANK_ACCOUNTS.jp.holder);
+}
 let selectedPaymentMethod = 'visa';
 
 function selectPaymentMethod(method, el) {
@@ -874,6 +897,7 @@ function renderCheckout() {
         if (img) { img.src = PAYPAY_QR_URL; img.style.display = 'block'; }
         if (note) note.style.display = 'none';
     }
+    fillBankDetails();
 
     if (cart.length === 0) {
         checkoutItems.innerHTML = `<p style="text-align:center;color:var(--text-secondary);padding:20px;">${t.msg_cart_empty}</p>`;
