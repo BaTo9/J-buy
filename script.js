@@ -467,12 +467,11 @@ function setLanguage(lang) {
 }
 
 function syncMenuControls() {
-    document.querySelectorAll('.menu-pill[data-lang]').forEach(b => {
+    document.querySelectorAll('.lang-icon-btn[data-lang]').forEach(b => {
         b.classList.toggle('active', b.dataset.lang === currentLang);
     });
-    document.querySelectorAll('.menu-pill[data-theme-mode]').forEach(b => {
-        b.classList.toggle('active', b.dataset.themeMode === currentTheme);
-    });
+    const themeBtn = $('menu-theme-btn');
+    if (themeBtn) themeBtn.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
 }
 
 function updateThemeIcon() {
