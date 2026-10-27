@@ -7,12 +7,13 @@
     <meta name="theme-color" content="#f4738a">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="icons/icon-192.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="JAPANBUY">
     <title>JAPANBUY - Online Store</title>
-    <link rel="stylesheet" href="style.css?v=20261027aj">
+    <link rel="stylesheet" href="style.css?v=20261027ak">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -20,7 +21,7 @@
     <header class="header">
         <div class="container header-container">
             <div class="logo" onclick="navigateTo('home')" role="button" tabindex="0">
-                <div class="logo-icon-box">🛍️</div>
+                <img class="logo-img" src="logo-jb.jpg" alt="JAPANBUY">
                 <h1 class="logo-text">JAPAN<span>BUY</span></h1>
             </div>
 
@@ -398,7 +399,7 @@
         <div class="container footer-grid-new">
             <div class="footer-brand">
                 <div class="footer-logo">
-                    <div class="logo-icon-box">🛍️</div>
+                    <img class="logo-img" src="logo-jb.jpg" alt="JAPANBUY">
                     <h2>JAPAN<span>BUY</span></h2>
                 </div>
                 <p data-i18n="footer_desc">Японы топ брэнд хувцсыг шууд захиалан авах хамгийн найдвартай зуучлал ба карго платформ.</p>
@@ -522,7 +523,7 @@
     </nav>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=20261027aj"></script>
+    <script src="script.js?v=20261027ak"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
