@@ -1273,7 +1273,7 @@ async function processPayment() {
     }
 
     if (USE_SUPABASE && sb && currentUser) {
-        const items = cart.map(i => ({ id: i.id, name: iname(i), size: i.size || '', color: i.color || '', qty: i.qty, price: i.price }));
+        const items = cart.map(i => { const p = PRODUCTS.find(x => x.id === i.id); const cimg = (p && p.swatches && i.color && p.swatches[i.color]) || i.img || ''; return { id: i.id, brand: i.brand || (p ? p.brand : ''), name: iname(i), size: i.size || '', color: i.color || '', qty: i.qty, price: i.price, img: cimg }; });
         const total = cart.reduce((s, i) => s + i.price * i.qty, 0) + SHIPPING_FEE;
         const { error } = await sb.from('orders').insert({
             user_id: currentUser.id, email: currentUser.email,
@@ -1351,9 +1351,12 @@ async function loadAdminOrders() {
     if (error) { box.innerHTML = '<p class="admin-note">' + esc(t.msg_order_error) + '</p>'; return; }
     if (!data || data.length === 0) { box.innerHTML = '<p class="admin-note">' + esc(t.admin_no_orders) + '</p>'; return; }
     box.innerHTML = data.map(o => {
-        const itemsHtml = (o.items || []).map(i =>
-            `<div class="admin-item"><span>${esc(i.name)} (${esc(i.size)} ${esc(i.color)}) × ${i.qty}</span><span>¥${(i.price * i.qty).toLocaleString()}</span></div>`
-        ).join('');
+        const itemsHtml = (o.items || []).map(i => {
+            const p = PRODUCTS.find(x => x.id === i.id);
+            const img = i.img || (p && p.swatches && i.color && p.swatches[i.color]) || (p ? p.img : '');
+            const meta = [i.brand || (p ? p.brand : ''), i.color, i.size].filter(Boolean).map(x => esc(x)).join(' · ');
+            return `<div class="admin-item">${img ? `<img class="admin-item-img" src="${esc(img)}" alt="" loading="lazy">` : ''}<div class="admin-item-main"><div>${esc(i.name)} × ${i.qty}</div><div class="admin-item-meta">${meta}</div></div><span class="admin-item-price">¥${(i.price * i.qty).toLocaleString()}</span></div>`;
+        }).join('');
         const opts = ORDER_STATUSES.map(s => `<option value="${s}" ${s === o.status ? 'selected' : ''}>${esc(t['st_' + s] || s)}</option>`).join('');
         const date = new Date(o.created_at).toLocaleString();
         return `<div class="admin-order">
