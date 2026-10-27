@@ -347,49 +347,54 @@ button, input, select {
     flex-shrink: 0;
 }
 
-.menu-section {
-    margin-top: 26px;
-}
-
-.menu-section-label {
-    color: #8b98ad;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    margin: 0 0 12px;
-}
-
-.menu-btn-row {
+.menu-controls {
     display: flex;
-    gap: 10px;
-}
-
-.menu-pill {
-    flex: 1;
-    padding: 13px 4px;
-    border-radius: 14px;
-    border: 1.5px solid rgba(255, 255, 255, 0.16);
-    background: transparent;
-    color: #fff;
-    font-size: 0.92rem;
-    font-weight: 700;
-    cursor: pointer;
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 6px;
-    transition: all 0.2s;
-    white-space: nowrap;
+    justify-content: space-between;
+    margin-top: 26px;
+    padding: 2px;
 }
 
-.menu-pill.active {
-    background: linear-gradient(135deg, #f4738a, #f05a78);
-    border-color: transparent;
-    color: #fff;
+.menu-lang-icons {
+    display: flex;
+    gap: 14px;
+}
+
+.lang-icon-btn {
+    background: none;
+    border: none;
+    font-size: 1.55rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.lang-icon-btn.active {
+    box-shadow: 0 0 0 2.5px #f4738a;
+}
+
+.lang-icon-btn:active {
+    transform: scale(0.88);
+}
+
+.theme-icon-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.15s;
+}
+
+.theme-icon-btn:active {
+    transform: scale(0.88);
 }
 
 .mobile-menu-footer {
-    margin-top: auto;
+    margin-top: 26px;
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.09);
 }
