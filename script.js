@@ -60,7 +60,7 @@ const BRAND_COLORS = {
 };
 
 const SHIPPING_FEE = 1500;
-const EXCHANGE_RATE = 70; // 1 JPY ≈ 70 MNT
+const EXCHANGE_RATE = 22; // 1 JPY ≈ 22 MNT
 
 // ================= STATE =================
 let currentLang = localStorage.getItem('lang') || 'mn';
