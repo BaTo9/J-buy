@@ -49,7 +49,7 @@ const PRODUCTS = [
 
 // Холбоо барих мэдээлэл — хажуугийн цэсний доод хэсэгт харагдана
 const CONTACT_PHONE = '';
-const SOCIAL_LINKS = { facebook: '', instagram: '', x: '', youtube: '', line: '' };
+const SOCIAL_LINKS = { facebook: '', instagram: '', line: '', gmail: '' };
 
 const BRAND_COLORS = {
     'UNIQLO': '#FF0000', 'GU': '#0033A0', 'ZARA': '#000000',
@@ -125,6 +125,7 @@ const translations = {
         cat_men: 'Эрэгтэй', cat_women: 'Эмэгтэй', cat_kids: 'Хүүхэд',
         menu_title: 'Цэс', menu_lang_label: 'ХЭЛ', menu_theme_label: 'ЗАГВАР',
         theme_light: 'Гэрэл', theme_dark: 'Харанхуй', nav_cart: 'Миний сагс',
+        nav_cart_short: 'Сагс', nav_account: 'Бүртгэл',
         pay_paypay_note: 'PayPay QR код энд гарна',
         pay_paypay_hint: 'QR кодыг PayPay аппаараа уншуулж төлбөрөө хийгээд, захиалгаа баталгаажуулна уу.',
         form_name: 'Овог нэр *', form_phone: 'Утас *', form_address: 'Хаяг *',
@@ -200,6 +201,7 @@ const translations = {
         cat_men: 'Men', cat_women: 'Women', cat_kids: 'Kids',
         menu_title: 'Menu', menu_lang_label: 'LANGUAGE', menu_theme_label: 'THEME',
         theme_light: 'Light', theme_dark: 'Dark', nav_cart: 'My Cart',
+        nav_cart_short: 'Cart', nav_account: 'Account',
         pay_paypay_note: 'PayPay QR code will appear here',
         pay_paypay_hint: 'Scan the QR code with your PayPay app to pay, then confirm your order.',
         form_name: 'Full Name *', form_phone: 'Phone *', form_address: 'Address *',
@@ -271,6 +273,7 @@ const translations = {
         cat_men: 'メンズ', cat_women: 'レディース', cat_kids: 'キッズ',
         menu_title: 'メニュー', menu_lang_label: '言語', menu_theme_label: 'テーマ',
         theme_light: 'ライト', theme_dark: 'ダーク', nav_cart: 'カート',
+        nav_cart_short: 'カート', nav_account: 'アカウント',
         pay_paypay_note: 'PayPay QRコードがここに表示されます',
         pay_paypay_hint: 'PayPayアプリでQRコードを読み取ってお支払い後、注文を確定してください。',
         form_name: '氏名 *', form_phone: '電話 *', form_address: '住所 *',
@@ -874,6 +877,31 @@ function updateCartBadge() {
     const total = cart.reduce((s, i) => s + i.qty, 0);
     cartBadge.textContent = total;
     cartBadge.style.display = total > 0 ? 'block' : 'none';
+    const bnavBadge = $('bnav-cart-badge');
+    if (bnavBadge) {
+        bnavBadge.textContent = total;
+        bnavBadge.style.display = total > 0 ? 'flex' : 'none';
+    }
+}
+
+function setBnavActive(name) {
+    document.querySelectorAll('.bnav-item').forEach(b => {
+        b.classList.toggle('active', b.dataset.bnav === name);
+    });
+}
+
+function bnavGo(action) {
+    if (action === 'home') {
+        navigateTo('home');
+    } else if (action === 'products') {
+        navigateTo('home');
+        setBnavActive('products');
+        setTimeout(scrollToProducts, 80);
+    } else if (action === 'cart') {
+        openCart();
+    } else if (action === 'account') {
+        handleUserClick();
+    }
 }
 
 function openCart() {
@@ -991,13 +1019,13 @@ function fillContactInfo() {
         phoneLink.removeAttribute('onclick');
     }
     Object.keys(SOCIAL_LINKS).forEach(key => {
-        const el = $('social-' + key);
-        if (el && SOCIAL_LINKS[key]) {
+        if (!SOCIAL_LINKS[key]) return;
+        document.querySelectorAll('[data-social="' + key + '"]').forEach(el => {
             el.href = SOCIAL_LINKS[key];
             el.removeAttribute('onclick');
             el.target = '_blank';
             el.rel = 'noopener';
-        }
+        });
     });
 }
 
@@ -1123,7 +1151,7 @@ function finishOrder() {
 function navigateTo(viewName) {
     homeView.classList.remove('active');
     checkoutView.classList.remove('active');
-    if (viewName === 'home') homeView.classList.add('active');
+    if (viewName === 'home') { homeView.classList.add('active'); setBnavActive('home'); }
     if (viewName === 'checkout') {
         checkoutView.classList.add('active');
         renderCheckout();
