@@ -12,7 +12,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="JAPANBUY">
     <title>JAPANBUY - Online Store</title>
-    <link rel="stylesheet" href="style.css?v=20261027z">
+    <link rel="stylesheet" href="style.css?v=20261027aa">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -50,7 +50,10 @@
     <!-- MOBILE MENU -->
     <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
         <div class="mobile-menu-header">
-            <h2 data-i18n="menu_title">Цэс</h2>
+            <div style="display:flex;align-items:center;gap:10px;">
+                <h2 data-i18n="menu_title">Цэс</h2>
+                <button class="theme-icon-btn" id="menu-theme-btn" onclick="toggleTheme()" aria-label="Загвар"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
+            </div>
             <button id="close-btn" class="close-btn" aria-label="Хаах">&times;</button>
         </div>
         <ul class="mobile-nav-links">
@@ -68,7 +71,6 @@
                 <button class="lang-icon-btn" data-lang="en" onclick="setLanguage('en')" aria-label="English">🇬🇧</button>
                 <button class="lang-icon-btn" data-lang="jp" onclick="setLanguage('jp')" aria-label="日本語">🇯🇵</button>
             </div>
-            <button class="theme-icon-btn" id="menu-theme-btn" onclick="toggleTheme()" aria-label="Загвар"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
         </div>
         <div class="mobile-menu-footer">
             <div class="menu-socials">
@@ -510,7 +512,7 @@
     </nav>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=20261027z"></script>
+    <script src="script.js?v=20261027aa"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
