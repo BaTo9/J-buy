@@ -47,6 +47,10 @@ const PRODUCTS = [
 
 ];
 
+// Холбоо барих мэдээлэл — хажуугийн цэсний доод хэсэгт харагдана
+const CONTACT_PHONE = '';
+const SOCIAL_LINKS = { facebook: '', instagram: '', x: '', youtube: '', line: '' };
+
 const BRAND_COLORS = {
     'UNIQLO': '#FF0000', 'GU': '#0033A0', 'ZARA': '#000000',
     'H&M': '#E50010', 'GAP': '#002F6C', 'MICHAEL KORS': '#8A6D3B'
@@ -361,6 +365,15 @@ function showToast(message, type = 'success', duration = 2800) {
 // ================= EVENTS =================
 function setupEventListeners() {
     themeToggleBtn.addEventListener('click', toggleTheme);
+
+    fillContactInfo();
+
+    const toTopBtn = $('to-top-btn');
+    if (toTopBtn) {
+        window.addEventListener('scroll', () => {
+            toTopBtn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+    }
 
     langSelect.addEventListener('change', (e) => {
         currentLang = e.target.value;
@@ -935,6 +948,29 @@ function fallbackCopy(text, done) {
     ta.select();
     try { document.execCommand('copy'); done(); } catch (e) { /* noop */ }
     document.body.removeChild(ta);
+}
+
+function fillContactInfo() {
+    const phoneEl = $('menu-phone-number');
+    const phoneLink = $('menu-phone');
+    if (phoneEl) phoneEl.textContent = CONTACT_PHONE || '—';
+    if (phoneLink && CONTACT_PHONE) {
+        phoneLink.href = 'tel:' + CONTACT_PHONE.replace(/[^+\d]/g, '');
+        phoneLink.removeAttribute('onclick');
+    }
+    Object.keys(SOCIAL_LINKS).forEach(key => {
+        const el = $('social-' + key);
+        if (el && SOCIAL_LINKS[key]) {
+            el.href = SOCIAL_LINKS[key];
+            el.removeAttribute('onclick');
+            el.target = '_blank';
+            el.rel = 'noopener';
+        }
+    });
+}
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function fillBankDetails() {
