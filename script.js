@@ -184,7 +184,7 @@ const translations = {
     en: {
         search_placeholder: 'Search products...',
         nav_home: 'Home', nav_products: 'Products', nav_features: 'Features', nav_contact: 'Contact',
-        hero_title: 'Order the products you want from Japan',
+        hero_title: 'ORDER ANYTHING YOU WANT FROM JAPAN',
         hero_desc: 'Shop directly from Japan\'s top brands. Fast, reliable, authentic.',
         btn_shop_now: 'Shop Now',
         brands_title: 'Products', brand_all: 'All',
@@ -267,7 +267,7 @@ const translations = {
     jp: {
         search_placeholder: '商品を検索...',
         nav_home: 'ホーム', nav_products: '商品', nav_features: '強み', nav_contact: 'お問い合わせ',
-        hero_title: '日本から欲しい商品を注文しよう。',
+        hero_title: '日本から欲しい商品を注文しよう',
         hero_desc: '日本のトップブランドから直接購入。迅速、信頼、本物。',
         btn_shop_now: '今すぐ購入',
         brands_title: '商品', brand_all: 'すべて',
