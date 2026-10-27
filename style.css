@@ -2244,11 +2244,39 @@ body {
     .detail-info { width: 52%; }
 }
 
+.desktop-nav { display: none; }
+
+.desktop-nav-inner {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+
+.desktop-nav a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 11px 2px;
+}
+
+.desktop-nav a:hover { color: var(--primary-color); }
+
 @media (min-width: 1024px) {
     .product-grid {
         grid-template-columns: repeat(4, 1fr);
         gap: 22px;
     }
+
+    .desktop-nav {
+        display: block;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .hamburger-menu { display: none; }
+    .bottom-nav { display: none; }
+    body { padding-bottom: 0; }
+    .to-top-btn { bottom: 28px; }
 }
 /* ================= TOAST ================= */
 .toast-container {
