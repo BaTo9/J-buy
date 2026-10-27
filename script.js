@@ -837,7 +837,7 @@ function searchProducts() { /* input event handles */ }
 
 // ================= PRODUCT DETAIL =================
 function openProductDetail(id, keepOpen = false) {
-
+    if (!isLoggedIn) { openAuthModal('login'); return; }
     const p = PRODUCTS.find(x => x.id === id);
     if (!p) return;
 
@@ -1008,6 +1008,7 @@ function buyNowFromDetail() {
 }
 
 function quickAddToCart(id) {
+    if (!isLoggedIn) { openAuthModal('login'); return; }
     const p = PRODUCTS.find(x => x.id === id);
     if (!p) return;
     const defColor = (p.colors && p.colors.length) ? p.colors[0] : 'black';
