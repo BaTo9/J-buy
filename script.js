@@ -757,6 +757,8 @@ function updateAuthUI() {
     const t = translations[currentLang];
     const adminItem = $('admin-nav-item');
     if (adminItem) adminItem.style.display = (isLoggedIn && currentUser && currentUser.role === 'admin') ? '' : 'none';
+    const adminItemDesktop = $('admin-nav-item-desktop');
+    if (adminItemDesktop) adminItemDesktop.style.display = (isLoggedIn && currentUser && currentUser.role === 'admin') ? '' : 'none';
     if (isLoggedIn) {
         userBtn.title = currentLang === 'jp' ? 'ログアウト' : currentLang === 'en' ? 'Logout' : 'Гарах';
         if (mobileLoginLabel) mobileLoginLabel.textContent = currentLang === 'jp' ? 'ログアウト' : currentLang === 'en' ? 'Logout' : 'Гарах';
