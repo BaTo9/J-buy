@@ -6,7 +6,7 @@
     <meta name="description" content="JAPANBUY - Японы топ брэнд хувцсыг шууд захиалан авах найдвартай карго платформ">
     <meta name="theme-color" content="#0f62fe">
     <title>JAPANBUY - Online Store</title>
-    <link rel="stylesheet" href="style.css?v=20261027j">
+    <link rel="stylesheet" href="style.css?v=20261027k">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -55,20 +55,13 @@
             <li><a href="#contact"><span class="menu-emoji">📞</span><span data-i18n="nav_contact">Холбоо барих</span></a></li>
             <li><a href="#" onclick="event.preventDefault();handleUserClick()" id="mobile-login-link"><span class="menu-emoji">🔐</span><span id="mobile-login-label">Нэвтрэх</span></a></li>
         </ul>
-        <div class="menu-section">
-            <p class="menu-section-label" data-i18n="menu_lang_label">ХЭЛ</p>
-            <div class="menu-btn-row">
-                <button class="menu-pill" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
-                <button class="menu-pill" data-lang="jp" onclick="setLanguage('jp')">🇯🇵 日本語</button>
-                <button class="menu-pill" data-lang="mn" onclick="setLanguage('mn')">🇲🇳 МОНГОЛ</button>
+        <div class="menu-controls">
+            <div class="menu-lang-icons">
+                <button class="lang-icon-btn" data-lang="mn" onclick="setLanguage('mn')" aria-label="Монгол">🇲🇳</button>
+                <button class="lang-icon-btn" data-lang="en" onclick="setLanguage('en')" aria-label="English">🇬🇧</button>
+                <button class="lang-icon-btn" data-lang="jp" onclick="setLanguage('jp')" aria-label="日本語">🇯🇵</button>
             </div>
-        </div>
-        <div class="menu-section">
-            <p class="menu-section-label" data-i18n="menu_theme_label">ЗАГВАР</p>
-            <div class="menu-btn-row">
-                <button class="menu-pill" data-theme-mode="light" onclick="setThemeMode('light')">☀️ <span data-i18n="theme_light">Гэрэл</span></button>
-                <button class="menu-pill" data-theme-mode="dark" onclick="setThemeMode('dark')">🌙 <span data-i18n="theme_dark">Харанхуй</span></button>
-            </div>
+            <button class="theme-icon-btn" id="menu-theme-btn" onclick="toggleTheme()" aria-label="Загвар">☀️</button>
         </div>
         <div class="mobile-menu-footer">
             <div class="menu-socials">
@@ -474,6 +467,6 @@
     <!-- TOAST CONTAINER -->
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-    <script src="script.js?v=20261027j"></script>
+    <script src="script.js?v=20261027k"></script>
 </body>
 </html>
