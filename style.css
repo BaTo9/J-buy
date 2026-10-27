@@ -2345,3 +2345,18 @@ body {
     .toast-container { right: 8px; left: 8px; top: 72px; }
     .toast { max-width: none; }
 }
+
+/* JB logo image (navbar + footer) */
+.logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+}
+
+.logo .logo-img {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+}
