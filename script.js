@@ -102,6 +102,7 @@ const translations = {
         pay_bank_note: 'Дээрх данснуудын аль нэг рүү шилжүүлэг хийнэ үү. Шилжүүлэг хийгдсэний дараа таны захиалга баталгаажна.',
         bank_mn_title: 'Монгол банк', bank_jp_title: 'Япон банк',
         bank_label_bank: 'Банк', bank_label_branch: 'Салбар', bank_label_number: 'Дансны дугаар', bank_label_holder: 'Дансны нэр',
+        btn_copy: 'Хуулах', msg_copied: 'Хуулагдлаа',
         pay_paypay_note: 'PayPay QR код энд гарна',
         pay_paypay_hint: 'QR кодыг PayPay аппаараа уншуулж төлбөрөө хийгээд, захиалгаа баталгаажуулна уу.',
         form_name: 'Овог нэр *', form_phone: 'Утас *', form_address: 'Хаяг *',
@@ -173,6 +174,7 @@ const translations = {
         pay_bank_note: 'Please transfer to one of the accounts above. Your order is confirmed once the transfer arrives.',
         bank_mn_title: 'Mongolian bank', bank_jp_title: 'Japanese bank',
         bank_label_bank: 'Bank', bank_label_branch: 'Branch', bank_label_number: 'Account number', bank_label_holder: 'Account name',
+        btn_copy: 'Copy', msg_copied: 'Copied',
         pay_paypay_note: 'PayPay QR code will appear here',
         pay_paypay_hint: 'Scan the QR code with your PayPay app to pay, then confirm your order.',
         form_name: 'Full Name *', form_phone: 'Phone *', form_address: 'Address *',
@@ -240,6 +242,7 @@ const translations = {
         pay_bank_note: '上記の口座のいずれかにお振込みください。お振込み確認後に注文が確定します。',
         bank_mn_title: 'モンゴルの銀行', bank_jp_title: '日本の銀行',
         bank_label_bank: '銀行', bank_label_branch: '支店', bank_label_number: '口座番号', bank_label_holder: '口座名義',
+        btn_copy: 'コピー', msg_copied: 'コピーしました',
         pay_paypay_note: 'PayPay QRコードがここに表示されます',
         pay_paypay_hint: 'PayPayアプリでQRコードを読み取ってお支払い後、注文を確定してください。',
         form_name: '氏名 *', form_phone: '電話 *', form_address: '住所 *',
@@ -866,6 +869,30 @@ const BANK_ACCOUNTS = {
     mn: { bank: '', number: '', holder: '' },
     jp: { bank: '', branch: '', number: '', holder: '' }
 };
+
+function copyText(elId) {
+    const el = $(elId);
+    if (!el) return;
+    const text = el.textContent.trim();
+    if (!text || text === '—') return;
+    const done = () => showToast(translations[currentLang].msg_copied, 'success');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+    } else {
+        fallbackCopy(text, done);
+    }
+}
+
+function fallbackCopy(text, done) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) { /* noop */ }
+    document.body.removeChild(ta);
+}
 
 function fillBankDetails() {
     const set = (id, v) => { const el = $(id); if (el) el.textContent = v || '—'; };
