@@ -1137,7 +1137,7 @@ const PAYPAY_QR_URL = 'paypay-qr.jpg';
 
 // Банкны данснууд — шилжүүлгийн хэсэгт харагдана
 const BANK_ACCOUNTS = {
-    mn: { bank: '', number: '', holder: '' },
+    mn: { bank: 'М Банк', number: 'MN970039008000004436', holder: 'Дармаа Батдэлгэр' },
     jp: { bank: '', branch: '', number: '', holder: '' }
 };
 
