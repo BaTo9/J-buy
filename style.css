@@ -340,11 +340,19 @@ button, input, select {
     color: #fff;
 }
 
-.menu-emoji {
-    font-size: 1.35rem;
+.menu-icon {
     width: 30px;
-    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+    color: #fff;
+}
+
+.menu-icon svg {
+    width: 23px;
+    height: 23px;
+    display: block;
 }
 
 .menu-controls {
@@ -382,11 +390,23 @@ button, input, select {
 .theme-icon-btn {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    color: #fff;
     line-height: 1;
     cursor: pointer;
     padding: 5px;
     transition: transform 0.15s;
+}
+
+.theme-icon-btn svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+#theme-toggle svg {
+    width: 21px;
+    height: 21px;
+    display: block;
 }
 
 .theme-icon-btn:active {
@@ -513,20 +533,19 @@ body {
 }
 
 .bnav-icon {
-    font-size: 1.3rem;
-    line-height: 1.25;
-    filter: grayscale(0.5);
-    opacity: 0.7;
+    display: flex;
+    line-height: 1;
     transition: all var(--transition);
+}
+
+.bnav-icon svg {
+    width: 24px;
+    height: 24px;
+    display: block;
 }
 
 .bnav-item.active {
     color: var(--primary-color);
-}
-
-.bnav-item.active .bnav-icon {
-    filter: none;
-    opacity: 1;
 }
 
 .bnav-badge {
