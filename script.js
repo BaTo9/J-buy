@@ -1133,7 +1133,7 @@ function goToCheckout() {
 
 // ================= CHECKOUT =================
 // PayPay QR зургийн хаяг (хоосон бол placeholder харагдана)
-const PAYPAY_QR_URL = '';
+const PAYPAY_QR_URL = 'paypay-qr.jpg';
 
 // Банкны данснууд — шилжүүлгийн хэсэгт харагдана
 const BANK_ACCOUNTS = {
