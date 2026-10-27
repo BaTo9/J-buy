@@ -123,6 +123,8 @@ const translations = {
         bank_label_bank: 'Банк', bank_label_branch: 'Салбар', bank_label_number: 'Дансны дугаар', bank_label_holder: 'Дансны нэр',
         btn_copy: 'Хуулах', msg_copied: 'Хуулагдлаа',
         cat_men: 'Эрэгтэй', cat_women: 'Эмэгтэй', cat_kids: 'Хүүхэд',
+        menu_title: 'Цэс', menu_lang_label: 'ХЭЛ', menu_theme_label: 'ЗАГВАР',
+        theme_light: 'Гэрэл', theme_dark: 'Харанхуй', nav_cart: 'Миний сагс',
         pay_paypay_note: 'PayPay QR код энд гарна',
         pay_paypay_hint: 'QR кодыг PayPay аппаараа уншуулж төлбөрөө хийгээд, захиалгаа баталгаажуулна уу.',
         form_name: 'Овог нэр *', form_phone: 'Утас *', form_address: 'Хаяг *',
@@ -196,6 +198,8 @@ const translations = {
         bank_label_bank: 'Bank', bank_label_branch: 'Branch', bank_label_number: 'Account number', bank_label_holder: 'Account name',
         btn_copy: 'Copy', msg_copied: 'Copied',
         cat_men: 'Men', cat_women: 'Women', cat_kids: 'Kids',
+        menu_title: 'Menu', menu_lang_label: 'LANGUAGE', menu_theme_label: 'THEME',
+        theme_light: 'Light', theme_dark: 'Dark', nav_cart: 'My Cart',
         pay_paypay_note: 'PayPay QR code will appear here',
         pay_paypay_hint: 'Scan the QR code with your PayPay app to pay, then confirm your order.',
         form_name: 'Full Name *', form_phone: 'Phone *', form_address: 'Address *',
@@ -265,6 +269,8 @@ const translations = {
         bank_label_bank: '銀行', bank_label_branch: '支店', bank_label_number: '口座番号', bank_label_holder: '口座名義',
         btn_copy: 'コピー', msg_copied: 'コピーしました',
         cat_men: 'メンズ', cat_women: 'レディース', cat_kids: 'キッズ',
+        menu_title: 'メニュー', menu_lang_label: '言語', menu_theme_label: 'テーマ',
+        theme_light: 'ライト', theme_dark: 'ダーク', nav_cart: 'カート',
         pay_paypay_note: 'PayPay QRコードがここに表示されます',
         pay_paypay_hint: 'PayPayアプリでQRコードを読み取ってお支払い後、注文を確定してください。',
         form_name: '氏名 *', form_phone: '電話 *', form_address: '住所 *',
@@ -330,6 +336,7 @@ const checkoutTotal = $('checkout-total');
 const checkoutExchange = $('checkout-exchange');
 const userBtn = $('user-btn');
 const mobileLoginLink = $('mobile-login-link');
+const mobileLoginLabel = $('mobile-login-label');
 const toastContainer = $('toast-container');
 
 const LANG_META = { mn: 'mn', en: 'en', jp: 'ja' };
@@ -344,6 +351,7 @@ function init() {
     updateCartBadge();
     renderProducts();
     setupEventListeners();
+    syncMenuControls();
 }
 init();
 
@@ -375,17 +383,10 @@ function setupEventListeners() {
         }, { passive: true });
     }
 
-    langSelect.addEventListener('change', (e) => {
-        currentLang = e.target.value;
-        localStorage.setItem('lang', currentLang);
-        applyLanguage();
-        renderProducts();
-        renderCart();
-        renderCheckout();
-        // Хэрэв product modal нээлттэй бол дахин render
-        if (productModal.classList.contains('active') && selectedProduct) {
-            openProductDetail(selectedProduct.id, true);
-        }
+    langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
+
+    document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+        link.addEventListener('click', () => toggleMobileMenu(false));
     });
 
     menuBtn.addEventListener('click', () => toggleMobileMenu(true));
@@ -440,6 +441,38 @@ function toggleTheme() {
     htmlEl.setAttribute('data-theme', currentTheme);
     localStorage.setItem('theme', currentTheme);
     updateThemeIcon();
+    syncMenuControls();
+}
+
+function setThemeMode(mode) {
+    currentTheme = mode;
+    htmlEl.setAttribute('data-theme', mode);
+    localStorage.setItem('theme', mode);
+    updateThemeIcon();
+    syncMenuControls();
+}
+
+function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    if (langSelect) langSelect.value = lang;
+    applyLanguage();
+    renderProducts();
+    renderCart();
+    renderCheckout();
+    if (productModal.classList.contains('active') && selectedProduct) {
+        openProductDetail(selectedProduct.id, true);
+    }
+    syncMenuControls();
+}
+
+function syncMenuControls() {
+    document.querySelectorAll('.menu-pill[data-lang]').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === currentLang);
+    });
+    document.querySelectorAll('.menu-pill[data-theme-mode]').forEach(b => {
+        b.classList.toggle('active', b.dataset.themeMode === currentTheme);
+    });
 }
 
 function updateThemeIcon() {
@@ -472,8 +505,8 @@ function applyLanguage() {
     });
 
     // 5. Mobile login link тусгай
-    if (mobileLoginLink) {
-        mobileLoginLink.textContent = isLoggedIn
+    if (mobileLoginLabel) {
+        mobileLoginLabel.textContent = isLoggedIn
             ? (currentLang === 'jp' ? 'ログアウト' : currentLang === 'en' ? 'Logout' : 'Гарах')
             : t.btn_login;
     }
@@ -569,12 +602,12 @@ function updateAuthUI() {
     const t = translations[currentLang];
     if (isLoggedIn) {
         userBtn.title = currentLang === 'jp' ? 'ログアウト' : currentLang === 'en' ? 'Logout' : 'Гарах';
-        if (mobileLoginLink) mobileLoginLink.textContent = currentLang === 'jp' ? 'ログアウト' : currentLang === 'en' ? 'Logout' : 'Гарах';
+        if (mobileLoginLabel) mobileLoginLabel.textContent = currentLang === 'jp' ? 'ログアウト' : currentLang === 'en' ? 'Logout' : 'Гарах';
         loginPrompt.classList.add('hidden');
         productsWrapper.classList.remove('hidden');
     } else {
         userBtn.title = t.btn_login;
-        if (mobileLoginLink) mobileLoginLink.textContent = t.btn_login;
+        if (mobileLoginLabel) mobileLoginLabel.textContent = t.btn_login;
         loginPrompt.classList.remove('hidden');
         productsWrapper.classList.add('hidden');
     }
