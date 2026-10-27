@@ -552,6 +552,66 @@ button, input, select {
     text-indent: 2.5px;
 }
 
+/* ================= PAYMENT METHODS ================= */
+.pay-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.pay-method {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 15px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--transition);
+}
+
+.pay-method.active {
+    border-color: var(--primary-color);
+    background: var(--primary-light);
+    box-shadow: 0 0 0 1.5px var(--primary-color);
+}
+
+.pay-panel { margin-bottom: 6px; }
+
+.pay-note {
+    background: var(--bg-color);
+    border: 1px dashed var(--border-color);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+}
+
+.paypay-qr-box {
+    width: 190px;
+    height: 190px;
+    margin: 4px auto 10px;
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    padding: 10px;
+    background: #fff;
+}
+
+.paypay-qr-box img { width: 100%; height: 100%; object-fit: contain; }
+
 /* ================= PRODUCT GRID ================= */
 .product-grid {
     display: grid;
