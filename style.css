@@ -2360,3 +2360,21 @@ body {
     height: 34px;
     border-radius: 9px;
 }
+
+/* Small phones: keep navbar logo and action icons from overlapping */
+@media (max-width: 480px) {
+    .container { padding: 0 12px; }
+    .logo { flex-shrink: 0; gap: 6px; }
+    .logo .logo-img { width: 30px; height: 30px; border-radius: 8px; }
+    .logo-text { font-size: 1rem; letter-spacing: 0; white-space: nowrap; }
+    .header-actions { gap: 3px; }
+    .header-actions .icon-btn { padding: 7px; }
+    .lang-select { max-width: 74px; padding-left: 6px; padding-right: 22px; }
+}
+
+/* Admin order items: color-variant thumbnail + variant line */
+.admin-item { align-items: center; }
+.admin-item-img { width: 46px; height: 46px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+.admin-item-main { flex: 1; min-width: 0; }
+.admin-item-meta { font-size: 0.8rem; opacity: 0.75; margin-top: 2px; }
+.admin-item-price { font-weight: 600; white-space: nowrap; }
