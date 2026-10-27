@@ -6,7 +6,7 @@
     <meta name="description" content="JAPANBUY - Японы топ брэнд хувцсыг шууд захиалан авах найдвартай карго платформ">
     <meta name="theme-color" content="#0f62fe">
     <title>JAPANBUY - Online Store</title>
-    <link rel="stylesheet" href="style.css?v=20261027h">
+    <link rel="stylesheet" href="style.css?v=20261027i">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -54,8 +54,20 @@
             <li><a href="#contact" data-i18n="nav_contact">Холбоо барих</a></li>
             <li><a href="#" onclick="event.preventDefault();handleUserClick()" id="mobile-login-link" data-i18n="btn_login">Нэвтрэх</a></li>
         </ul>
+        <div class="mobile-menu-footer">
+            <div class="menu-socials">
+                <a href="#" class="social-icon" id="social-facebook" aria-label="Facebook" onclick="event.preventDefault()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="#" class="social-icon" id="social-instagram" aria-label="Instagram" onclick="event.preventDefault()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="0.6" fill="currentColor"/></svg></a>
+                <a href="#" class="social-icon" id="social-x" aria-label="X" onclick="event.preventDefault()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3.1l-6.8 7.8L21.8 21h-6.3l-4.9-6.4L5 21H1.9l7.3-8.3L2.2 3h6.4l4.4 5.9L17.5 3zm-1.1 16.1h1.7L7.7 4.8H5.9l10.5 14.3z"/></svg></a>
+                <a href="#" class="social-icon" id="social-youtube" aria-label="YouTube" onclick="event.preventDefault()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z" fill="currentColor" stroke="none"/></svg></a>
+                <a href="#" class="social-icon social-line" id="social-line" aria-label="LINE" onclick="event.preventDefault()"><span>LINE</span></a>
+            </div>
+            <a class="menu-phone" id="menu-phone" href="#" onclick="event.preventDefault()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span id="menu-phone-number">—</span></a>
+        </div>
     </div>
     <div id="overlay" class="overlay"></div>
+
+    <button id="to-top-btn" class="to-top-btn" aria-label="Дээшээ" onclick="scrollToTop()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></button>
 
     <main>
         <!-- HOME VIEW -->
@@ -446,6 +458,6 @@
     <!-- TOAST CONTAINER -->
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-    <script src="script.js?v=20261027h"></script>
+    <script src="script.js?v=20261027i"></script>
 </body>
 </html>
