@@ -283,19 +283,39 @@
                         </div>
 
                         <h3 style="margin-top: 25px;" data-i18n="pay_info">Төлбөрийн мэдээлэл</h3>
-                        <div class="form-group">
-                            <label for="card-number" data-i18n="form_card_number">Картын дугаар</label>
-                            <input type="text" id="card-number" placeholder="0000 0000 0000 0000" data-i18n-placeholder="placeholder_card" maxlength="19" autocomplete="cc-number" inputmode="numeric">
+                        <div class="pay-methods" id="pay-methods">
+                            <button type="button" class="pay-method active" data-method="visa" onclick="selectPaymentMethod('visa', this)">💳 <span data-i18n="pay_visa">Visa карт</span></button>
+                            <button type="button" class="pay-method" data-method="bank" onclick="selectPaymentMethod('bank', this)">🏦 <span data-i18n="pay_bank">Банкны шилжүүлэг</span></button>
+                            <button type="button" class="pay-method" data-method="paypay" onclick="selectPaymentMethod('paypay', this)">📱 <span>PayPay QR</span></button>
                         </div>
-                        <div class="form-group row">
-                            <div>
-                                <label for="card-expiry" data-i18n="form_expiry">Хугацаа</label>
-                                <input type="text" id="card-expiry" placeholder="MM/YY" data-i18n-placeholder="placeholder_expiry" maxlength="5" autocomplete="cc-exp">
+
+                        <div class="pay-panel" id="pay-panel-visa">
+                            <div class="form-group">
+                                <label for="card-number" data-i18n="form_card_number">Картын дугаар</label>
+                                <input type="text" id="card-number" placeholder="0000 0000 0000 0000" data-i18n-placeholder="placeholder_card" maxlength="19" autocomplete="cc-number" inputmode="numeric">
                             </div>
-                            <div>
-                                <label for="card-cvv">CVV</label>
-                                <input type="text" id="card-cvv" placeholder="123" data-i18n-placeholder="placeholder_cvv" maxlength="4" autocomplete="cc-csc" inputmode="numeric">
+                            <div class="form-group row">
+                                <div>
+                                    <label for="card-expiry" data-i18n="form_expiry">Хугацаа</label>
+                                    <input type="text" id="card-expiry" placeholder="MM/YY" data-i18n-placeholder="placeholder_expiry" maxlength="5" autocomplete="cc-exp">
+                                </div>
+                                <div>
+                                    <label for="card-cvv">CVV</label>
+                                    <input type="text" id="card-cvv" placeholder="123" data-i18n-placeholder="placeholder_cvv" maxlength="4" autocomplete="cc-csc" inputmode="numeric">
+                                </div>
                             </div>
+                        </div>
+
+                        <div class="pay-panel hidden" id="pay-panel-bank">
+                            <p class="pay-note" data-i18n="pay_bank_note">Захиалга баталгаажуулсны дараа шилжүүлэх дансны мэдээллийг танд илгээнэ. Шилжүүлэг хийгдсэний дараа таны захиалга баталгаажна.</p>
+                        </div>
+
+                        <div class="pay-panel hidden" id="pay-panel-paypay">
+                            <div class="paypay-qr-box">
+                                <img id="paypay-qr-img" alt="PayPay QR" style="display:none;">
+                                <span id="paypay-qr-note" data-i18n="pay_paypay_note">PayPay QR код энд гарна</span>
+                            </div>
+                            <p class="pay-note" data-i18n="pay_paypay_hint">QR кодыг PayPay аппаараа уншуулж төлбөрөө хийгээд, захиалгаа баталгаажуулна уу.</p>
                         </div>
                         <button class="btn btn-primary w-100" onclick="processPayment()" data-i18n="btn_confirm">✈️ Захиалга баталгаажуулах</button>
                     </div>
@@ -398,6 +418,7 @@
             <div class="success-icon">✓</div>
             <h2 data-i18n="success_title">Захиалга амжилттай илгээгдлээ!</h2>
             <p class="order-number"><span data-i18n="success_order_label">Захиалгын дугаар:</span> <strong id="order-number"></strong></p>
+            <p class="order-number"><span data-i18n="pay_method_label">Төлбөрийн хэлбэр:</span> <strong id="order-payment"></strong></p>
             <p data-i18n="success_desc">Таны захиалгын мэдээлэл манай системд бүртгэгдлээ. Бид тантай удахгүй холбогдох болно.</p>
             <button class="btn btn-primary" onclick="finishOrder()" data-i18n="btn_back_home">Нүүр хуудас руу буцах</button>
         </div>
