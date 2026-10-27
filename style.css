@@ -413,6 +413,17 @@ button, input, select {
     margin-bottom: 16px;
 }
 
+.social-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: nowrap;
+}
+
+.social-icons .social-icon {
+    flex: 0 0 auto;
+}
+
 .social-icon {
     width: 42px;
     height: 42px;
