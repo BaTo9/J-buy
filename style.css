@@ -403,9 +403,15 @@ button, input, select {
     display: block;
 }
 
-#theme-toggle svg {
+.icon-btn svg {
     width: 21px;
     height: 21px;
+    display: block;
+}
+
+.search-btn svg {
+    width: 19px;
+    height: 19px;
     display: block;
 }
 
