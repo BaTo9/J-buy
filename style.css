@@ -2250,7 +2250,7 @@ body {
     display: flex;
     gap: 28px;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
 }
 
 .desktop-nav a {
