@@ -1357,7 +1357,7 @@ function paintSummary() {
     const dEl = $('checkout-delivery'); if (dEl) dEl.textContent = `¥${delivYen.toLocaleString()}`;
     const total = subtotal + cargoFee + delivYen;
     checkoutTotal.textContent = `¥${total.toLocaleString()}`;
-    if (checkoutExchange) checkoutExchange.textContent = cart.length ? `(${((fmtMNT(subtotal + cargoFee)) + (delivChecked ? DELIVERY_FEE_MNT : 0)).toLocaleString()}₮)` : '';
+    if (checkoutExchange) checkoutExchange.textContent = cart.length ? `${translations[currentLang].price_mnt_label}: ${((fmtMNT(subtotal + cargoFee)) + (delivChecked ? DELIVERY_FEE_MNT : 0)).toLocaleString()}₮` : '';
     return { subtotal, cargoFee, delivYen, total };
 }
 function updateConfirmState() { const cb = $('accept-prices'); const btn = $('confirm-order-btn'); if (btn) btn.disabled = !(cb && cb.checked); }
