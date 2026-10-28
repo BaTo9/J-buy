@@ -2378,3 +2378,16 @@ body {
 .admin-item-main { flex: 1; min-width: 0; }
 .admin-item-meta { font-size: 0.8rem; opacity: 0.75; margin-top: 2px; }
 .admin-item-price { font-weight: 600; white-space: nowrap; }
+
+/* Very small phones (<=400px): a bit tighter so the navbar never touches */
+@media (max-width: 400px) {
+    .logo .logo-img { width: 28px; height: 28px; }
+    .logo-text { font-size: 0.92rem; }
+    .header-actions .icon-btn { padding: 6px; }
+    .lang-select { max-width: 62px; font-size: 0.82rem; }
+}
+
+/* Extremely narrow screens: language lives in the side menu flags, hide the header select */
+@media (max-width: 340px) {
+    .header-actions .lang-select { display: none; }
+}
