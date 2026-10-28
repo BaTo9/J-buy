@@ -956,6 +956,14 @@ function pdesc(p) {
     if (currentLang === 'jp') return p.descJp || p.desc;
     return p.desc;
 }
+const COLOR_TR = {"Anthracite grey":{"mn":"Антрацит саарал"},"BLACK":{"mn":"Хар"},"BLUE":{"mn":"Цэнхэр"},"Beige marl":{"mn":"Шаргал меланж"},"Black":{"mn":"Хар"},"Blue":{"mn":"Цэнхэр"},"Bottle green":{"mn":"Гүн ногоон"},"Brown":{"mn":"Бор"},"CREAM":{"mn":"Крем"},"DARK GRAY":{"mn":"Бараан саарал"},"DARK GREEN":{"mn":"Бараан ногоон"},"DARK ORANGE":{"mn":"Бараан улбар шар"},"Ecru":{"mn":"Экрю"},"GRAY":{"mn":"Саарал"},"GREEN":{"mn":"Ногоон"},"Green":{"mn":"Ногоон"},"Grey marl":{"mn":"Саарал меланж"},"Khaki":{"mn":"Хаки"},"LIGHT GRAY":{"mn":"Цайвар саарал"},"Light blue":{"mn":"Цайвар цэнхэр"},"Light grey":{"mn":"Цайвар саарал"},"Light yellow":{"mn":"Цайвар шар"},"NATURAL":{"mn":"Байгалийн өнгө"},"NAVY":{"mn":"Гүн хөх"},"OFF WHITE":{"mn":"Сүүн цагаан"},"OLIVE":{"mn":"Олив ногоон"},"ORANGE":{"mn":"Улбар шар"},"PINK":{"mn":"Ягаан"},"PURPLE":{"mn":"Нил ягаан"},"Pastel pink":{"mn":"Пастель ягаан"},"Pink marl":{"mn":"Ягаан меланж"},"RED":{"mn":"Улаан"},"Red":{"mn":"Улаан"},"Sky blue":{"mn":"Тэнгэрийн цэнхэр"},"WHITE":{"mn":"Цагаан"},"WINE":{"mn":"Бордо улаан"},"White":{"mn":"Цагаан"},"YELLOW":{"mn":"Шар"},"Yellow":{"mn":"Шар"},"striped":{"mn":"Судалтай"},"black":{"mn":"Хар"},"white":{"mn":"Цагаан"},"gray":{"mn":"Саарал"},"navy":{"mn":"Гүн хөх"},"red":{"mn":"Улаан"},"アッシュ":{"mn":"Үнсэн саарал","en":"Ash"},"ウィッカータン":{"mn":"Сагсан шаргал","en":"Wicker Tan"},"エッグシェル":{"mn":"Өндөгний хальсан өнгө","en":"Eggshell"},"オプティックホワイト":{"mn":"Тод цагаан","en":"Optic White"},"カールストーン":{"mn":"Чулуун саарал","en":"Carl Stone"},"クジラ":{"mn":"Халим хөх","en":"Whale Blue"},"クリーム":{"mn":"Крем","en":"Cream"},"グリーン／ホワイト":{"mn":"Ногоон/Цагаан","en":"Green/White"},"シティスケープミルク":{"mn":"Сүүн цайвар саарал","en":"Cityscape Milk"},"シルバー":{"mn":"Мөнгөлөг","en":"Silver"},"タスカンレッド":{"mn":"Тоскана улаан","en":"Tuscan Red"},"ダークウォッシュ":{"mn":"Бараан угаалттай деним","en":"Dark Wash"},"ダークブルー":{"mn":"Бараан цэнхэр","en":"Dark Blue"},"チョコレート":{"mn":"Шоколадан бор","en":"Chocolate"},"テラブラウン":{"mn":"Терра бор","en":"Terra Brown"},"デザートカモフラージュ":{"mn":"Цөлийн камуфляж","en":"Desert Camouflage"},"トゥルーブラック":{"mn":"Жинхэнэ хар","en":"True Black"},"ニッケル":{"mn":"Никель саарал","en":"Nickel"},"ニューオフホワイト":{"mn":"Сүүн цагаан","en":"New Off White"},"ニュークラシックネイビー":{"mn":"Сонгодог гүн хөх","en":"New Classic Navy"},"ネイビー":{"mn":"Гүн хөх","en":"Navy"},"バニラ/エイコーン":{"mn":"Ваниль/Царсны бор","en":"Vanilla/Acorn"},"ビーチピンク":{"mn":"Эргийн ягаан","en":"Beach Pink"},"フラワープリント":{"mn":"Цэцгэн хээтэй","en":"Flower Print"},"フロストアイボリー":{"mn":"Зааны ясан цагаан","en":"Frost Ivory"},"フロストアイボリーフローラル":{"mn":"Зааны ясан цагаан, цэцэгтэй","en":"Frost Ivory Floral"},"ブラウン/エイコーン":{"mn":"Бор/Царсны бор","en":"Brown/Acorn"},"ブラウン/ラゲッジ":{"mn":"Бор/Чемоданы бор","en":"Brown/Luggage"},"ブラウンプレイド":{"mn":"Бор алаг","en":"Brown Plaid"},"ブラック":{"mn":"Хар","en":"Black"},"ブラックプレイド":{"mn":"Хар алаг","en":"Black Plaid"},"ブラックモスグリーン":{"mn":"Хар хөвд ногоон","en":"Black Moss Green"},"ブルー":{"mn":"Цэнхэр","en":"Blue"},"ベインブリッジブルー":{"mn":"Бэйнбриж хөх","en":"Bainbridge Blue"},"ホワイト":{"mn":"Цагаан","en":"White"},"ポーセリンブルー":{"mn":"Шаазан цэнхэр","en":"Porcelain Blue"},"ミッションタン":{"mn":"Миссион шаргал","en":"Mission Tan"},"ムーンレスナイト":{"mn":"Саргүй шөнийн хар","en":"Moonless Night"},"モダンレッド":{"mn":"Орчин үеийн улаан","en":"Modern Red"},"ライトイエロー／ドット":{"mn":"Цайвар шар / Цэгтэй","en":"Light Yellow / Dot"},"ライトインディゴ":{"mn":"Цайвар индиго","en":"Light Indigo"},"ライトグリーン／フルーツ":{"mn":"Цайвар ногоон / Жимстэй","en":"Light Green / Fruit"},"ライトグレーメランジ":{"mn":"Цайвар саарал меланж","en":"Light Grey Melange"},"ライトターコイズ":{"mn":"Цайвар оюу","en":"Light Turquoise"},"ライトダスティグリーン":{"mn":"Цайвар бүдэг ногоон","en":"Light Dusty Green"},"ライトピンク／ストロベリー":{"mn":"Цайвар ягаан / Гүзээлзгэнэтэй","en":"Light Pink / Strawberry"},"ライトピンク／ハート":{"mn":"Цайвар ягаан / Зүрхтэй","en":"Light Pink / Heart"},"ライトピンク／フローラル":{"mn":"Цайвар ягаан / Цэцэгтэй","en":"Light Pink / Floral"},"ライトブルー":{"mn":"Цайвар цэнхэр","en":"Light Blue"},"ライトヘザーグレー":{"mn":"Цайвар алаг саарал","en":"Light Heather Grey"}};
+function cname(c) {
+    if (!c) return c;
+    if (currentLang === 'jp') return c;
+    const tr = COLOR_TR[c];
+    if (!tr) return c;
+    return currentLang === 'mn' ? (tr.mn || tr.en || c) : (tr.en || c);
+}
 
 function iname(item) {
     return pname(PRODUCTS.find(x => x.id === item.id)) || item.name || '';
@@ -1037,14 +1045,14 @@ function openProductDetail(id, keepOpen = false) {
 
     const colorOptionsHtml = (p.colors && p.colors.length)
         ? p.colors.map(c => (p.swatches && p.swatches[c]) ? `
-            <button type="button" class="color-swatch ${c === selectedColor ? 'active' : ''}${isColorSoldOut(p, c) ? ' sold-out' : ''}" data-full="${p.swatches[c].replace('w=105', 'w=655')}" onclick="selectColorUI(this, '${c}')" title="${c}" ${isColorSoldOut(p, c) ? 'disabled' : ''}><img src="${p.swatches[c]}" alt="${c}">${isColorSoldOut(p, c) ? `<span class="variant-out-badge">${t.sold_out}</span>` : ''}</button>
+            <button type="button" class="color-swatch ${c === selectedColor ? 'active' : ''}${isColorSoldOut(p, c) ? ' sold-out' : ''}" data-full="${p.swatches[c].replace('w=105', 'w=655')}" onclick="selectColorUI(this, '${c}')" title="${cname(c)}" ${isColorSoldOut(p, c) ? 'disabled' : ''}><img src="${p.swatches[c]}" alt="${cname(c)}">${isColorSoldOut(p, c) ? `<span class="variant-out-badge">${t.sold_out}</span>` : ''}</button>
         ` : `
-            <button type="button" class="color-chip ${c === selectedColor ? 'active' : ''}${isColorSoldOut(p, c) ? ' sold-out' : ''}" onclick="selectColorUI(this, '${c}')" ${isColorSoldOut(p, c) ? 'disabled' : ''}><span class="dot" style="background:${JP_COLOR_HEX[c] || '#ccc'}"></span>${c}${isColorSoldOut(p, c) ? `<span class="variant-out-label">${t.sold_out}</span>` : ''}</button>
+            <button type="button" class="color-chip ${c === selectedColor ? 'active' : ''}${isColorSoldOut(p, c) ? ' sold-out' : ''}" onclick="selectColorUI(this, '${c}')" ${isColorSoldOut(p, c) ? 'disabled' : ''}><span class="dot" style="background:${JP_COLOR_HEX[c] || '#ccc'}"></span>${cname(c)}${isColorSoldOut(p, c) ? `<span class="variant-out-label">${t.sold_out}</span>` : ''}</button>
         `).join('')
         : colors.map(c => `
             <div class="color-circle ${c.name === selectedColor ? 'active' : ''}"
                  style="background:${c.hex};${c.name === 'white' ? 'border:2px solid #ddd;' : ''}"
-                 onclick="selectColor(this, '${c.name}')" title="${c.name}"></div>
+                 onclick="selectColor(this, '${c.name}')" title="${cname(c.name)}"></div>
         `).join('');
 
     $('product-detail-content').innerHTML = `
@@ -1063,7 +1071,7 @@ function openProductDetail(id, keepOpen = false) {
                 ${p.url ? `<a class="official-link" href="${p.url}" target="_blank" rel="noopener">🔗 ${t.official_store}</a>` : ''}
 
                 <div class="selector-group">
-                    <label>${t.detail_color}: <span id="selected-color-name" class="selected-value">${selectedColor}</span></label>
+                    <label>${t.detail_color}: <span id="selected-color-name" class="selected-value">${cname(selectedColor)}</span></label>
                     <div class="color-options">
                         ${colorOptionsHtml}
                     </div>
@@ -1160,7 +1168,7 @@ function selectColorUI(el, name) {
     el.classList.add('active');
     selectedColor = name;
     const lbl = $('selected-color-name');
-    if (lbl) lbl.textContent = name;
+    if (lbl) lbl.textContent = cname(name);
     const full = el.getAttribute('data-full');
     if (full) {
         const main = $('detail-main-img');
@@ -1299,7 +1307,7 @@ function renderCart() {
             <div class="cart-item-info">
                 <h4>${iname(item)}</h4>
                 <p class="brand">${item.brand}</p>
-                <p class="attrs">${item.size} | ${item.color} | x${item.qty}</p>
+                <p class="attrs">${item.size} | ${cname(item.color)} | x${item.qty}</p>
                 <p class="price">¥${(item.price * item.qty).toLocaleString()}</p>
                 <div class="cart-item-qty">
                     <button onclick="updateCartQty(${idx}, -1)">−</button>
@@ -1472,7 +1480,7 @@ function renderCheckout() {
             <img src="${item.img}" alt="${iname(item)}">
             <div class="checkout-item-info">
                 <p><strong>${iname(item)}</strong></p>
-                <p class="small">${item.brand} | ${item.size} | ${item.color} | x${item.qty} | ${itemWeightGrams(item)} г</p>
+                <p class="small">${item.brand} | ${item.size} | ${cname(item.color)} | x${item.qty} | ${itemWeightGrams(item)} г</p>
                 <p class="price">¥${(item.price * item.qty).toLocaleString()}</p>
             </div>
         </div>
@@ -1578,10 +1586,10 @@ const ORDER_STATUSES = ['new', 'paid', 'shipped', 'done', 'cancelled'];
 let adminOrdersById = {};
 
 function orderItemsText(o) {
-    return (o.items || []).map(i => `• ${i.name} — өнгө: ${i.color || '-'}, размер: ${i.size || '-'}, тоо: ${i.qty}, үнэ: ¥${(i.price * i.qty).toLocaleString()}`).join('\n');
+    return (o.items || []).map(i => `• ${i.name} — өнгө: ${cname(i.color) || '-'}, размер: ${i.size || '-'}, тоо: ${i.qty}, үнэ: ¥${(i.price * i.qty).toLocaleString()}`).join('\n');
 }
 function orderItemsHtml(o) {
-    return (o.items || []).map(i => `• ${esc(i.name)} — өнгө: ${esc(i.color || '-')}, размер: ${esc(i.size || '-')}, тоо: ${i.qty}, үнэ: ¥${(i.price * i.qty).toLocaleString()}`).join('<br>');
+    return (o.items || []).map(i => `• ${esc(i.name)} — өнгө: ${esc(cname(i.color) || '-')}, размер: ${esc(i.size || '-')}, тоо: ${i.qty}, үнэ: ¥${(i.price * i.qty).toLocaleString()}`).join('<br>');
 }
 async function sendPaidOrderEmail(order) {
     if (!order || !order.email) return false;
@@ -1649,7 +1657,7 @@ async function loadAdminOrders() {
         const itemsHtml = (o.items || []).map(i => {
             const p = PRODUCTS.find(x => x.id === i.id);
             const img = i.img || (p && p.swatches && i.color && p.swatches[i.color]) || (p ? p.img : '');
-            const meta = [i.brand || (p ? p.brand : ''), i.color, i.size, (i.weight || (p && p.weightKg)) ? ((i.weight || p.weightKg) + ' кг') : ''].filter(Boolean).map(x => esc(x)).join(' · ');
+            const meta = [i.brand || (p ? p.brand : ''), cname(i.color), i.size, (i.weight || (p && p.weightKg)) ? ((i.weight || p.weightKg) + ' кг') : ''].filter(Boolean).map(x => esc(x)).join(' · ');
             return `<div class="admin-item">${img ? `<img class="admin-item-img" src="${esc(img)}" alt="" loading="lazy">` : ''}<div class="admin-item-main"><div>${esc(i.name)} × ${i.qty}</div><div class="admin-item-meta">${meta}</div></div><span class="admin-item-price">¥${(i.price * i.qty).toLocaleString()}</span></div>`;
         }).join('');
         const opts = ORDER_STATUSES.map(s => `<option value="${s}" ${s === o.status ? 'selected' : ''}>${esc(t['st_' + s] || s)}</option>`).join('');
