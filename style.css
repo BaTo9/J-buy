@@ -2423,3 +2423,25 @@ body {
     letter-spacing: 2px;
     opacity: 1;
 }
+
+/* Form fields: labels and inputs clearly active/readable */
+.form-group label {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+.form-group input {
+    background-color: var(--surface-color);
+    border-color: #b9c6d8;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+.form-group input::placeholder {
+    color: #64748b;
+    opacity: 1;
+}
+.form-group input::-webkit-input-placeholder {
+    color: #64748b;
+    opacity: 1;
+}
+[data-theme="dark"] .form-group input { border-color: #4b5563; }
+[data-theme="dark"] .form-group input::placeholder { color: #cbd5e1; }
+[data-theme="dark"] .form-group input::-webkit-input-placeholder { color: #cbd5e1; }
