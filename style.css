@@ -2470,3 +2470,29 @@ body {
     opacity: 0.65;
 }
 .pay-unavailable-note { margin-bottom: 14px; }
+
+/* Checkout price-acceptance checkbox */
+.accept-prices-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 18px 0 12px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    line-height: 1.45;
+}
+.accept-prices-row input {
+    width: 19px;
+    height: 19px;
+    margin-top: 1px;
+    accent-color: var(--primary-color);
+    flex-shrink: 0;
+    cursor: pointer;
+}
+#confirm-order-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
