@@ -311,7 +311,11 @@
                         </div>
                         <div class="summary-row">
                             <span data-i18n="checkout_weight">Жин</span>
-                            <span id="checkout-weight">0.0 кг</span>
+                            <span id="checkout-weight">0 г</span>
+                        </div>
+                        <div class="summary-row" id="checkout-packaging-row" style="display:none">
+                            <span data-i18n="checkout_packaging">Савлагаа</span>
+                            <span id="checkout-packaging">200 г</span>
                         </div>
                         <div class="summary-row">
                             <span data-i18n="checkout_cargo">Карго</span>
@@ -546,7 +550,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=20261027az"></script>
+    <script src="script.js?v=20261027ba"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

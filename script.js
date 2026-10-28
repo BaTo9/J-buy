@@ -207,7 +207,7 @@ const translations = {
         placeholder_email: 'email@example.com', placeholder_password: '••••••••', placeholder_name: 'Бат Болд',
         // Checkout
         checkout_title: 'Төлбөр тооцоо', checkout_order_info: 'Захиалгын мэдээлэл',
-        checkout_subtotal: 'Дэд бараа үнэ', checkout_total: 'Нийт дүн (JPY)', checkout_weight: 'Жин', checkout_cargo: 'Карго',
+        checkout_subtotal: 'Дэд бараа үнэ', checkout_total: 'Нийт дүн (JPY)', checkout_weight: 'Жин', checkout_packaging: 'Савлагаа', checkout_cargo: 'Карго',
         cargo_by_weight: 'Бодит жингээр тооцно', accept_prices: 'Үйлчилгээний болон каргоны үнийг хүлээн зөвшөөрч байна', msg_accept_prices: 'Үргэлжлүүлэхийн тулд эхлээд үнийг хүлээн зөвшөөрнө үү', price_mnt_label: 'МНТ үнэ', delivery_city: 'Хүргэлт (хот дотор) — 15,000₮', checkout_delivery: 'Хүргэлт',
         ship_info: 'Хүргэлтийн мэдээлэл', pay_info: 'Төлбөрийн мэдээлэл',
         pay_visa: 'Visa карт', pay_visa_off: 'Түр боломжгүй', pay_visa_notice: 'Картаар төлөх боломж одоогоор байхгүй байна. Дансаар шилжүүлнэ үү.', pay_bank: 'Банкны шилжүүлэг', pay_method_label: 'Төлбөрийн хэлбэр:',
@@ -294,7 +294,7 @@ const translations = {
         form_email: 'Email', form_password: 'Password', form_fullname: 'Full Name',
         placeholder_email: 'email@example.com', placeholder_password: '••••••••', placeholder_name: 'John Doe',
         checkout_title: 'Checkout', checkout_order_info: 'Order Information',
-        checkout_subtotal: 'Subtotal', checkout_total: 'Total (JPY)', checkout_weight: 'Weight', checkout_cargo: 'Cargo',
+        checkout_subtotal: 'Subtotal', checkout_total: 'Total (JPY)', checkout_weight: 'Weight', checkout_packaging: 'Packaging', checkout_cargo: 'Cargo',
         cargo_by_weight: 'Charged by actual weight', accept_prices: 'I accept the service and cargo prices', msg_accept_prices: 'Please accept the prices to continue', price_mnt_label: 'MNT price', delivery_city: 'City delivery — 15,000₮', checkout_delivery: 'Delivery',
         ship_info: 'Shipping Information', pay_info: 'Payment Information',
         pay_visa: 'Visa card', pay_visa_off: 'Temporarily unavailable', pay_visa_notice: 'Card payment is not available yet. Please pay by bank transfer.', pay_bank: 'Bank transfer', pay_method_label: 'Payment method:',
@@ -377,7 +377,7 @@ const translations = {
         form_email: 'メール', form_password: 'パスワード', form_fullname: '氏名',
         placeholder_email: 'email@example.com', placeholder_password: '••••••••', placeholder_name: '山田 太郎',
         checkout_title: 'お支払い', checkout_order_info: 'ご注文情報',
-        checkout_subtotal: '小計', checkout_total: '合計 (JPY)', checkout_weight: '重量', checkout_cargo: 'カーゴ',
+        checkout_subtotal: '小計', checkout_total: '合計 (JPY)', checkout_weight: '重量', checkout_packaging: '梱包', checkout_cargo: 'カーゴ',
         cargo_by_weight: '実重量で計算します', accept_prices: 'サービス料金とカーゴ料金に同意します', msg_accept_prices: '続けるには料金への同意をお願いします', price_mnt_label: 'MNT価格', delivery_city: '市内配送 — 15,000₮', checkout_delivery: '配送',
         ship_info: '配送情報', pay_info: 'お支払い情報',
         pay_visa: 'Visaカード', pay_visa_off: '一時利用不可', pay_visa_notice: 'カード払いは現在ご利用いただけません。銀行振込でお支払いください。', pay_bank: '銀行振込', pay_method_label: 'お支払い方法:',
@@ -1351,7 +1351,9 @@ function paintSummary() {
     const delivChecked = !!($('city-delivery') && $('city-delivery').checked);
     const delivYen = delivChecked ? deliveryFeeYen() : 0;
     checkoutSubtotal.textContent = `¥${subtotal.toLocaleString()}`;
-    if (checkoutWeight) checkoutWeight.textContent = `${billed.toLocaleString()} г`;
+    if (checkoutWeight) checkoutWeight.textContent = `${cartGoodsWeightGrams().toLocaleString()} г`;
+    const pRow = $('checkout-packaging-row'); if (pRow) pRow.style.display = cart.length ? '' : 'none';
+    const pEl = $('checkout-packaging'); if (pEl) pEl.textContent = `${PACKAGING_GRAMS.toLocaleString()} г`;
     if (checkoutCargo) checkoutCargo.textContent = `¥${cargoFee.toLocaleString()}`;
     const dRow = $('checkout-delivery-row'); if (dRow) dRow.style.display = delivChecked ? '' : 'none';
     const dEl = $('checkout-delivery'); if (dEl) dEl.textContent = `¥${delivYen.toLocaleString()}`;
