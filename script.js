@@ -90,7 +90,7 @@ const translations = {
         // Nav
         nav_home: 'Нүүр', nav_products: 'Бараанууд', nav_features: 'Давуу тал', nav_contact: 'Холбоо барих',
         // Hero
-        hero_title: 'ЯПОН УЛСААС ХҮССЭН БАРААГАА ЗАХИАЛ',
+        hero_title: 'ЯПОН УЛСААС ХҮССЭН БАРААГАА ЗАХИАЛЪЯ',
         hero_desc: 'Японы шилдэг брэндүүдээс шууд худалдан аваарай. Хурдан, найдвартай, баталгаатай.',
         btn_shop_now: 'Одоо захиалах',
         // Products
