@@ -2401,3 +2401,6 @@ body {
     padding: 6px 8px;
     text-align: center;
 }
+
+/* Footer socials: lift icons off the bottom divider line */
+.footer-socials { margin-bottom: 22px; }
