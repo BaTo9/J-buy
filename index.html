@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="JAPANBUY">
     <title>JAPANBUY - Online Store</title>
-    <link rel="stylesheet" href="style.css?v=20261027au">
+    <link rel="stylesheet" href="style.css?v=20261027av">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -306,12 +306,16 @@
                             <span id="checkout-subtotal">¥0</span>
                         </div>
                         <div class="summary-row">
-                            <span data-i18n="free_shipping">Карго (олирлоор)</span>
-                            <span id="checkout-shipping">¥1,500</span>
+                            <span data-i18n="checkout_weight">Ойролцоо жин</span>
+                            <span id="checkout-weight">0.0 кг</span>
+                        </div>
+                        <div class="summary-row">
+                            <span data-i18n="checkout_cargo">Карго</span>
+                            <span id="checkout-cargo">Бодит жингээр тооцно</span>
                         </div>
                         <div class="summary-row total">
                             <span data-i18n="checkout_total">Нийт дүн (JPY)</span>
-                            <span id="checkout-total">¥1,500</span>
+                            <span id="checkout-total">¥0</span>
                         </div>
                         <p class="exchange-rate" id="checkout-exchange"></p>
                     </div>
@@ -380,7 +384,11 @@
                             </div>
                             <p class="pay-note" data-i18n="pay_paypay_hint">QR кодыг PayPay аппаараа уншуулж төлбөрөө хийгээд, захиалгаа баталгаажуулна уу.</p>
                         </div>
-                        <button class="btn btn-primary w-100" onclick="processPayment()" data-i18n="btn_confirm">✈️ Захиалга баталгаажуулах</button>
+                        <label class="accept-prices-row">
+                            <input type="checkbox" id="accept-prices" onchange="updateConfirmState()">
+                            <span data-i18n="accept_prices">Үйлчилгээний болон каргоны үнийг хүлээн зөвшөөрч байна</span>
+                        </label>
+                        <button class="btn btn-primary w-100" id="confirm-order-btn" onclick="processPayment()" data-i18n="btn_confirm" disabled>✈️ Захиалга баталгаажуулах</button>
                     </div>
                 </div>
             </div>
@@ -524,7 +532,7 @@
     </nav>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=20261027au"></script>
+    <script src="script.js?v=20261027av"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
