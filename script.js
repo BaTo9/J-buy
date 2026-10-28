@@ -212,7 +212,7 @@ const EXCHANGE_RATE = 22.97; // Хаан банк JPY бэлэн бус зара
 const CARGO_RATE_PER_KG = 1500; // карго: 1 кг = ¥1,500 (граммаар тооцно: 1 г = ¥1.5)
 const DELIVERY_FEE_MNT = 15000; // хот доторх хүргэлт ₮
 // Захиалагчид төлбөр баталгаажсан и-мэйл илгээх (EmailJS). Тохиргоо хоосон бол илгээхгүй.
-const EMAILJS_CONFIG = { publicKey: '', serviceId: '', templateId: '', templatePlacedId: '' };
+const EMAILJS_CONFIG = { publicKey: 'cuuajLZP5jz4XLWD9', serviceId: 'service_po1ko4e', templateId: 'template_8n3y9rc', templatePlacedId: 'template_7mbdthp' };
 
 // ================= STATE =================
 let currentLang = localStorage.getItem('lang') || 'mn';
