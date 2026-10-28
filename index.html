@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="JAPANBUY">
     <title>JAPANBUY - Online Store</title>
-    <link rel="stylesheet" href="style.css?v=20261027at">
+    <link rel="stylesheet" href="style.css?v=20261027au">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -333,29 +333,30 @@
 
                         <h3 style="margin-top: 25px;" data-i18n="pay_info">Төлбөрийн мэдээлэл</h3>
                         <div class="pay-methods" id="pay-methods">
-                            <button type="button" class="pay-method active" data-method="visa" onclick="selectPaymentMethod('visa', this)">💳 <span data-i18n="pay_visa">Visa карт</span></button>
-                            <button type="button" class="pay-method" data-method="bank" onclick="selectPaymentMethod('bank', this)">🏦 <span data-i18n="pay_bank">Банкны шилжүүлэг</span></button>
+                            <button type="button" class="pay-method" data-method="visa" disabled aria-disabled="true">💳 <span data-i18n="pay_visa">Visa карт</span><span class="pay-off-badge" data-i18n="pay_visa_off">Түр боломжгүй</span></button>
+                            <button type="button" class="pay-method active" data-method="bank" onclick="selectPaymentMethod('bank', this)">🏦 <span data-i18n="pay_bank">Банкны шилжүүлэг</span></button>
                             <button type="button" class="pay-method" data-method="paypay" onclick="selectPaymentMethod('paypay', this)">📱 <span>PayPay QR</span></button>
                         </div>
 
-                        <div class="pay-panel" id="pay-panel-visa">
+                        <div class="pay-panel hidden" id="pay-panel-visa">
+                            <p class="pay-note pay-unavailable-note" data-i18n="pay_visa_notice">Картаар төлөх боломж одоогоор байхгүй байна. Дансаар шилжүүлнэ үү.</p>
                             <div class="form-group">
                                 <label for="card-number" data-i18n="form_card_number">Картын дугаар</label>
-                                <input type="text" id="card-number" placeholder="0000 0000 0000 0000" data-i18n-placeholder="placeholder_card" maxlength="19" autocomplete="cc-number" inputmode="numeric">
+                                <input type="text" id="card-number" placeholder="0000 0000 0000 0000" data-i18n-placeholder="placeholder_card" maxlength="19" autocomplete="off" inputmode="numeric" disabled>
                             </div>
                             <div class="form-group row">
                                 <div>
                                     <label for="card-expiry" data-i18n="form_expiry">Хугацаа</label>
-                                    <input type="text" id="card-expiry" placeholder="MM/YY" data-i18n-placeholder="placeholder_expiry" maxlength="5" autocomplete="cc-exp">
+                                    <input type="text" id="card-expiry" placeholder="MM/YY" data-i18n-placeholder="placeholder_expiry" maxlength="5" autocomplete="off" disabled>
                                 </div>
                                 <div>
                                     <label for="card-cvv">CVV</label>
-                                    <input type="text" id="card-cvv" placeholder="123" data-i18n-placeholder="placeholder_cvv" maxlength="4" autocomplete="cc-csc" inputmode="numeric">
+                                    <input type="text" id="card-cvv" placeholder="123" data-i18n-placeholder="placeholder_cvv" maxlength="4" autocomplete="off" inputmode="numeric" disabled>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="pay-panel hidden" id="pay-panel-bank">
+                        <div class="pay-panel" id="pay-panel-bank">
                             <div class="bank-account">
                                 <h4>🇲🇳 <span data-i18n="bank_mn_title">Монгол данс</span></h4>
                                 <p><span data-i18n="bank_label_bank">Банк</span>: <strong id="bank-mn-bank">—</strong></p>
@@ -523,7 +524,7 @@
     </nav>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=20261027at"></script>
+    <script src="script.js?v=20261027au"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
