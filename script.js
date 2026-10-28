@@ -127,7 +127,7 @@ const translations = {
         checkout_subtotal: 'Дэд бараа үнэ', checkout_total: 'Нийт дүн (JPY)',
         free_shipping: 'Карго (олирлоор)',
         ship_info: 'Хүргэлтийн мэдээлэл', pay_info: 'Төлбөрийн мэдээлэл',
-        pay_visa: 'Visa карт', pay_bank: 'Банкны шилжүүлэг', pay_method_label: 'Төлбөрийн хэлбэр:',
+        pay_visa: 'Visa карт', pay_visa_off: 'Түр боломжгүй', pay_visa_notice: 'Картаар төлөх боломж одоогоор байхгүй байна. Дансаар шилжүүлнэ үү.', pay_bank: 'Банкны шилжүүлэг', pay_method_label: 'Төлбөрийн хэлбэр:',
         pay_bank_note: 'Дээрх данснуудын аль нэг рүү шилжүүлэг хийнэ үү. Шилжүүлэг хийгдсэний дараа таны захиалга баталгаажна.',
         bank_mn_title: 'Монгол данс', bank_jp_title: 'Япон данс',
         bank_label_bank: 'Банк', bank_label_branch: 'Салбар', bank_label_number: 'Дансны дугаар', bank_label_holder: 'Дансны нэр',
@@ -214,7 +214,7 @@ const translations = {
         checkout_subtotal: 'Subtotal', checkout_total: 'Total (JPY)',
         free_shipping: 'Shipping (approx.)',
         ship_info: 'Shipping Information', pay_info: 'Payment Information',
-        pay_visa: 'Visa card', pay_bank: 'Bank transfer', pay_method_label: 'Payment method:',
+        pay_visa: 'Visa card', pay_visa_off: 'Temporarily unavailable', pay_visa_notice: 'Card payment is not available yet. Please pay by bank transfer.', pay_bank: 'Bank transfer', pay_method_label: 'Payment method:',
         pay_bank_note: 'Please transfer to one of the accounts above. Your order is confirmed once the transfer arrives.',
         bank_mn_title: 'Mongolian account', bank_jp_title: 'Japanese account',
         bank_label_bank: 'Bank', bank_label_branch: 'Branch', bank_label_number: 'Account number', bank_label_holder: 'Account name',
@@ -297,7 +297,7 @@ const translations = {
         checkout_subtotal: '小計', checkout_total: '合計 (JPY)',
         free_shipping: '送料（概算）',
         ship_info: '配送情報', pay_info: 'お支払い情報',
-        pay_visa: 'Visaカード', pay_bank: '銀行振込', pay_method_label: 'お支払い方法:',
+        pay_visa: 'Visaカード', pay_visa_off: '一時利用不可', pay_visa_notice: 'カード払いは現在ご利用いただけません。銀行振込でお支払いください。', pay_bank: '銀行振込', pay_method_label: 'お支払い方法:',
         pay_bank_note: '上記の口座のいずれかにお振込みください。お振込み確認後に注文が確定します。',
         bank_mn_title: 'モンゴルの口座', bank_jp_title: '日本の口座',
         bank_label_bank: '銀行', bank_label_branch: '支店', bank_label_number: '口座番号', bank_label_holder: '口座名義',
@@ -1195,9 +1195,14 @@ function fillBankDetails() {
     set('bank-jp-number', BANK_ACCOUNTS.jp.number);
     set('bank-jp-holder', BANK_ACCOUNTS.jp.holder);
 }
-let selectedPaymentMethod = 'visa';
+let selectedPaymentMethod = 'bank';
 
 function selectPaymentMethod(method, el) {
+    if (method === 'visa') {
+        const t = translations[currentLang];
+        showToast(t.pay_visa_notice, 'warning');
+        method = 'bank';
+    }
     selectedPaymentMethod = method;
     document.querySelectorAll('.pay-method').forEach(b => b.classList.toggle('active', b.dataset.method === method));
     ['visa', 'bank', 'paypay'].forEach(m => {
@@ -1263,13 +1268,8 @@ async function processPayment() {
     }
 
     if (selectedPaymentMethod === 'visa') {
-        const num = $('card-number').value.replace(/\s/g, '');
-        const exp = $('card-expiry').value.trim();
-        const cvv = $('card-cvv').value.trim();
-        if (num.length < 12 || !exp || cvv.length < 3) {
-            showToast(t.msg_fill_fields, 'error');
-            return;
-        }
+        // Visa is temporarily disabled: fall back to bank transfer.
+        selectPaymentMethod('bank');
     }
 
     if (USE_SUPABASE && sb && currentUser) {
