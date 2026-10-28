@@ -2391,3 +2391,13 @@ body {
 @media (max-width: 340px) {
     .header-actions .lang-select { display: none; }
 }
+
+/* Language select: full flag+letters visible, no up/down arrow */
+.lang-select {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: none;
+    max-width: none;
+    padding: 6px 8px;
+    text-align: center;
+}
