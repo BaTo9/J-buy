@@ -50,6 +50,85 @@ const PRODUCTS = [
 
 ];
 
+/* Албан ёсны сайтад дууссан өнгө/размерууд.
+   variant түлхүүр: "өнгө|размер". Шинэчлэлтийг stock-sync шалгалтаар хийнэ. */
+const SOLD_OUT_VARIANTS = {
+    // 2026-10-28 албан ёсны сайтуудын шалгалт (stock-sync-2026-10-28)
+    18: { variants: ['ライトヘザーグレー|XXS', 'ライトヘザーグレー|XS', 'ネイビー|XXS', 'ネイビー|XS', 'ネイビー|S', 'カールストーン|XXS', 'カールストーン|XS'] },
+    19: { variants: ['ダークウォッシュ|27', 'ダークウォッシュ|28', 'ダークウォッシュ|29'] },
+    20: { variants: ['トゥルーブラック|M', 'トゥルーブラック|L', 'テラブラウン|M', 'テラブラウン|L'] },
+    23: { colors: ['ブラックモスグリーン'], variants: ['トゥルーブラック|XXS', 'トゥルーブラック|XS', 'トゥルーブラック|M', 'トゥルーブラック|L', 'ウィッカータン|XXS', 'ウィッカータン|XS'] },
+    25: { variants: ['ブラック|XS', 'ブラック|S', 'ブラック|M', 'ニューオフホワイト|S'] },
+    26: { variants: ['ブルー|S'] },
+    27: { variants: ['ブラウンプレイド|XS', 'ブラウンプレイド|S', 'ブラウンプレイド|M'] },
+    28: { variants: ['ブラックプレイド|L', 'ブラックプレイド|XL', 'デザートカモフラージュ|M', 'デザートカモフラージュ|L', 'デザートカモフラージュ|XL', 'ブラウンプレイド|M', 'ブラウンプレイド|L', 'ブラウンプレイド|XL'] },
+    30: { variants: ['ブラック|110cm', 'ブラック|120cm', 'ブルー|110cm', 'ブルー|120cm', 'ブルー|160cm', 'グレークリスタル|110cm', 'グレークリスタル|120cm', 'グレークリスタル|130cm', 'グレークリスタル|160cm'] },
+    31: { variants: ['ラベンダー|120cm'] },
+    32: { variants: ['NATURAL|M'] },
+    34: { variants: ['DARK BROWN|XS', 'DARK BROWN|S', 'DARK BROWN|M', 'DARK BROWN|XL', 'DARK BROWN|XXL', 'DARK GRAY|XS', 'DARK GRAY|XL', 'DARK GRAY|XXL'] },
+    36: { variants: ['NAVY|XL', 'BEIGE|XL'] },
+    37: { variants: ['OLIVE|110cm', 'OLIVE|120cm', 'OLIVE|130cm', 'OLIVE|140cm', 'BLACK|110cm', 'BLACK|120cm', 'BLACK|130cm', 'BLACK|140cm', 'BLACK|150cm', 'BLACK|160cm', 'BEIGE|110cm', 'BEIGE|120cm', 'BEIGE|130cm', 'BEIGE|140cm'] },
+    38: { variants: ['LIGHT GRAY|3XL', 'BLACK|XXL', 'BLACK|3XL', 'NAVY|XL', 'NAVY|XXL', 'NAVY|3XL'] },
+    40: { colors: ['DARK GRAY', 'BROWN'], variants: ['NATURAL|XS', 'NATURAL|S', 'NATURAL|M', 'NATURAL|XXL', 'NATURAL|3XL', 'BLACK|XS', 'BLACK|S', 'BLACK|M', 'BLACK|XXL', 'BLACK|3XL', 'ORANGE|S', 'ORANGE|M', 'ORANGE|L', 'ORANGE|XL', 'ORANGE|XXL', 'ORANGE|3XL', 'GREEN|S', 'GREEN|M', 'GREEN|L', 'GREEN|XL', 'GREEN|XXL', 'GREEN|3XL'] },
+    42: { variants: ['GREEN|XXL', 'GREEN|3XL'] },
+    43: { colors: ['DARK GREEN'], variants: ['RED|130cm', 'RED|140cm', 'RED|150cm', 'RED|160cm'] },
+    44: { variants: ['Ecru|XS', 'Ecru|S', 'Ecru|XXL'] },
+    46: { variants: ['Navy blue|M', 'Navy blue|L', 'Navy blue|XL', 'Sand|XL'] },
+    47: { variants: ['Black|36', 'Black|38', 'Black|40', 'Black|42', 'Bottle green|36', 'Brown|36', 'Brown|38', 'Brown|40', 'Khaki|36', 'Khaki|38', 'Khaki|40', 'Khaki|42', 'Grey marl|36', 'Grey marl|38', 'Grey marl|40'] },
+    48: { variants: ['Brown|S'] },
+    49: { variants: ['Blue|164cm'] },
+    50: { variants: ['ブライトレッド|M', 'ブライトレッド|XL', 'ブライトレッド|XXL', 'ダークグレー|XXS', 'ダークグレー|L', 'ダークグレー|XL'] },
+    53: { variants: ['グレー／チェック|46', 'ダークグレー|46', 'ダークグレー|48', 'ダークグレー|50', 'ダークグレー|52', 'ダークグレー|54', 'ダークグレー|56'] },
+    55: { variants: ['クリーム／シナモロール|120/130'] }
+};
+function variantKey(color, size) { return `${color}|${size}`; }
+
+function scrollBrandTabs(dir) {
+    const el = $('brand-tabs');
+    if (!el) return;
+    const amount = dir * 230;
+    if (typeof el.scrollBy === 'function') el.scrollBy({ left: amount, behavior: 'smooth' });
+    else el.scrollLeft += amount;
+}
+function updateBrandArrows() {
+    const el = $('brand-tabs');
+    const left = $('brand-arrow-left');
+    const right = $('brand-arrow-right');
+    if (!el || !left || !right) return;
+    const max = el.scrollWidth - el.clientWidth;
+    const canScroll = max > 4;
+    left.classList.toggle('is-hidden', !canScroll || el.scrollLeft <= 4);
+    right.classList.toggle('is-hidden', !canScroll || el.scrollLeft >= max - 4);
+}
+function soldOutCfg(p) { return SOLD_OUT_VARIANTS[p.id] || {}; }
+function isVariantSoldOut(p, color, size) {
+    const cfg = soldOutCfg(p);
+    return (cfg.colors || []).includes(color) || (cfg.sizes || []).includes(size) || (cfg.variants || []).includes(variantKey(color, size));
+}
+function isColorSoldOut(p, color) {
+    const cfg = soldOutCfg(p);
+    if ((cfg.colors || []).includes(color)) return true;
+    const sizes = (p.sizes && p.sizes.length) ? p.sizes : ['NS'];
+    return sizes.every(sz => isVariantSoldOut(p, color, sz));
+}
+function productHasAvailable(p) {
+    const colors = (p.colors && p.colors.length) ? p.colors : ['black'];
+    const sizes = (p.sizes && p.sizes.length) ? p.sizes : ['NS'];
+    return colors.some(c => sizes.some(sz => !isVariantSoldOut(p, c, sz)));
+}
+function firstAvailableVariant(p) {
+    const colors = (p.colors && p.colors.length) ? p.colors : ['black'];
+    const sizes = (p.sizes && p.sizes.length) ? p.sizes : ['NS'];
+    for (const c of colors) for (const sz of sizes) if (!isVariantSoldOut(p, c, sz)) return { color: c, size: sz };
+    return null;
+}
+function cardAddButtonHtml(p) {
+    const t = translations[currentLang];
+    return productHasAvailable(p)
+        ? `<button class="add-to-cart-btn" onclick="event.stopPropagation(); quickAddToCart(${p.id})">${t.btn_add_cart}</button>`
+        : `<button class="add-to-cart-btn" disabled>${t.sold_out}</button>`;
+}
+
 // Холбоо барих мэдээлэл — хажуугийн цэсний доод хэсэгт харагдана
 const CONTACT_PHONE = '';
 const SOCIAL_LINKS = { facebook: '', instagram: '', line: '', gmail: '' };
@@ -59,10 +138,12 @@ const BRAND_COLORS = {
     'H&M': '#E50010', 'GAP': '#002F6C', 'MICHAEL KORS': '#8A6D3B'
 };
 
-const PACKAGING_KG = 0.2; // савлагааны жин (кг), захиалга тутамд нэг удаа
+const PACKAGING_GRAMS = 200; // савлагааны жин (г), захиалга тутамд нэг удаа
 const EXCHANGE_RATE = 22.97; // Хаан банк JPY бэлэн бус зарах ханш (2026-10-28)
-const CARGO_RATE_PER_KG = 1500; // карго: 1 кг = ¥1,500, доод хэмжээ 1 кг
+const CARGO_RATE_PER_KG = 1500; // карго: 1 кг = ¥1,500 (граммаар тооцно: 1 г = ¥1.5)
 const DELIVERY_FEE_MNT = 15000; // хот доторх хүргэлт ₮
+// Захиалагчид төлбөр баталгаажсан и-мэйл илгээх (EmailJS). Тохиргоо хоосон бол илгээхгүй.
+const EMAILJS_CONFIG = { publicKey: '', serviceId: '', templateId: '', templatePlacedId: '' };
 
 // ================= STATE =================
 let currentLang = localStorage.getItem('lang') || 'mn';
@@ -147,7 +228,7 @@ const translations = {
         msg_password_updated: 'Нууц үг шинэчлэгдлээ', msg_login_error: 'Имэйл эсвэл нууц үг буруу байна',
         msg_order_error: 'Захиалга хадгалахад алдаа гарлаа. Дахин оролдоно уу.',
         admin_orders_title: 'Захиалгууд (Админ)', admin_no_orders: 'Захиалга одоогоор алга',
-        msg_status_updated: 'Төлөв шинэчлэгдлээ', btn_back_home: 'Нүүр хуудас руу буцах',
+        msg_status_updated: 'Төлөв шинэчлэгдлээ', sold_out: 'Дууссан', msg_variant_sold_out: 'Энэ өнгө/размер дууссан байна', msg_paid_email_sent: 'Захиалагчид баталгаажсан и-мэйл илгээлээ', msg_paid_email_failed: 'Төлөв шинэчлэгдсэн ч и-мэйл илгээгдсэнгүй', msg_placed_email_sent: 'Захиалгын мэдээлэл таны и-мэйл рүү илгээгдлээ', btn_back_home: 'Нүүр хуудас руу буцах',
         st_new: 'Шинэ', st_paid: 'Төлбөр төлөгдсөн', st_shipped: 'Илгээгдсэн', st_done: 'Дууссан', st_cancelled: 'Цуцлагдсан',
         pay_paypay_note: 'PayPay QR код энд гарна',
         pay_paypay_hint: 'QR кодыг PayPay аппаараа уншуулж төлбөрөө хийгээд, захиалгаа баталгаажуулна уу.',
@@ -234,7 +315,7 @@ const translations = {
         msg_password_updated: 'Password updated', msg_login_error: 'Wrong email or password',
         msg_order_error: 'Could not save the order. Please try again.',
         admin_orders_title: 'Orders (Admin)', admin_no_orders: 'No orders yet',
-        msg_status_updated: 'Status updated', btn_back_home: 'Back to home',
+        msg_status_updated: 'Status updated', sold_out: 'Sold out', msg_variant_sold_out: 'This color/size is sold out', msg_paid_email_sent: 'Confirmation email sent to the customer', msg_paid_email_failed: 'Status updated, but the email was not sent', msg_placed_email_sent: 'Order details were emailed to you', btn_back_home: 'Back to home',
         st_new: 'New', st_paid: 'Paid', st_shipped: 'Shipped', st_done: 'Done', st_cancelled: 'Cancelled',
         pay_paypay_note: 'PayPay QR code will appear here',
         pay_paypay_hint: 'Scan the QR code with your PayPay app to pay, then confirm your order.',
@@ -317,7 +398,7 @@ const translations = {
         msg_password_updated: 'パスワードを更新しました', msg_login_error: 'メールまたはパスワードが違います',
         msg_order_error: '注文を保存できませんでした。もう一度お試しください。',
         admin_orders_title: '注文一覧（管理者）', admin_no_orders: '注文はまだありません',
-        msg_status_updated: 'ステータスを更新しました', btn_back_home: 'ホームに戻る',
+        msg_status_updated: 'ステータスを更新しました', sold_out: '完売', msg_variant_sold_out: 'このカラー/サイズは完売しています', msg_paid_email_sent: 'お客様へ確認メールを送信しました', msg_paid_email_failed: 'ステータスは更新されましたが、メールは送信されませんでした', msg_placed_email_sent: '注文内容をメールでお送りしました', btn_back_home: 'ホームに戻る',
         st_new: '新規', st_paid: '支払済', st_shipped: '発送済', st_done: '完了', st_cancelled: 'キャンセル',
         pay_paypay_note: 'PayPay QRコードがここに表示されます',
         pay_paypay_hint: 'PayPayアプリでQRコードを読み取ってお支払い後、注文を確定してください。',
@@ -455,6 +536,13 @@ function setupEventListeners() {
             renderProducts();
         });
     });
+
+    const brandTabsEl = $('brand-tabs');
+    if (brandTabsEl) {
+        brandTabsEl.addEventListener('scroll', updateBrandArrows, { passive: true });
+        window.addEventListener('resize', updateBrandArrows);
+        updateBrandArrows();
+    }
 
     document.querySelectorAll('.cat-chip').forEach(chip => {
         chip.addEventListener('click', () => {
@@ -773,6 +861,7 @@ function updateAuthUI() {
         loginPrompt.classList.add('hidden');
         productsWrapper.classList.remove('hidden');
     }
+    requestAnimationFrame(updateBrandArrows);
 }
 
 // ================= PRODUCTS =================
@@ -813,6 +902,7 @@ function renderProducts() {
                 <img src="${p.img}" alt="${pname(p)}" loading="lazy">
                 <span class="brand-badge" style="background:${BRAND_COLORS[p.brand] || '#333'}">${p.brand}</span>
                 ${p.url ? '<span class="official-badge">✓ OFFICIAL</span>' : ''}
+                ${productHasAvailable(p) ? '' : `<span class="sold-out-badge">${t.sold_out}</span>`}
                 <button class="wishlist-btn-card" onclick="event.stopPropagation(); toggleWishlist(this)" aria-label="Wishlist">♡</button>
             </div>
             <div class="product-info">
@@ -820,9 +910,7 @@ function renderProducts() {
                 <p class="brand-name">${p.brand}</p>
                 <p class="price">¥${p.price.toLocaleString()}</p>
                 <p class="price-mnt">${t.price_mnt_label}: ${fmtMNT(p.price).toLocaleString()}₮</p>
-                <button class="add-to-cart-btn" onclick="event.stopPropagation(); quickAddToCart(${p.id})">
-                    ${t.btn_add_cart}
-                </button>
+                ${cardAddButtonHtml(p)}
             </div>
         </div>
     `).join('');
@@ -847,8 +935,9 @@ function openProductDetail(id, keepOpen = false) {
 
     selectedProduct = p;
     if (!keepOpen) {
-        selectedSize = (p.sizes && p.sizes.length) ? (p.sizes.includes('M') ? 'M' : p.sizes[0]) : 'M';
-        selectedColor = (p.colors && p.colors.length) ? p.colors[0] : 'black';
+        const firstAvail = firstAvailableVariant(p);
+        selectedSize = firstAvail ? firstAvail.size : ((p.sizes && p.sizes.length) ? p.sizes[0] : 'M');
+        selectedColor = firstAvail ? firstAvail.color : ((p.colors && p.colors.length) ? p.colors[0] : 'black');
         selectedQty = 1;
     }
 
@@ -863,9 +952,9 @@ function openProductDetail(id, keepOpen = false) {
 
     const colorOptionsHtml = (p.colors && p.colors.length)
         ? p.colors.map(c => (p.swatches && p.swatches[c]) ? `
-            <button type="button" class="color-swatch ${c === selectedColor ? 'active' : ''}" data-full="${p.swatches[c].replace('w=105', 'w=655')}" onclick="selectColorUI(this, '${c}')" title="${c}"><img src="${p.swatches[c]}" alt="${c}"></button>
+            <button type="button" class="color-swatch ${c === selectedColor ? 'active' : ''}${isColorSoldOut(p, c) ? ' sold-out' : ''}" data-full="${p.swatches[c].replace('w=105', 'w=655')}" onclick="selectColorUI(this, '${c}')" title="${c}" ${isColorSoldOut(p, c) ? 'disabled' : ''}><img src="${p.swatches[c]}" alt="${c}">${isColorSoldOut(p, c) ? `<span class="variant-out-badge">${t.sold_out}</span>` : ''}</button>
         ` : `
-            <button type="button" class="color-chip ${c === selectedColor ? 'active' : ''}" onclick="selectColorUI(this, '${c}')"><span class="dot" style="background:${JP_COLOR_HEX[c] || '#ccc'}"></span>${c}</button>
+            <button type="button" class="color-chip ${c === selectedColor ? 'active' : ''}${isColorSoldOut(p, c) ? ' sold-out' : ''}" onclick="selectColorUI(this, '${c}')" ${isColorSoldOut(p, c) ? 'disabled' : ''}><span class="dot" style="background:${JP_COLOR_HEX[c] || '#ccc'}"></span>${c}${isColorSoldOut(p, c) ? `<span class="variant-out-label">${t.sold_out}</span>` : ''}</button>
         `).join('')
         : colors.map(c => `
             <div class="color-circle ${c.name === selectedColor ? 'active' : ''}"
@@ -884,7 +973,7 @@ function openProductDetail(id, keepOpen = false) {
                 <h2>${pname(p)}</h2>
                 <p class="price">¥${p.price.toLocaleString()}</p>
                 <p class="price-mnt">${t.price_mnt_label}: ${fmtMNT(p.price).toLocaleString()}₮</p>
-                <p class="detail-weight">${t.checkout_weight}: ${p.weightKg} кг · ${t.checkout_cargo}: ¥${singleItemCargo(p).toLocaleString()}</p>
+                <p class="detail-weight">${t.checkout_weight}: ${Math.round((p.weightKg || 0) * 1000)} г</p>
                 <p class="desc">${p.desc}</p>
                 ${p.url ? `<a class="official-link" href="${p.url}" target="_blank" rel="noopener">🔗 ${t.official_store}</a>` : ''}
 
@@ -898,7 +987,7 @@ function openProductDetail(id, keepOpen = false) {
                 <div class="selector-group">
                     <label>${t.detail_size}</label>
                     <div class="size-options">
-                        ${sizes.map(s => `<button class="size-btn ${s === selectedSize ? 'active' : ''}" onclick="selectSize(this, '${s}')">${s}</button>`).join('')}
+                        ${sizes.map(s => `<button type="button" class="size-btn ${s === selectedSize ? 'active' : ''}${isVariantSoldOut(p, selectedColor, s) ? ' sold-out' : ''}" data-size="${s}" onclick="selectSize(this, '${s}')" ${isVariantSoldOut(p, selectedColor, s) ? 'disabled' : ''}>${s}${isVariantSoldOut(p, selectedColor, s) ? `<span class="variant-out-label">${t.sold_out}</span>` : ''}</button>`).join('')}
                     </div>
                 </div>
 
@@ -912,10 +1001,10 @@ function openProductDetail(id, keepOpen = false) {
                 </div>
 
                 <div class="detail-actions">
-                    <button class="btn btn-primary detail-add-btn" onclick="addToCartFromDetail()">
+                    <button class="btn btn-primary detail-add-btn" id="detail-add-btn" onclick="addToCartFromDetail()" ${isVariantSoldOut(p, selectedColor, selectedSize) ? 'disabled' : ''}>
                         🛒 ${t.btn_add_cart}
                     </button>
-                    <button class="btn btn-buy-now detail-add-btn" onclick="buyNowFromDetail()">
+                    <button class="btn btn-buy-now detail-add-btn" id="detail-buy-btn" onclick="buyNowFromDetail()" ${isVariantSoldOut(p, selectedColor, selectedSize) ? 'disabled' : ''}>
                         ⚡ ${t.btn_buy_now}
                     </button>
                 </div>
@@ -923,10 +1012,36 @@ function openProductDetail(id, keepOpen = false) {
         </div>
     `;
 
+    refreshVariantAvailability();
+
     if (!keepOpen) {
         productModal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
+}
+
+function refreshVariantAvailability() {
+    if (!selectedProduct) return;
+    document.querySelectorAll('.size-btn').forEach(btn => {
+        const sz = btn.getAttribute('data-size');
+        if (!sz) return;
+        const out = isVariantSoldOut(selectedProduct, selectedColor, sz);
+        btn.disabled = out;
+        btn.classList.toggle('sold-out', out);
+        let lbl = btn.querySelector('.variant-out-label');
+        if (out && !lbl) { lbl = document.createElement('span'); lbl.className = 'variant-out-label'; lbl.textContent = translations[currentLang].sold_out; btn.appendChild(lbl); }
+        if (!out && lbl) lbl.remove();
+    });
+    if (isVariantSoldOut(selectedProduct, selectedColor, selectedSize)) {
+        const first = (selectedProduct.sizes || []).find(sz => !isVariantSoldOut(selectedProduct, selectedColor, sz));
+        if (first) {
+            selectedSize = first;
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-size') === first));
+        }
+    }
+    const unavailable = !productHasAvailable(selectedProduct) || isVariantSoldOut(selectedProduct, selectedColor, selectedSize);
+    const addBtn = $('detail-add-btn'); if (addBtn) addBtn.disabled = unavailable;
+    const buyBtn = $('detail-buy-btn'); if (buyBtn) buyBtn.disabled = unavailable;
 }
 
 function closeProductModal() {
@@ -936,9 +1051,11 @@ function closeProductModal() {
 }
 
 function selectSize(btn, size) {
+    if (btn.disabled) return;
     document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     selectedSize = size;
+    refreshVariantAvailability();
 }
 
 const JP_COLOR_HEX = {
@@ -953,6 +1070,7 @@ const JP_COLOR_HEX = {
 };
 
 function selectColorUI(el, name) {
+    if (el.disabled) return;
     document.querySelectorAll('.color-chip, .color-swatch').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
     selectedColor = name;
@@ -963,6 +1081,7 @@ function selectColorUI(el, name) {
         const main = $('detail-main-img');
         if (main) main.src = full;
     }
+    refreshVariantAvailability();
 }
 
 function selectThumb(el, src) {
@@ -990,6 +1109,7 @@ function changeQty(delta) {
 
 function addSelectedToCart() {
     if (!selectedProduct) return false;
+    if (isVariantSoldOut(selectedProduct, selectedColor, selectedSize)) { showToast(translations[currentLang].msg_variant_sold_out, 'warning'); return false; }
     const existing = cart.find(i => i.id === selectedProduct.id && i.size === selectedSize && i.color === selectedColor);
     if (existing) existing.qty += selectedQty;
     else cart.push({
@@ -1218,19 +1338,20 @@ function selectPaymentMethod(method, el) {
 }
 
 function itemWeight(i) { const p = PRODUCTS.find(x => x.id === i.id); return (p && p.weightKg) || i.weight || 0; }
-function cartGoodsWeight() { return cart.reduce((sum, i) => sum + itemWeight(i) * i.qty, 0); }
-function cartBilledWeight() { if (!cart.length) return 0; return Math.max(1, Math.ceil((cartGoodsWeight() + PACKAGING_KG) * 2) / 2); }
+function itemWeightGrams(i) { return Math.round(itemWeight(i) * 1000); }
+function cartGoodsWeightGrams() { return cart.reduce((sum, i) => sum + itemWeightGrams(i) * i.qty, 0); }
+function cartBilledWeightGrams() { if (!cart.length) return 0; return cartGoodsWeightGrams() + PACKAGING_GRAMS; }
+function cargoFeeForGrams(grams) { return Math.round(grams * CARGO_RATE_PER_KG / 1000); }
 function fmtMNT(yen) { return Math.round(yen * EXCHANGE_RATE / 100) * 100; }
 function deliveryFeeYen() { return Math.round(DELIVERY_FEE_MNT / EXCHANGE_RATE); }
-function singleItemCargo(p) { const b = Math.max(1, Math.ceil(((p.weightKg || 0) + PACKAGING_KG) * 2) / 2); return Math.round(b * CARGO_RATE_PER_KG); }
 function paintSummary() {
     const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-    const billed = cartBilledWeight();
-    const cargoFee = cart.length ? Math.round(billed * CARGO_RATE_PER_KG) : 0;
+    const billed = cartBilledWeightGrams();
+    const cargoFee = cart.length ? cargoFeeForGrams(billed) : 0;
     const delivChecked = !!($('city-delivery') && $('city-delivery').checked);
     const delivYen = delivChecked ? deliveryFeeYen() : 0;
     checkoutSubtotal.textContent = `¥${subtotal.toLocaleString()}`;
-    if (checkoutWeight) checkoutWeight.textContent = `${billed.toFixed(1)} кг`;
+    if (checkoutWeight) checkoutWeight.textContent = `${billed.toLocaleString()} г`;
     if (checkoutCargo) checkoutCargo.textContent = `¥${cargoFee.toLocaleString()}`;
     const dRow = $('checkout-delivery-row'); if (dRow) dRow.style.display = delivChecked ? '' : 'none';
     const dEl = $('checkout-delivery'); if (dEl) dEl.textContent = `¥${delivYen.toLocaleString()}`;
@@ -1264,7 +1385,7 @@ function renderCheckout() {
             <img src="${item.img}" alt="${iname(item)}">
             <div class="checkout-item-info">
                 <p><strong>${iname(item)}</strong></p>
-                <p class="small">${item.brand} | ${item.size} | ${item.color} | x${item.qty} | ${itemWeight(item).toFixed(2)} кг</p>
+                <p class="small">${item.brand} | ${item.size} | ${item.color} | x${item.qty} | ${itemWeightGrams(item)} г</p>
                 <p class="price">¥${(item.price * item.qty).toLocaleString()}</p>
             </div>
         </div>
@@ -1297,12 +1418,16 @@ async function processPayment() {
 
     if (USE_SUPABASE && sb && currentUser) {
         const items = cart.map(i => { const p = PRODUCTS.find(x => x.id === i.id); const cimg = (p && p.swatches && i.color && p.swatches[i.color]) || i.img || ''; return { id: i.id, brand: i.brand || (p ? p.brand : ''), name: iname(i), size: i.size || '', color: i.color || '', qty: i.qty, price: i.price, weight: (p && p.weightKg) || 0, img: cimg }; });
-        const total = paintSummary().total;
-        const { error } = await sb.from('orders').insert({
+        const sum = paintSummary();
+        const total = sum.total;
+        const { data: inserted, error } = await sb.from('orders').insert({
             user_id: currentUser.id, email: currentUser.email,
             name, phone, address, items, total, payment_method: selectedPaymentMethod
-        });
+        }).select('id').single();
         if (error) { showToast(t.msg_order_error, 'error'); return; }
+        const placedOrder = { id: inserted ? inserted.id : '', email: currentUser.email, name, phone, items, total, payment_method: selectedPaymentMethod };
+        const placedSent = await sendOrderPlacedEmail(placedOrder, sum);
+        if (placedSent) showToast(t.msg_placed_email_sent, 'success');
     }
 
     const orderNum = '#JB' + Date.now().toString().slice(-8);
@@ -1363,6 +1488,64 @@ function esc(s) {
 }
 
 const ORDER_STATUSES = ['new', 'paid', 'shipped', 'done', 'cancelled'];
+let adminOrdersById = {};
+
+function orderItemsText(o) {
+    return (o.items || []).map(i => `• ${i.name} — өнгө: ${i.color || '-'}, размер: ${i.size || '-'}, тоо: ${i.qty}, үнэ: ¥${(i.price * i.qty).toLocaleString()}`).join('\n');
+}
+function orderItemsHtml(o) {
+    return (o.items || []).map(i => `• ${esc(i.name)} — өнгө: ${esc(i.color || '-')}, размер: ${esc(i.size || '-')}, тоо: ${i.qty}, үнэ: ¥${(i.price * i.qty).toLocaleString()}`).join('<br>');
+}
+async function sendPaidOrderEmail(order) {
+    if (!order || !order.email) return false;
+    const cfg = EMAILJS_CONFIG;
+    if (!(cfg.publicKey && cfg.serviceId && cfg.templateId && window.emailjs)) return false;
+    try {
+        await window.emailjs.send(cfg.serviceId, cfg.templateId, {
+            to_email: order.email,
+            to_name: order.name || '',
+            order_id: order.id,
+            order_total: `¥${(order.total || 0).toLocaleString()}`,
+            order_items: orderItemsText(order),
+            order_items_html: orderItemsHtml(order),
+            payment_method: order.payment_method || '',
+            customer_phone: order.phone || '',
+            store_name: 'JAPANBUY'
+        }, { publicKey: cfg.publicKey });
+        return true;
+    } catch (err) {
+        console.warn('Paid email failed', err);
+        return false;
+    }
+}
+
+async function sendOrderPlacedEmail(order, sum) {
+    if (!order || !order.email) return false;
+    const cfg = EMAILJS_CONFIG;
+    if (!(cfg.publicKey && cfg.serviceId && cfg.templatePlacedId && window.emailjs)) return false;
+    try {
+        const totalMnt = fmtMNT(sum.subtotal + sum.cargoFee) + (sum.delivYen > 0 ? DELIVERY_FEE_MNT : 0);
+        await window.emailjs.send(cfg.serviceId, cfg.templatePlacedId, {
+            to_email: order.email,
+            to_name: order.name || '',
+            order_id: order.id,
+            subtotal: `¥${(sum.subtotal || 0).toLocaleString()}`,
+            cargo_fee: `¥${(sum.cargoFee || 0).toLocaleString()}`,
+            order_total: `¥${(order.total || 0).toLocaleString()}`,
+            exchange_rate: EXCHANGE_RATE.toLocaleString(),
+            total_mnt: totalMnt.toLocaleString(),
+            order_items: orderItemsText(order),
+            order_items_html: orderItemsHtml(order),
+            payment_method: order.payment_method || '',
+            customer_phone: order.phone || '',
+            store_name: 'JAPANBUY'
+        }, { publicKey: cfg.publicKey });
+        return true;
+    } catch (err) {
+        console.warn('Placed email failed', err);
+        return false;
+    }
+}
 
 async function loadAdminOrders() {
     const box = $('admin-orders');
@@ -1373,6 +1556,8 @@ async function loadAdminOrders() {
     const { data, error } = await sb.from('orders').select('*').order('created_at', { ascending: false }).limit(100);
     if (error) { box.innerHTML = '<p class="admin-note">' + esc(t.msg_order_error) + '</p>'; return; }
     if (!data || data.length === 0) { box.innerHTML = '<p class="admin-note">' + esc(t.admin_no_orders) + '</p>'; return; }
+    adminOrdersById = {};
+    data.forEach(o => { adminOrdersById[o.id] = o; });
     box.innerHTML = data.map(o => {
         const itemsHtml = (o.items || []).map(i => {
             const p = PRODUCTS.find(x => x.id === i.id);
@@ -1395,8 +1580,16 @@ async function loadAdminOrders() {
 
 async function updateOrderStatus(id, status) {
     if (!(USE_SUPABASE && sb)) return;
+    const order = adminOrdersById[id] || null;
+    const previousStatus = order ? order.status : null;
     const { error } = await sb.from('orders').update({ status }).eq('id', id);
-    if (!error) showToast(translations[currentLang].msg_status_updated, 'success');
+    if (error) { showToast(translations[currentLang].msg_order_error, 'error'); return; }
+    if (order) order.status = status;
+    showToast(translations[currentLang].msg_status_updated, 'success');
+    if (status === 'paid' && previousStatus !== 'paid' && order) {
+        const sent = await sendPaidOrderEmail(order);
+        showToast(translations[currentLang][sent ? 'msg_paid_email_sent' : 'msg_paid_email_failed'], sent ? 'success' : 'warning');
+    }
 }
 
 console.log('✅ JAPANBUY ачаалагдлаа! Хэл:', currentLang, '| Бүтээгдэхүүн:', PRODUCTS.length);

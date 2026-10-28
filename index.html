@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="JAPANBUY">
     <title>JAPANBUY - Online Store</title>
-    <link rel="stylesheet" href="style.css?v=20261027aw">
+    <link rel="stylesheet" href="style.css?v=20261027ax">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -132,6 +132,8 @@
                 </div>
 
                 <div id="products-wrapper" class="products-wrapper hidden">
+                    <div class="brand-tabs-wrap">
+                    <button class="brand-arrow brand-arrow-left" id="brand-arrow-left" type="button" aria-label="Өмнөх лого" onclick="scrollBrandTabs(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="14.5 5 7.5 12 14.5 19"/></svg></button>
                     <div class="brand-filter-tabs" id="brand-tabs" role="tablist">
                         <button class="brand-tab logo-all active" data-brand="all" role="tab" data-i18n="brand_all">Бүгд</button>
                         <button class="brand-tab logo-gap" data-brand="GAP" role="tab" aria-label="GAP"><img class="brand-logo-img" src="logos/gap.jpg" alt="GAP"></button>
@@ -140,6 +142,8 @@
                         <button class="brand-tab logo-zara" data-brand="ZARA" role="tab" aria-label="ZARA"><img class="brand-logo-img" src="logos/zara.jpg" alt="ZARA"></button>
                         <button class="brand-tab logo-hm" data-brand="H&M" role="tab" aria-label="H&M"><img class="brand-logo-img" src="logos/hm.jpg" alt="H&M"></button>
                         <button class="brand-tab logo-mk" data-brand="MICHAEL KORS" role="tab" aria-label="Michael Kors"><img class="brand-logo-img" src="logos/mk.jpg" alt="Michael Kors"></button>
+                    </div>
+                    <button class="brand-arrow brand-arrow-right" id="brand-arrow-right" type="button" aria-label="Дараагийн лого" onclick="scrollBrandTabs(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9.5 5 16.5 12 9.5 19"/></svg></button>
                     </div>
                     <div class="category-filter hidden" id="category-filter">
                         <button class="cat-chip active" data-cat="all" data-i18n="brand_all">Бүгд</button>
@@ -540,8 +544,9 @@
         </button>
     </nav>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=20261027aw"></script>
+    <script src="script.js?v=20261027ax"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
