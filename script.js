@@ -200,7 +200,7 @@ function cardAddButtonHtml(p) {
 
 // Холбоо барих мэдээлэл — хажуугийн цэсний доод хэсэгт харагдана
 const CONTACT_PHONE = '';
-const SOCIAL_LINKS = { facebook: 'https://www.facebook.com/profile.php?id=61595757882524', instagram: '', line: '', gmail: '' };
+const SOCIAL_LINKS = { facebook: 'https://www.facebook.com/profile.php?id=61595757882524', instagram: '', line: '', gmail: 'mailto:aagii.juge@gmail.com' };
 
 const BRAND_COLORS = {
     'UNIQLO': '#FF0000', 'GU': '#0033A0', 'ZARA': '#000000',
@@ -1450,8 +1450,7 @@ function fillContactInfo() {
         document.querySelectorAll('[data-social="' + key + '"]').forEach(el => {
             el.href = SOCIAL_LINKS[key];
             el.removeAttribute('onclick');
-            el.target = '_blank';
-            el.rel = 'noopener';
+            if (key !== 'gmail') { el.target = '_blank'; el.rel = 'noopener'; }
         });
     });
 }
