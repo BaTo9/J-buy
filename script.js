@@ -962,13 +962,14 @@ function pdesc(p) {
     return p.desc;
 }
 const COLOR_TR = {"Anthracite grey":{"mn":"Антрацит саарал"},"BLACK":{"mn":"Хар"},"BLUE":{"mn":"Цэнхэр"},"Beige marl":{"mn":"Шаргал меланж"},"Black":{"mn":"Хар"},"Blue":{"mn":"Цэнхэр"},"Bottle green":{"mn":"Гүн ногоон"},"Brown":{"mn":"Бор"},"CREAM":{"mn":"Крем"},"DARK GRAY":{"mn":"Бараан саарал"},"DARK GREEN":{"mn":"Бараан ногоон"},"DARK ORANGE":{"mn":"Бараан улбар шар"},"Ecru":{"mn":"Экрю"},"GRAY":{"mn":"Саарал"},"GREEN":{"mn":"Ногоон"},"Green":{"mn":"Ногоон"},"Grey marl":{"mn":"Саарал меланж"},"Khaki":{"mn":"Хаки"},"LIGHT GRAY":{"mn":"Цайвар саарал"},"Light blue":{"mn":"Цайвар цэнхэр"},"Light grey":{"mn":"Цайвар саарал"},"Light yellow":{"mn":"Цайвар шар"},"NATURAL":{"mn":"Байгалийн өнгө"},"NAVY":{"mn":"Гүн хөх"},"OFF WHITE":{"mn":"Сүүн цагаан"},"OLIVE":{"mn":"Олив ногоон"},"ORANGE":{"mn":"Улбар шар"},"PINK":{"mn":"Ягаан"},"PURPLE":{"mn":"Нил ягаан"},"Pastel pink":{"mn":"Пастель ягаан"},"Pink marl":{"mn":"Ягаан меланж"},"RED":{"mn":"Улаан"},"Red":{"mn":"Улаан"},"Sky blue":{"mn":"Тэнгэрийн цэнхэр"},"WHITE":{"mn":"Цагаан"},"WINE":{"mn":"Бордо улаан"},"White":{"mn":"Цагаан"},"YELLOW":{"mn":"Шар"},"Yellow":{"mn":"Шар"},"striped":{"mn":"Судалтай"},"black":{"mn":"Хар"},"white":{"mn":"Цагаан"},"gray":{"mn":"Саарал"},"navy":{"mn":"Гүн хөх"},"red":{"mn":"Улаан"},"アッシュ":{"mn":"Үнсэн саарал","en":"Ash"},"ウィッカータン":{"mn":"Сагсан шаргал","en":"Wicker Tan"},"エッグシェル":{"mn":"Өндөгний хальсан өнгө","en":"Eggshell"},"オプティックホワイト":{"mn":"Тод цагаан","en":"Optic White"},"カールストーン":{"mn":"Чулуун саарал","en":"Carl Stone"},"クジラ":{"mn":"Халим хөх","en":"Whale Blue"},"クリーム":{"mn":"Крем","en":"Cream"},"グリーン／ホワイト":{"mn":"Ногоон/Цагаан","en":"Green/White"},"シティスケープミルク":{"mn":"Сүүн цайвар саарал","en":"Cityscape Milk"},"シルバー":{"mn":"Мөнгөлөг","en":"Silver"},"タスカンレッド":{"mn":"Тоскана улаан","en":"Tuscan Red"},"ダークウォッシュ":{"mn":"Бараан угаалттай деним","en":"Dark Wash"},"ダークブルー":{"mn":"Бараан цэнхэр","en":"Dark Blue"},"チョコレート":{"mn":"Шоколадан бор","en":"Chocolate"},"テラブラウン":{"mn":"Терра бор","en":"Terra Brown"},"デザートカモフラージュ":{"mn":"Цөлийн камуфляж","en":"Desert Camouflage"},"トゥルーブラック":{"mn":"Жинхэнэ хар","en":"True Black"},"ニッケル":{"mn":"Никель саарал","en":"Nickel"},"ニューオフホワイト":{"mn":"Сүүн цагаан","en":"New Off White"},"ニュークラシックネイビー":{"mn":"Сонгодог гүн хөх","en":"New Classic Navy"},"ネイビー":{"mn":"Гүн хөх","en":"Navy"},"バニラ/エイコーン":{"mn":"Ваниль/Царсны бор","en":"Vanilla/Acorn"},"ビーチピンク":{"mn":"Эргийн ягаан","en":"Beach Pink"},"フラワープリント":{"mn":"Цэцгэн хээтэй","en":"Flower Print"},"フロストアイボリー":{"mn":"Зааны ясан цагаан","en":"Frost Ivory"},"フロストアイボリーフローラル":{"mn":"Зааны ясан цагаан, цэцэгтэй","en":"Frost Ivory Floral"},"ブラウン/エイコーン":{"mn":"Бор/Царсны бор","en":"Brown/Acorn"},"ブラウン/ラゲッジ":{"mn":"Бор/Чемоданы бор","en":"Brown/Luggage"},"ブラウンプレイド":{"mn":"Бор алаг","en":"Brown Plaid"},"ブラック":{"mn":"Хар","en":"Black"},"ブラックプレイド":{"mn":"Хар алаг","en":"Black Plaid"},"ブラックモスグリーン":{"mn":"Хар хөвд ногоон","en":"Black Moss Green"},"ブルー":{"mn":"Цэнхэр","en":"Blue"},"ベインブリッジブルー":{"mn":"Бэйнбриж хөх","en":"Bainbridge Blue"},"ホワイト":{"mn":"Цагаан","en":"White"},"ポーセリンブルー":{"mn":"Цайвар цэнхэр","en":"Porcelain Blue"},"ミッションタン":{"mn":"Миссион шаргал","en":"Mission Tan"},"ムーンレスナイト":{"mn":"Саргүй шөнийн хар","en":"Moonless Night"},"モダンレッド":{"mn":"Орчин үеийн улаан","en":"Modern Red"},"ライトイエロー／ドット":{"mn":"Цайвар шар / Цэгтэй","en":"Light Yellow / Dot"},"ライトインディゴ":{"mn":"Цайвар индиго","en":"Light Indigo"},"ライトグリーン／フルーツ":{"mn":"Цайвар ногоон / Жимстэй","en":"Light Green / Fruit"},"ライトグレーメランジ":{"mn":"Цайвар саарал меланж","en":"Light Grey Melange"},"ライトターコイズ":{"mn":"Цайвар оюу","en":"Light Turquoise"},"ライトダスティグリーン":{"mn":"Цайвар ногоон","en":"Light Dusty Green"},"ライトピンク／ストロベリー":{"mn":"Цайвар ягаан / Гүзээлзгэнэтэй","en":"Light Pink / Strawberry"},"ライトピンク／ハート":{"mn":"Цайвар ягаан / Зүрхтэй","en":"Light Pink / Heart"},"ライトピンク／フローラル":{"mn":"Цайвар ягаан / Цэцэгтэй","en":"Light Pink / Floral"},"ライトブルー":{"mn":"Цайвар цэнхэр","en":"Light Blue"},"ライトヘザーグレー":{"mn":"Цайвар алаг саарал","en":"Light Heather Grey"}};
-function cname(c) {
+function cnameL(c, lang) {
     if (!c) return c;
-    if (currentLang === 'jp') return c;
+    if (lang === 'jp') return c;
     const tr = COLOR_TR[c];
     if (!tr) return c;
-    return currentLang === 'mn' ? (tr.mn || tr.en || c) : (tr.en || c);
+    return lang === 'mn' ? (tr.mn || tr.en || c) : (tr.en || c);
 }
+function cname(c) { return cnameL(c, currentLang); }
 
 function iname(item) {
     return pname(PRODUCTS.find(x => x.id === item.id)) || item.name || '';
@@ -1567,7 +1568,7 @@ async function processPayment() {
     }
 
     if (USE_SUPABASE && sb && currentUser) {
-        const items = cart.map(i => { const p = PRODUCTS.find(x => x.id === i.id); const cimg = (p && p.swatches && i.color && p.swatches[i.color]) || i.img || ''; return { id: i.id, brand: i.brand || (p ? p.brand : ''), name: iname(i), size: i.size || '', color: i.color || '', qty: i.qty, price: i.price, weight: (p && p.weightKg) || 0, img: cimg }; });
+        const items = cart.map(i => { const p = PRODUCTS.find(x => x.id === i.id); const cimg = (p && p.swatches && i.color && p.swatches[i.color]) || i.img || ''; return { id: i.id, brand: i.brand || (p ? p.brand : ''), name: iname(i), size: i.size || '', color: i.color || '', qty: i.qty, price: i.price, weight: (p && p.weightKg) || 0, img: cimg, lang: currentLang }; });
         const sum = paintSummary();
         const total = sum.total;
         const { data: inserted, error } = await sb.from('orders').insert({
@@ -1641,16 +1642,32 @@ const ORDER_STATUSES = ['new', 'paid', 'shipped', 'done', 'cancelled'];
 let adminOrdersById = {};
 
 function orderItemsText(o) {
-    return (o.items || []).map(i => `• ${i.name} — өнгө: ${cname(i.color) || '-'}, размер: ${i.size || '-'}, тоо: ${i.qty}, үнэ: ¥${(i.price * i.qty).toLocaleString()}`).join('\n');
+    const lang = orderLang(o); const L = EMAIL_I18N[lang] || EMAIL_I18N.mn;
+    return (o.items || []).map(i => `• ${i.name} — ${L.i_color}: ${cnameL(i.color, lang) || '-'}, ${L.i_size}: ${i.size || '-'}, ${L.i_qty}: ${i.qty}, ${L.i_price}: ¥${(i.price * i.qty).toLocaleString()}`).join('\n');
 }
 function orderItemsHtml(o) {
-    return (o.items || []).map(i => `• ${esc(i.name)} — өнгө: ${esc(cname(i.color) || '-')}, размер: ${esc(i.size || '-')}, тоо: ${i.qty}, үнэ: ¥${(i.price * i.qty).toLocaleString()}`).join('<br>');
+    const lang = orderLang(o); const L = EMAIL_I18N[lang] || EMAIL_I18N.mn;
+    return (o.items || []).map(i => `• ${esc(i.name)} — ${L.i_color}: ${esc(cnameL(i.color, lang) || '-')}, ${L.i_size}: ${esc(i.size || '-')}, ${L.i_qty}: ${i.qty}, ${L.i_price}: ¥${(i.price * i.qty).toLocaleString()}`).join('<br>');
 }
+const EMAIL_I18N = {
+    mn: { subj_placed: id => `JAPANBUY: Таны захиалга #${id} хүлээн авлаа`, subj_paid: id => `JAPANBUY: Таны захиалга #${id} баталгаажлаа`, greeting: name => `Сайн байна уу, ${name}!`, intro_placed: 'Таны захиалгыг хүлээн авлаа.', intro_paid: 'Таны төлбөр баталгаажсан бөгөөд таны захиалга баталгаажлаа.', i_color: 'өнгө', i_size: 'размер', i_qty: 'тоо', i_price: 'үнэ', l_subtotal: 'Барааны дүн', l_cargo: 'Карго', l_total: 'Нийт дүн', l_rate: 'Ханш', l_mnt: 'Төгрөгөөр', l_phone: 'Утас', l_payment: 'Төлбөрийн хэлбэр', pay_bank: 'Банкны шилжүүлэг', pay_paypay: 'PayPay QR', pay_visa: 'Visa карт', closing: 'Баярлалаа! — JAPANBUY' },
+    en: { subj_placed: id => `JAPANBUY: Your order #${id} has been received`, subj_paid: id => `JAPANBUY: Your order #${id} is confirmed`, greeting: name => `Hello, ${name}!`, intro_placed: 'We have received your order.', intro_paid: 'Your payment has been confirmed and your order is now confirmed.', i_color: 'color', i_size: 'size', i_qty: 'qty', i_price: 'price', l_subtotal: 'Items total', l_cargo: 'Cargo', l_total: 'Total', l_rate: 'Exchange rate', l_mnt: 'In MNT', l_phone: 'Phone', l_payment: 'Payment method', pay_bank: 'Bank transfer', pay_paypay: 'PayPay QR', pay_visa: 'Visa card', closing: 'Thank you! — JAPANBUY' },
+    jp: { subj_placed: id => `JAPANBUY: ご注文 #${id} を受け付けました`, subj_paid: id => `JAPANBUY: ご注文 #${id} が確定しました`, greeting: name => `${name} 様`, intro_placed: 'ご注文を受け付けました。', intro_paid: 'お支払いが確認できました。ご注文が確定しました。', i_color: '色', i_size: 'サイズ', i_qty: '数量', i_price: '価格', l_subtotal: '商品代金', l_cargo: 'カーゴ料金', l_total: '合計', l_rate: '為替レート', l_mnt: 'MNT換算', l_phone: '電話番号', l_payment: 'お支払い方法', pay_bank: '銀行振込', pay_paypay: 'PayPay QR', pay_visa: 'Visaカード', closing: 'ありがとうございます！ — JAPANBUY' }
+};
+function orderLang(o) { return (o && o.items && o.items[0] && o.items[0].lang) || currentLang || 'mn'; }
+function emailL(o) { return EMAIL_I18N[orderLang(o)] || EMAIL_I18N.mn; }
+function payLabel(method, lang) { const L = EMAIL_I18N[lang] || EMAIL_I18N.mn; return method === 'paypay' ? L.pay_paypay : method === 'visa' ? L.pay_visa : L.pay_bank; }
+
 async function sendPaidOrderEmail(order) {
     if (!order || !order.email) return false;
     const cfg = EMAILJS_CONFIG;
     if (!(cfg.publicKey && cfg.serviceId && cfg.templateId && window.emailjs)) return false;
     try {
+        const lang = orderLang(order); const L = emailL(order);
+        const details = [
+            `${L.l_total}: ¥${(order.total || 0).toLocaleString()}`,
+            `${L.l_payment}: ${payLabel(order.payment_method, lang)}`
+        ];
         await window.emailjs.send(cfg.serviceId, cfg.templateId, {
             to_email: order.email,
             to_name: order.name || '',
@@ -1658,9 +1675,17 @@ async function sendPaidOrderEmail(order) {
             order_total: `¥${(order.total || 0).toLocaleString()}`,
             order_items: orderItemsText(order),
             order_items_html: orderItemsHtml(order),
-            payment_method: order.payment_method || '',
+            payment_method: payLabel(order.payment_method, lang),
             customer_phone: order.phone || '',
-            store_name: 'JAPANBUY'
+            store_name: 'JAPANBUY',
+            mail_subject: L.subj_paid(order.id),
+            mail_greeting: L.greeting(order.name || ''),
+            mail_intro: L.intro_paid,
+            mail_items: orderItemsText(order),
+            mail_items_html: orderItemsHtml(order),
+            mail_details: details.join('\n'),
+            mail_details_html: details.join('<br>'),
+            mail_closing: L.closing
         }, { publicKey: cfg.publicKey });
         return true;
     } catch (err) {
@@ -1675,6 +1700,16 @@ async function sendOrderPlacedEmail(order, sum) {
     if (!(cfg.publicKey && cfg.serviceId && cfg.templatePlacedId && window.emailjs)) return false;
     try {
         const totalMnt = fmtMNT(sum.subtotal + sum.cargoFee) + (sum.delivYen > 0 ? DELIVERY_FEE_MNT : 0);
+        const lang = orderLang(order); const L = emailL(order);
+        const details = [
+            `${L.l_subtotal}: ¥${(sum.subtotal || 0).toLocaleString()}`,
+            `${L.l_cargo}: ¥${(sum.cargoFee || 0).toLocaleString()}`,
+            `${L.l_total}: ¥${(order.total || 0).toLocaleString()}`,
+            `${L.l_rate}: 1¥ = ${EXCHANGE_RATE.toLocaleString()}₮`,
+            `${L.l_mnt}: ${totalMnt.toLocaleString()}₮`,
+            `${L.l_phone}: ${order.phone || ''}`,
+            `${L.l_payment}: ${payLabel(order.payment_method, lang)}`
+        ];
         await window.emailjs.send(cfg.serviceId, cfg.templatePlacedId, {
             to_email: order.email,
             to_name: order.name || '',
@@ -1686,9 +1721,17 @@ async function sendOrderPlacedEmail(order, sum) {
             total_mnt: totalMnt.toLocaleString(),
             order_items: orderItemsText(order),
             order_items_html: orderItemsHtml(order),
-            payment_method: order.payment_method || '',
+            payment_method: payLabel(order.payment_method, lang),
             customer_phone: order.phone || '',
-            store_name: 'JAPANBUY'
+            store_name: 'JAPANBUY',
+            mail_subject: L.subj_placed(order.id),
+            mail_greeting: L.greeting(order.name || ''),
+            mail_intro: L.intro_placed,
+            mail_items: orderItemsText(order),
+            mail_items_html: orderItemsHtml(order),
+            mail_details: details.join('\n'),
+            mail_details_html: details.join('<br>'),
+            mail_closing: L.closing
         }, { publicKey: cfg.publicKey });
         return true;
     } catch (err) {
