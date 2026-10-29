@@ -2619,3 +2619,27 @@ body {
     opacity: 0.55;
     cursor: not-allowed;
 }
+
+.favorites-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    border-radius: 12px;
+}
+.favorites-bar-text { font-weight: 600; color: var(--text-primary); }
+.favorites-bar-heart { color: #ef4444; }
+.favorites-bar-btn {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}

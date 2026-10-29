@@ -229,6 +229,11 @@ let currentBrandFilter = 'all';
 let currentCategory = 'all';
 let currentSearchQuery = '';
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+let favoritesOnly = false;
+function saveWishlist() { localStorage.setItem('wishlist', JSON.stringify(wishlist)); updateFavBadge(); }
+function isWished(id) { return wishlist.includes(id); }
+function updateFavBadge() { const b = $('bnav-fav-badge'); if (b) { b.textContent = wishlist.length; b.style.display = wishlist.length ? 'flex' : 'none'; } }
 let selectedProduct = null;
 let selectedSize = 'M';
 let selectedColor = 'black';
@@ -287,7 +292,7 @@ const translations = {
         cat_men: 'Эрэгтэй', cat_women: 'Эмэгтэй', cat_kids: 'Хүүхэд',
         menu_title: 'Цэс', menu_lang_label: 'ХЭЛ', menu_theme_label: 'ЗАГВАР',
         theme_light: 'Гэрэл', theme_dark: 'Харанхуй', nav_cart: 'Миний сагс',
-        nav_cart_short: 'Сагс', nav_account: 'Бүртгэл',
+        nav_cart_short: 'Сагс', nav_account: 'Бүртгэл', nav_favorites: 'Таалагдсан', favorites_title: 'Таалагдсан бараа', favorites_show_all: 'Бүгдийг харах', favorites_empty: 'Таалагдсан бараа алга', favorites_empty_desc: 'Барааны зүрхийг дарж энд хадгалаарай', msg_wish_added: 'Таалагдсанд нэмэгдлээ', msg_wish_removed: 'Таалагдсанаас хаслаа',
         nav_admin: 'Админ', forgot_password: 'Нууц үгээ мартсан уу?',
         form_new_password: 'Шинэ нууц үг', btn_set_password: 'Нууц үг шинэчлэх',
         msg_check_email: 'Бүртгэл үүслээ! Имэйл рүү тань очсон холбоосоор баталгаажуулна уу.',
@@ -374,7 +379,7 @@ const translations = {
         cat_men: 'Men', cat_women: 'Women', cat_kids: 'Kids',
         menu_title: 'Menu', menu_lang_label: 'LANGUAGE', menu_theme_label: 'THEME',
         theme_light: 'Light', theme_dark: 'Dark', nav_cart: 'My Cart',
-        nav_cart_short: 'Cart', nav_account: 'Account',
+        nav_cart_short: 'Cart', nav_account: 'Account', nav_favorites: 'Favorites', favorites_title: 'Favorite items', favorites_show_all: 'Show all', favorites_empty: 'No favorites yet', favorites_empty_desc: 'Tap the heart on any product to save it here', msg_wish_added: 'Added to favorites', msg_wish_removed: 'Removed from favorites',
         nav_admin: 'Admin', forgot_password: 'Forgot your password?',
         form_new_password: 'New password', btn_set_password: 'Update password',
         msg_check_email: 'Account created! Please confirm via the link sent to your email.',
@@ -457,7 +462,7 @@ const translations = {
         cat_men: 'メンズ', cat_women: 'レディース', cat_kids: 'キッズ',
         menu_title: 'メニュー', menu_lang_label: '言語', menu_theme_label: 'テーマ',
         theme_light: 'ライト', theme_dark: 'ダーク', nav_cart: 'カート',
-        nav_cart_short: 'カート', nav_account: 'アカウント',
+        nav_cart_short: 'カート', nav_account: 'アカウント', nav_favorites: 'お気に入り', favorites_title: 'お気に入り商品', favorites_show_all: 'すべて表示', favorites_empty: 'お気に入りはまだありません', favorites_empty_desc: '商品のハートを押すとここに保存されます', msg_wish_added: 'お気に入りに追加しました', msg_wish_removed: 'お気に入りから削除しました',
         nav_admin: '管理者', forgot_password: 'パスワードをお忘れですか？',
         form_new_password: '新しいパスワード', btn_set_password: 'パスワードを更新',
         msg_check_email: '登録しました！メールに届いたリンクで確認してください。',
@@ -604,6 +609,7 @@ function updateCatChips() {
 
     document.querySelectorAll('.brand-tab').forEach(tab => {
         tab.addEventListener('click', () => {
+            if (exitFavorites()) setBnavActive('products');
             document.querySelectorAll('.brand-tab').forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
             currentBrandFilter = tab.dataset.brand;
@@ -634,6 +640,7 @@ function updateCatChips() {
 
     $('search-input').addEventListener('input', (e) => {
         currentSearchQuery = e.target.value.toLowerCase().trim();
+        if (favoritesOnly && currentSearchQuery) { exitFavorites(); setBnavActive('products'); }
         renderProducts();
     });
 
@@ -972,6 +979,7 @@ function iname(item) {
 function renderProducts() {
 
     let filtered = PRODUCTS;
+    if (favoritesOnly) filtered = filtered.filter(p => wishlist.includes(p.id));
     if (currentBrandFilter !== 'all') filtered = filtered.filter(p => p.brand === currentBrandFilter);
     if (currentCategory !== 'all') filtered = filtered.filter(p => p.cat === currentCategory);
     if (currentSearchQuery) {
@@ -983,9 +991,16 @@ function renderProducts() {
 
     const t = translations[currentLang];
     productCount.textContent = `${filtered.length} ${t.product_count}`;
+    const favBar = $('favorites-bar');
+    if (favBar) { favBar.style.display = favoritesOnly ? 'flex' : 'none'; const fc = $('favorites-count'); if (fc) fc.textContent = wishlist.length; }
+    updateFavBadge();
 
     if (filtered.length === 0) {
-        productGrid.innerHTML = `<p style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text-secondary);">${t.no_products}</p>`;
+        if (favoritesOnly) {
+            productGrid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text-secondary);"><div style="font-size:2.4rem;color:#ef4444;">♡</div><h3 style="margin:10px 0 6px;color:var(--text-primary);">${t.favorites_empty}</h3><p>${t.favorites_empty_desc}</p></div>`;
+        } else {
+            productGrid.innerHTML = `<p style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text-secondary);">${t.no_products}</p>`;
+        }
         return;
     }
 
@@ -996,7 +1011,7 @@ function renderProducts() {
                 <span class="brand-badge" style="background:${BRAND_COLORS[p.brand] || '#333'}">${p.brand}</span>
                 ${p.url ? '<span class="official-badge">✓ OFFICIAL</span>' : ''}
                 ${productHasAvailable(p) ? '' : `<span class="sold-out-badge">${t.sold_out}</span>`}
-                <button class="wishlist-btn-card" onclick="event.stopPropagation(); toggleWishlist(this)" aria-label="Wishlist">♡</button>
+                <button class="wishlist-btn-card${isWished(p.id) ? ' active' : ''}" onclick="event.stopPropagation(); toggleWishlist(this, ${p.id})" aria-label="Wishlist">${isWished(p.id) ? '♥' : '♡'}</button>
             </div>
             <div class="product-info">
                 <h3>${pname(p)}</h3>
@@ -1009,9 +1024,47 @@ function renderProducts() {
     `).join('');
 }
 
-function toggleWishlist(btn) {
-    btn.classList.toggle('active');
-    btn.textContent = btn.classList.contains('active') ? '♥' : '♡';
+function toggleWishlist(btn, id) {
+    const t = translations[currentLang];
+    const idx = wishlist.indexOf(id);
+    if (idx >= 0) {
+        wishlist.splice(idx, 1);
+        saveWishlist();
+        if (btn) { btn.classList.remove('active'); btn.textContent = '♡'; }
+        showToast(t.msg_wish_removed, 'success');
+        if (favoritesOnly) renderProducts();
+    } else {
+        wishlist.push(id);
+        saveWishlist();
+        if (btn) { btn.classList.add('active'); btn.textContent = '♥'; }
+        showToast(t.msg_wish_added, 'success');
+    }
+}
+function showFavorites() {
+    favoritesOnly = true;
+    currentBrandFilter = 'all';
+    currentCategory = 'all';
+    currentSearchQuery = '';
+    const si = $('search-input'); if (si) si.value = '';
+    document.querySelectorAll('.brand-tab').forEach(tb => tb.classList.toggle('active', tb.dataset.brand === 'all'));
+    document.querySelectorAll('.cat-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === 'all'));
+    const cf = $('category-filter'); if (cf) cf.classList.add('hidden');
+    navigateTo('home');
+    setBnavActive('favorites');
+    renderProducts();
+    setTimeout(scrollToProducts, 80);
+}
+function exitFavorites() {
+    if (!favoritesOnly) return false;
+    favoritesOnly = false;
+    const bar = $('favorites-bar'); if (bar) bar.style.display = 'none';
+    return true;
+}
+function showAllProducts() {
+    exitFavorites();
+    setBnavActive('products');
+    renderProducts();
+    scrollToProducts();
 }
 
 function scrollToProducts() {
@@ -1263,6 +1316,7 @@ function setBnavActive(name) {
 }
 
 function bnavGo(action) {
+    if (action === 'home' || action === 'products') exitFavorites();
     if (action === 'home') {
         navigateTo('home');
     } else if (action === 'products') {
@@ -1271,6 +1325,8 @@ function bnavGo(action) {
         setTimeout(scrollToProducts, 80);
     } else if (action === 'cart') {
         openCart();
+    } else if (action === 'favorites') {
+        showFavorites();
     } else if (action === 'account') {
         handleUserClick();
     }
