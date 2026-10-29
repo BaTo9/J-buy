@@ -230,7 +230,6 @@ let currentCategory = 'all';
 let currentSearchQuery = '';
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
-let favoritesOnly = false;
 function saveWishlist() { localStorage.setItem('wishlist', JSON.stringify(wishlist)); updateFavBadge(); }
 function isWished(id) { return wishlist.includes(id); }
 function updateFavBadge() { const b = $('bnav-fav-badge'); if (b) { b.textContent = wishlist.length; b.style.display = wishlist.length ? 'flex' : 'none'; } }
@@ -525,6 +524,7 @@ const tabRegister = $('tab-register');
 const productModal = $('product-modal');
 const cartModal = $('cart-modal');
 const successModal = $('success-modal');
+const favoritesModal = $('favorites-modal');
 const loginPrompt = $('login-prompt');
 const productsWrapper = $('products-wrapper');
 const productGrid = $('product-grid');
@@ -609,7 +609,6 @@ function updateCatChips() {
 
     document.querySelectorAll('.brand-tab').forEach(tab => {
         tab.addEventListener('click', () => {
-            if (exitFavorites()) setBnavActive('products');
             document.querySelectorAll('.brand-tab').forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
             currentBrandFilter = tab.dataset.brand;
@@ -640,11 +639,10 @@ function updateCatChips() {
 
     $('search-input').addEventListener('input', (e) => {
         currentSearchQuery = e.target.value.toLowerCase().trim();
-        if (favoritesOnly && currentSearchQuery) { exitFavorites(); setBnavActive('products'); }
         renderProducts();
     });
 
-    [authModal, productModal, cartModal, successModal].forEach(modal => {
+    [authModal, productModal, cartModal, successModal, favoritesModal].forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeModal(modal);
         });
@@ -653,7 +651,7 @@ function updateCatChips() {
     // ESC товчоор modal хаах
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            [authModal, productModal, cartModal, successModal].forEach(closeModal);
+            [authModal, productModal, cartModal, successModal, favoritesModal].forEach(closeModal);
             toggleMobileMenu(false);
         }
     });
@@ -979,7 +977,6 @@ function iname(item) {
 function renderProducts() {
 
     let filtered = PRODUCTS;
-    if (favoritesOnly) filtered = filtered.filter(p => wishlist.includes(p.id));
     if (currentBrandFilter !== 'all') filtered = filtered.filter(p => p.brand === currentBrandFilter);
     if (currentCategory !== 'all') filtered = filtered.filter(p => p.cat === currentCategory);
     if (currentSearchQuery) {
@@ -991,16 +988,10 @@ function renderProducts() {
 
     const t = translations[currentLang];
     productCount.textContent = `${filtered.length} ${t.product_count}`;
-    const favBar = $('favorites-bar');
-    if (favBar) { favBar.style.display = favoritesOnly ? 'flex' : 'none'; const fc = $('favorites-count'); if (fc) fc.textContent = wishlist.length; }
     updateFavBadge();
 
     if (filtered.length === 0) {
-        if (favoritesOnly) {
-            productGrid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text-secondary);"><div style="font-size:2.4rem;color:#ef4444;">♡</div><h3 style="margin:10px 0 6px;color:var(--text-primary);">${t.favorites_empty}</h3><p>${t.favorites_empty_desc}</p></div>`;
-        } else {
-            productGrid.innerHTML = `<p style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text-secondary);">${t.no_products}</p>`;
-        }
+        productGrid.innerHTML = `<p style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text-secondary);">${t.no_products}</p>`;
         return;
     }
 
@@ -1032,7 +1023,6 @@ function toggleWishlist(btn, id) {
         saveWishlist();
         if (btn) { btn.classList.remove('active'); btn.textContent = '♡'; }
         showToast(t.msg_wish_removed, 'success');
-        if (favoritesOnly) renderProducts();
     } else {
         wishlist.push(id);
         saveWishlist();
@@ -1040,31 +1030,41 @@ function toggleWishlist(btn, id) {
         showToast(t.msg_wish_added, 'success');
     }
 }
-function showFavorites() {
-    favoritesOnly = true;
-    currentBrandFilter = 'all';
-    currentCategory = 'all';
-    currentSearchQuery = '';
-    const si = $('search-input'); if (si) si.value = '';
-    document.querySelectorAll('.brand-tab').forEach(tb => tb.classList.toggle('active', tb.dataset.brand === 'all'));
-    document.querySelectorAll('.cat-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === 'all'));
-    const cf = $('category-filter'); if (cf) cf.classList.add('hidden');
-    navigateTo('home');
-    setBnavActive('favorites');
-    renderProducts();
-    setTimeout(scrollToProducts, 80);
+function openFavorites() {
+    renderFavorites();
+    favoritesModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
-function exitFavorites() {
-    if (!favoritesOnly) return false;
-    favoritesOnly = false;
-    const bar = $('favorites-bar'); if (bar) bar.style.display = 'none';
-    return true;
-}
-function showAllProducts() {
-    exitFavorites();
-    setBnavActive('products');
+function closeFavorites() {
+    favoritesModal.classList.remove('active');
+    document.body.style.overflow = '';
     renderProducts();
-    scrollToProducts();
+}
+function renderFavorites() {
+    const box = $('favorites-items');
+    if (!box) return;
+    const t = translations[currentLang];
+    const items = wishlist.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
+    if (!items.length) {
+        box.innerHTML = `<div class="empty-cart"><div class="empty-icon" style="color:#ef4444;">♡</div><h3>${t.favorites_empty}</h3><p>${t.favorites_empty_desc}</p></div>`;
+        return;
+    }
+    box.innerHTML = items.map(p => `
+        <div class="cart-item fav-item" onclick="closeFavorites();openProductDetail(${p.id})" role="button" tabindex="0">
+            <img src="${p.img}" alt="${pname(p)}">
+            <div class="cart-item-info">
+                <h4>${pname(p)}</h4>
+                <p class="brand">${p.brand}</p>
+                <p class="attrs">¥${p.price.toLocaleString()} · ${t.price_mnt_label}: ${fmtMNT(p.price).toLocaleString()}₮</p>
+            </div>
+            <button type="button" class="fav-remove" onclick="event.stopPropagation(); removeFavorite(${p.id})" aria-label="Хасах">♥</button>
+        </div>`).join('');
+}
+function removeFavorite(id) {
+    const idx = wishlist.indexOf(id);
+    if (idx >= 0) { wishlist.splice(idx, 1); saveWishlist(); }
+    renderFavorites();
+    showToast(translations[currentLang].msg_wish_removed, 'success');
 }
 
 function scrollToProducts() {
@@ -1316,7 +1316,6 @@ function setBnavActive(name) {
 }
 
 function bnavGo(action) {
-    if (action === 'home' || action === 'products') exitFavorites();
     if (action === 'home') {
         navigateTo('home');
     } else if (action === 'products') {
@@ -1326,7 +1325,7 @@ function bnavGo(action) {
     } else if (action === 'cart') {
         openCart();
     } else if (action === 'favorites') {
-        showFavorites();
+        openFavorites();
     } else if (action === 'account') {
         handleUserClick();
     }

@@ -2620,26 +2620,17 @@ body {
     cursor: not-allowed;
 }
 
-.favorites-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 10px 14px;
-    margin-bottom: 14px;
-    background: rgba(239, 68, 68, 0.08);
-    border: 1px solid rgba(239, 68, 68, 0.35);
-    border-radius: 12px;
-}
-.favorites-bar-text { font-weight: 600; color: var(--text-primary); }
 .favorites-bar-heart { color: #ef4444; }
-.favorites-bar-btn {
-    background: var(--primary-color);
-    color: #fff;
+.fav-item { cursor: pointer; }
+.fav-remove {
+    background: none;
     border: none;
-    border-radius: 999px;
-    padding: 7px 14px;
-    font-weight: 600;
+    color: #ef4444;
+    font-size: 1.3rem;
     cursor: pointer;
-    white-space: nowrap;
+    align-self: flex-start;
+    padding: 4px 6px;
+    line-height: 1;
+    transition: transform var(--transition);
 }
+.fav-remove:hover { transform: scale(1.15); }
