@@ -1081,7 +1081,6 @@ function searchProducts() { /* input event handles */ }
 
 // ================= PRODUCT DETAIL =================
 function openProductDetail(id, keepOpen = false) {
-    if (!isLoggedIn) { openAuthModal('login'); return; }
     const p = PRODUCTS.find(x => x.id === id);
     if (!p) return;
 
@@ -1274,12 +1273,14 @@ function addSelectedToCart() {
 }
 
 function addToCartFromDetail() {
+    if (!isLoggedIn) { openAuthModal('login'); return; }
     if (!addSelectedToCart()) return;
     closeProductModal();
     showToast(translations[currentLang].msg_added_to_cart, 'success');
 }
 
 function buyNowFromDetail() {
+    if (!isLoggedIn) { openAuthModal('login'); return; }
     if (!addSelectedToCart()) return;
     closeProductModal();
     goToCheckout();
