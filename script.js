@@ -1273,14 +1273,14 @@ function addSelectedToCart() {
 }
 
 function addToCartFromDetail() {
-    if (!isLoggedIn) { openAuthModal('login'); return; }
+    if (!isLoggedIn) { closeProductModal(); openAuthModal('login'); return; }
     if (!addSelectedToCart()) return;
     closeProductModal();
     showToast(translations[currentLang].msg_added_to_cart, 'success');
 }
 
 function buyNowFromDetail() {
-    if (!isLoggedIn) { openAuthModal('login'); return; }
+    if (!isLoggedIn) { closeProductModal(); openAuthModal('login'); return; }
     if (!addSelectedToCart()) return;
     closeProductModal();
     goToCheckout();
