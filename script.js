@@ -1601,8 +1601,9 @@ async function processPayment() {
             name, phone, address, items, total, payment_method: selectedPaymentMethod
         }).select('id').single();
         if (error) { showToast(t.msg_order_error, 'error'); return; }
-        const placedOrder = { id: inserted ? inserted.id : '', email: currentUser.email, name, phone, items, total, payment_method: selectedPaymentMethod };
+        const placedOrder = { id: inserted ? inserted.id : '', email: currentUser.email, name, phone, address, items, total, payment_method: selectedPaymentMethod };
         const placedSent = await sendOrderPlacedEmail(placedOrder, sum);
+        await sendAdminOrderNotification(placedOrder, sum);
         if (placedSent) showToast(t.msg_placed_email_sent, 'success');
     }
 
@@ -1762,6 +1763,62 @@ async function sendOrderPlacedEmail(order, sum) {
     } catch (err) {
         console.warn('Placed email failed', err);
         return false;
+    }
+}
+
+const ADMIN_NOTIFY_EMAILS = ['batdelger.design@gmail.com', 'aagii.juge@gmail.com'];
+
+async function sendAdminOrderNotification(order, sum) {
+    if (!order || !sum) return;
+    const cfg = EMAILJS_CONFIG;
+    if (!(cfg.publicKey && cfg.serviceId && cfg.templatePlacedId && window.emailjs)) return;
+    const L = EMAIL_I18N.mn;
+    const itemLine = (i, html) => {
+        const p = PRODUCTS.find(x => x.id === i.id);
+        const nm = (p && p.nameMn) || i.name || '';
+        const col = cnameL(i.color, 'mn') || '-';
+        return html
+            ? `• ${esc(nm)} — өнгө: ${esc(col)}, размер: ${esc(i.size || '-')}, тоо: ${i.qty}, үнэ: ¥${(i.price * i.qty).toLocaleString()}`
+            : `• ${nm} — өнгө: ${col}, размер: ${i.size || '-'}, тоо: ${i.qty}, үнэ: ¥${(i.price * i.qty).toLocaleString()}`;
+    };
+    const itemsText = (order.items || []).map(i => itemLine(i, false)).join('\n');
+    const itemsHtml = (order.items || []).map(i => itemLine(i, true)).join('<br>');
+    const totalMnt = fmtMNT(sum.subtotal + sum.cargoFee) + (sum.delivYen > 0 ? DELIVERY_FEE_MNT : 0);
+    const details = [
+        `Захиалагч: ${order.name || ''}`,
+        `${L.l_phone}: ${order.phone || ''}`,
+        `И-мэйл: ${order.email || ''}`,
+        `Хаяг: ${order.address || ''}`,
+        `${L.l_subtotal}: ¥${(sum.subtotal || 0).toLocaleString()}`,
+        `${L.l_cargo}: ¥${(sum.cargoFee || 0).toLocaleString()}`,
+        `${L.l_total}: ¥${(order.total || 0).toLocaleString()}`,
+        `${L.l_mnt}: ${totalMnt.toLocaleString()}₮`,
+        `${L.l_payment}: ${payLabel(order.payment_method, 'mn')}`
+    ];
+    for (const to of ADMIN_NOTIFY_EMAILS) {
+        try {
+            await window.emailjs.send(cfg.serviceId, cfg.templatePlacedId, {
+                to_email: to,
+                to_name: 'JAPANBUY админ',
+                order_id: order.id,
+                order_total: `¥${(order.total || 0).toLocaleString()}`,
+                order_items: itemsText,
+                order_items_html: itemsHtml,
+                payment_method: payLabel(order.payment_method, 'mn'),
+                customer_phone: order.phone || '',
+                store_name: 'JAPANBUY',
+                mail_subject: `🛎 Шинэ захиалга #${order.id} — JAPANBUY`,
+                mail_greeting: 'Сайн байна уу!',
+                mail_intro: `Сайт дээр шинэ захиалга орж ирлээ. Захиалагч: ${order.name || ''} (утас: ${order.phone || ''}).`,
+                mail_items: itemsText,
+                mail_items_html: itemsHtml,
+                mail_details: details.join('\n'),
+                mail_details_html: details.map(d => esc(d)).join('<br>'),
+                mail_closing: 'Админ хэсгээс захиалгыг шалгаарай: https://japanbuy.shop — JAPANBUY'
+            }, { publicKey: cfg.publicKey });
+        } catch (err) {
+            console.warn('Admin notify failed', err);
+        }
     }
 }
 
