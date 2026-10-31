@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="JAPANBUY">
     <title>JAPANBUY - Online Store</title>
-    <link rel="stylesheet" href="style.css?v=20261027bg">
+    <link rel="stylesheet" href="style.css?v=20261027bh">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -82,6 +82,8 @@
                     <li><a href="#" onclick="event.preventDefault();selectBrandFromMenu('ZARA')">ZARA</a></li>
                     <li><a href="#" onclick="event.preventDefault();selectBrandFromMenu('H&M')">H&M</a></li>
                     <li><a href="#" onclick="event.preventDefault();selectBrandFromMenu('MICHAEL KORS')">MICHAEL KORS</a></li>
+                    <li><a href="#" onclick="event.preventDefault();selectBrandFromMenu('beauty')"><span data-i18n="tab_beauty">ГОО САЙХАН</span></a></li>
+                    <li><a href="#" onclick="event.preventDefault();selectBrandFromMenu('ginza')">GINZA</a></li>
                 </ul>
             </li>
             <li><a href="#features"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span data-i18n="nav_features">Давуу тал</span></a></li>
@@ -157,6 +159,8 @@
                         <button class="brand-tab logo-zara" data-brand="ZARA" role="tab" aria-label="ZARA"><img class="brand-logo-img" src="logos/zara.jpg" alt="ZARA"></button>
                         <button class="brand-tab logo-hm" data-brand="H&M" role="tab" aria-label="H&M"><img class="brand-logo-img" src="logos/hm.jpg" alt="H&M"></button>
                         <button class="brand-tab logo-mk" data-brand="MICHAEL KORS" role="tab" aria-label="Michael Kors"><img class="brand-logo-img" src="logos/mk.jpg" alt="Michael Kors"></button>
+                        <button class="brand-tab tab-beauty" data-brand="beauty" role="tab" data-i18n="tab_beauty">ГОО САЙХАН</button>
+                        <button class="brand-tab tab-ginza" data-brand="ginza" role="tab">GINZA</button>
                     </div>
                     <button class="brand-arrow brand-arrow-right" id="brand-arrow-right" type="button" aria-label="Дараагийн лого" onclick="scrollBrandTabs(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9.5 5 16.5 12 9.5 19"/></svg></button>
                     </div>
@@ -578,7 +582,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=20261027bw"></script>
+    <script src="script.js?v=20261027bx"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
