@@ -1722,6 +1722,8 @@ async function sendPaidOrderEmail(order) {
 
 async function sendOrderPlacedEmail(order, sum) {
     if (!order || !order.email) return false;
+    // Админ өөрийн мэйлээр захиалсан бол захиалагчийн хувийг алгасна (админ мэдэгдэл нь хангалттай)
+    if (ADMIN_NOTIFY_EMAILS.includes((order.email || '').toLowerCase())) return false;
     const cfg = EMAILJS_CONFIG;
     if (!(cfg.publicKey && cfg.serviceId && cfg.templatePlacedId && window.emailjs)) return false;
     try {
