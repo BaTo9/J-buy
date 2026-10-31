@@ -314,7 +314,7 @@ const translations = {
         form_card_number: 'Картын дугаар', form_expiry: 'Хугацаа',
         placeholder_phone: '0901234567', placeholder_address: 'Улаанбаатар, Сүхбаатар дүүрэг...',
         placeholder_card: '0000 0000 0000 0000', placeholder_expiry: 'MM/YY', placeholder_cvv: '123',
-        btn_confirm: '✈️ Захиалга баталгаажуулах', btn_back_short: '← Нүүр хуудас',
+        btn_confirm: '✈️ Захиалга баталгаажуулах', btn_processing: '⏳ Түр хүлээнэ үү...', btn_back_short: '← Нүүр хуудас',
         // Cart
         cart_title: '🛒 Сагс', cart_empty_text: 'Сагс хоосон байна',
         cart_empty_desc: 'Бараа нэмэхийн тулд дэлгүүр рүү буцна уу',
@@ -401,7 +401,7 @@ const translations = {
         form_card_number: 'Card Number', form_expiry: 'Expiry',
         placeholder_phone: '0901234567', placeholder_address: 'Ulaanbaatar, Sukhbaatar district...',
         placeholder_card: '0000 0000 0000 0000', placeholder_expiry: 'MM/YY', placeholder_cvv: '123',
-        btn_confirm: '✈️ Confirm Order', btn_back_short: '← Home',
+        btn_confirm: '✈️ Confirm Order', btn_processing: '⏳ Processing...', btn_back_short: '← Home',
         cart_title: '🛒 Cart', cart_empty_text: 'Your cart is empty',
         cart_empty_desc: 'Go back to shop and add items',
         cart_total: 'Total', btn_checkout: 'Checkout', btn_continue: 'Continue Shopping',
@@ -484,7 +484,7 @@ const translations = {
         form_card_number: 'カード番号', form_expiry: '有効期限',
         placeholder_phone: '0901234567', placeholder_address: 'ウランバートル、スフバートル区...',
         placeholder_card: '0000 0000 0000 0000', placeholder_expiry: 'MM/YY', placeholder_cvv: '123',
-        btn_confirm: '✈️ 注文を確定する', btn_back_short: '← ホーム',
+        btn_confirm: '✈️ 注文を確定する', btn_processing: '⏳ 処理中です...', btn_back_short: '← ホーム',
         cart_title: '🛒 カート', cart_empty_text: 'カートは空です',
         cart_empty_desc: 'ショップに戻って商品を追加してください',
         cart_total: '合計', btn_checkout: 'お支払い', btn_continue: '買い物を続ける',
@@ -1540,6 +1540,8 @@ function updateConfirmState() { const cb = $('accept-prices'); const btn = $('co
 
 function renderCheckout() {
     const t = translations[currentLang];
+    orderProcessing = false;
+    const confirmBtn = $('confirm-order-btn'); if (confirmBtn) { confirmBtn.classList.remove('is-loading'); confirmBtn.textContent = t.btn_confirm; }
     const acceptCb = $('accept-prices'); if (acceptCb) acceptCb.checked = false; updateConfirmState();
 
     if (PAYPAY_QR_URL) {
@@ -1571,8 +1573,26 @@ function renderCheckout() {
 }
 
 // ================= PAYMENT =================
+let orderProcessing = false;
+
+function setConfirmBtnLoading(on) {
+    const btn = $('confirm-order-btn');
+    if (!btn) return;
+    const t = translations[currentLang];
+    if (on) {
+        btn.disabled = true;
+        btn.classList.add('is-loading');
+        btn.textContent = t.btn_processing;
+    } else {
+        btn.classList.remove('is-loading');
+        btn.textContent = t.btn_confirm;
+        updateConfirmState();
+    }
+}
+
 async function processPayment() {
     const t = translations[currentLang];
+    if (orderProcessing) return;
     if (!isLoggedIn) { openAuthModal('login'); return; }
     if (cart.length === 0) { showToast(t.msg_cart_empty, 'warning'); return; }
     const acceptCb = $('accept-prices');
@@ -1592,6 +1612,10 @@ async function processPayment() {
         selectPaymentMethod('bank');
     }
 
+    // Давхар даралтаас хамгаална: товчийг түгжиж, боловсруулж буй төлөвт оруулна
+    orderProcessing = true;
+    setConfirmBtnLoading(true);
+
     if (USE_SUPABASE && sb && currentUser) {
         const items = cart.map(i => { const p = PRODUCTS.find(x => x.id === i.id); const cimg = (p && p.swatches && i.color && p.swatches[i.color]) || i.img || ''; return { id: i.id, brand: i.brand || (p ? p.brand : ''), name: iname(i), size: i.size || '', color: i.color || '', qty: i.qty, price: i.price, weight: (p && p.weightKg) || 0, img: cimg, lang: currentLang }; });
         const sum = paintSummary();
@@ -1600,10 +1624,11 @@ async function processPayment() {
             user_id: currentUser.id, email: currentUser.email,
             name, phone, address, items, total, payment_method: selectedPaymentMethod
         }).select('id').single();
-        if (error) { showToast(t.msg_order_error, 'error'); return; }
+        if (error) { orderProcessing = false; setConfirmBtnLoading(false); showToast(t.msg_order_error, 'error'); return; }
         const placedOrder = { id: inserted ? inserted.id : '', email: currentUser.email, name, phone, address, items, total, payment_method: selectedPaymentMethod };
         const placedSent = await sendOrderPlacedEmail(placedOrder, sum);
-        await sendAdminOrderNotification(placedOrder, sum);
+        // Админ мэдэгдэл амжилтыг хүлээлгэхгүй (fire-and-forget) — захиалга хурдан дуусна
+        sendAdminOrderNotification(placedOrder, sum).catch(() => {});
         if (placedSent) showToast(t.msg_placed_email_sent, 'success');
     }
 
