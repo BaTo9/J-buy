@@ -900,21 +900,41 @@ body {
 }
 
 .beauty-logo {
-    font-family: 'Marck Script', cursive;
-    font-size: 1.6rem;
-    font-weight: 400;
-    letter-spacing: normal;
-    line-height: 1;
-    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bad Script', cursive;
+    line-height: 0.98;
     pointer-events: none;
+}
+
+.beauty-logo-top {
+    font-size: 1.45rem;
+    font-weight: 400;
+}
+
+.beauty-logo-bottom {
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin-top: 1px;
 }
 
 .brand-tab.tab-ginza {
     font-weight: 800;
     letter-spacing: 0.14em;
-    background: linear-gradient(135deg, #1c1a17, #2e2822);
+    background: #2e1c15;
     color: #d4af37;
     border-color: #d4af37;
+    padding: 6px 12px;
+}
+
+.ginza-logo-img {
+    display: block;
+    height: 42px;
+    width: auto;
+    border-radius: 7px;
+    pointer-events: none;
 }
 
 .brand-tab.tab-ginza.active {
