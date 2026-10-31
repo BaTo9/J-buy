@@ -763,6 +763,26 @@ function toggleMobileMenu(open) {
     mobileMenu.setAttribute('aria-hidden', !open);
 }
 
+function toggleBrandSubmenu(event) {
+    if (event) event.stopPropagation();
+    const sub = document.getElementById('brand-submenu');
+    const btn = document.getElementById('brand-submenu-toggle');
+    if (!sub || !btn) return;
+    const open = sub.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
+function selectBrandFromMenu(brand) {
+    if (typeof navigateTo === 'function') navigateTo('home');
+    let tab = null;
+    document.querySelectorAll('.brand-tab').forEach(t => { if (t.dataset.brand === brand) tab = t; });
+    if (tab) tab.click();
+    toggleMobileMenu(false);
+    const sec = document.getElementById('products');
+    if (sec) setTimeout(() => sec.scrollIntoView({ behavior: 'smooth' }), 60);
+}
+
 // ================= AUTH =================
 async function handleUserClick() {
     if (isLoggedIn) {

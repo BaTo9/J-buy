@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="JAPANBUY">
     <title>JAPANBUY - Online Store</title>
-    <link rel="stylesheet" href="style.css?v=20261027bb">
+    <link rel="stylesheet" href="style.css?v=20261027bc">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -70,7 +70,20 @@
         </div>
         <ul class="mobile-nav-links">
             <li><a href="#" onclick="event.preventDefault();navigateTo('home')"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span data-i18n="nav_home">Нүүр</span></a></li>
-            <li><a href="#products"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span data-i18n="nav_products">Бараанууд</span></a></li>
+            <li class="has-submenu">
+                <div class="menu-row">
+                    <a href="#products" class="menu-row-link"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span data-i18n="nav_products">Бараанууд</span></a>
+                    <button type="button" class="submenu-toggle" id="brand-submenu-toggle" onclick="toggleBrandSubmenu(event)" aria-label="Брэндүүд" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                </div>
+                <ul class="brand-submenu" id="brand-submenu">
+                    <li><a href="#" onclick="event.preventDefault();selectBrandFromMenu('GAP')">GAP</a></li>
+                    <li><a href="#" onclick="event.preventDefault();selectBrandFromMenu('UNIQLO')">UNIQLO</a></li>
+                    <li><a href="#" onclick="event.preventDefault();selectBrandFromMenu('GU')">GU</a></li>
+                    <li><a href="#" onclick="event.preventDefault();selectBrandFromMenu('ZARA')">ZARA</a></li>
+                    <li><a href="#" onclick="event.preventDefault();selectBrandFromMenu('H&M')">H&M</a></li>
+                    <li><a href="#" onclick="event.preventDefault();selectBrandFromMenu('MICHAEL KORS')">MICHAEL KORS</a></li>
+                </ul>
+            </li>
             <li><a href="#features"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span data-i18n="nav_features">Давуу тал</span></a></li>
             <li><a href="#" onclick="event.preventDefault();toggleMobileMenu(false);openCart()"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></span><span data-i18n="nav_cart">Миний сагс</span></a></li>
             <li><a href="#" onclick="event.preventDefault();openFavorites()"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><span data-i18n="nav_favorites">Таалагдсан</span></a></li>
@@ -565,7 +578,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=20261027bs"></script>
+    <script src="script.js?v=20261027bt"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

@@ -355,6 +355,61 @@ button, input, select {
     display: block;
 }
 
+.menu-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.menu-row-link {
+    flex: 1;
+    min-width: 0;
+}
+
+.submenu-toggle {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.submenu-toggle svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.25s ease;
+}
+
+.submenu-toggle.open svg {
+    transform: rotate(180deg);
+}
+
+.brand-submenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.brand-submenu.open {
+    max-height: 360px;
+}
+
+.brand-submenu a {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 10px 10px 56px;
+    color: rgba(255, 255, 255, 0.88);
+}
+
 .menu-controls {
     display: flex;
     align-items: center;
