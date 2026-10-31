@@ -358,7 +358,7 @@ button, input, select {
 .menu-row {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 3px;
 }
 
 .menu-row-link {
@@ -367,7 +367,7 @@ button, input, select {
 }
 
 .submenu-toggle {
-    width: 38px;
+    width: 28px;
     height: 40px;
     flex-shrink: 0;
     display: inline-flex;
