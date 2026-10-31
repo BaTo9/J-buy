@@ -1482,7 +1482,6 @@ body {
 .ticker {
     display: flex;
     width: max-content;
-    gap: 40px;
 }
 
 .ticker-item {
@@ -1492,6 +1491,8 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
+    padding: 0 20px;
+    white-space: nowrap;
     opacity: 0.5;
     transition: opacity var(--transition), color var(--transition);
     cursor: default;
@@ -1505,8 +1506,8 @@ body {
 
 .ticker-item span { font-size: 1.1rem; }
 
-.ticker-top { animation: scroll-ltr 30s linear infinite; }
-.ticker-bottom { animation: scroll-rtl 30s linear infinite; }
+.ticker-top { animation: scroll-ltr 60s linear infinite; }
+.ticker-bottom { animation: scroll-rtl 60s linear infinite; }
 
 @keyframes scroll-ltr {
     0% { transform: translateX(-50%); }
