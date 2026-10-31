@@ -2385,12 +2385,19 @@ body {
         gap: 48px;
     }
 
-    .detail-layout { flex-direction: row; }
-    .detail-img {
-        width: 48%;
-        aspect-ratio: 1 / 1.15;
+    .detail-layout { flex-direction: row; align-items: flex-start; }
+    .product-modal-content { max-width: 980px; }
+    .detail-gallery {
+        width: 46%;
+        flex-shrink: 0;
+        position: sticky;
+        top: 0;
     }
-    .detail-info { width: 52%; }
+    .detail-img {
+        width: 100%;
+        aspect-ratio: 1 / 1.08;
+    }
+    .detail-info { width: 54%; }
 }
 
 .desktop-nav { display: none; }
