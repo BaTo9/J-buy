@@ -362,7 +362,7 @@ button, input, select {
 }
 
 .menu-row-link {
-    flex: 1;
+    flex: 0 1 auto;
     min-width: 0;
 }
 
