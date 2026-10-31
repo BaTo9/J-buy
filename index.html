@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="JAPANBUY">
     <title>JAPANBUY - Online Store</title>
-    <link rel="stylesheet" href="style.css?v=20261027bk">
+    <link rel="stylesheet" href="style.css?v=20261027bl">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -37,6 +37,16 @@
                     <option value="jp">🇯🇵 JP</option>
                     <option value="en">🇬🇧 EN</option>
                 </select>
+                <div class="lang-flag" id="lang-flag">
+                    <button type="button" class="lang-flag-btn" id="lang-flag-btn" aria-haspopup="true" aria-expanded="false" aria-label="Хэл сонгох">
+                        <img id="lang-flag-current" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAABQBAMAAABsc2MHAAAAKlBMVEXaIDEAZrL/0wBJTYbmWyDzlhD2pwv6tgfugBb+ygLrbhveMCzkTSTgPShIGl0PAAABeklEQVRYw+3Yv0rDUBTH8Qu2Kkk7+AbyJU1baMFHKF3MIhRxKKIgHTKIQwkV/0MpCBUdJCBOBSnYxSWTIDhkdhIHK/VlXFwcCmJ/Q8CcB/hwOeeecy7XmKkxtzQ1VsxfIgVT8HcRq8E7NbglBu39SAteFbta8Lh0JgWtE2ckBbO3xSPtCaEoBe0AR1uUzGaU8F4e3V5KwTGUa0qwBQyEYAagIAQX4cdFnBmcByjrQNsCcHWgZYeAk9OBr0NgJysD820rpBD1dUU5iCfN+HGgA99Ka/mXsJvge2je1b1sJs04sfMQaKwClLt1vhfBzKC5ALaNELRbnBolaDKHRgsaIwV93/d9f08HAoCTYFCeQ2O8jUgKjqESC0ErdL3CeaQDF3BsdxjrwDquV+g1dOA6MAiudWDATf+Dqg4M3ef7gIoObFVbwLIO7HVcD9o68GnXsaGmA3Md16OkbL3PgHJNOhxy/YdEr4DkT2z5kpLnMH3bpN99KZiC/xr8AolEFsgYC3fyAAAAAElFTkSuQmCC" alt="" width="24" height="17"><span id="lang-flag-code">MN</span><svg class="lang-flag-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="lang-flag-menu" id="lang-flag-menu" hidden>
+                        <button type="button" data-lang="mn" onclick="chooseLangFlag('mn')"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAABQBAMAAABsc2MHAAAAKlBMVEXaIDEAZrL/0wBJTYbmWyDzlhD2pwv6tgfugBb+ygLrbhveMCzkTSTgPShIGl0PAAABeklEQVRYw+3Yv0rDUBTH8Qu2Kkk7+AbyJU1baMFHKF3MIhRxKKIgHTKIQwkV/0MpCBUdJCBOBSnYxSWTIDhkdhIHK/VlXFwcCmJ/Q8CcB/hwOeeecy7XmKkxtzQ1VsxfIgVT8HcRq8E7NbglBu39SAteFbta8Lh0JgWtE2ckBbO3xSPtCaEoBe0AR1uUzGaU8F4e3V5KwTGUa0qwBQyEYAagIAQX4cdFnBmcByjrQNsCcHWgZYeAk9OBr0NgJysD820rpBD1dUU5iCfN+HGgA99Ka/mXsJvge2je1b1sJs04sfMQaKwClLt1vhfBzKC5ALaNELRbnBolaDKHRgsaIwV93/d9f08HAoCTYFCeQ2O8jUgKjqESC0ErdL3CeaQDF3BsdxjrwDquV+g1dOA6MAiudWDATf+Dqg4M3ef7gIoObFVbwLIO7HVcD9o68GnXsaGmA3Md16OkbL3PgHJNOhxy/YdEr4DkT2z5kpLnMH3bpN99KZiC/xr8AolEFsgYC3fyAAAAAElFTkSuQmCC" alt="" width="24" height="17">MN</button>
+                        <button type="button" data-lang="jp" onclick="chooseLangFlag('jp')"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAABrBAMAAAACzpRpAAAALVBMVEW8AC3////BEzz77fDSVnPacInyzNXgiZ323OLHKU/++frtu8bmna7MPmDpqLfblsEPAAABs0lEQVRo3u3Yr0/DUBAH8EvTdSxQMcaPUiZKICBQRYEhBYkq/0GHxSxoSGhQOMg8SRMMDhDToLA4EhxB8V+QTRBo+665e0dn3jfVn7R9r713B23hgAENaEADGtCAtYLbxy+nwwsxcHcfxln7FAG9M/jJW6oPdmL4lUaoC/71AJqhHuifQC4bmRZ4CYUMdEAvKIKtngb4CCXZ5INdKM0HG0zKwWkuWPYGR7FSJrgDigyY4KsKdHngPChzyAITNeiwwEgN2hxwAZD0GOAcBu4xwAQDHQYYYaBNB/0AAy06uAzAWhVgbGt0ayvBJRy8JoPnODhFBp9wcIYM9nGwSQZjHGyQwQgHbTJ4hYMuGQxwsEUFfahIJnyHlvQ7JD+yuuRxVzmS3ofiG7sv/S0nOOiQwVkcXJn8H7uipjxIV71s8nVZ/uQgfrbxMDDlnA9jxoeHgltqcJUFdtXgM68LiBlPjIJ3KvBdupMKub3evXCv114kL0lVv3xU5q1rNOCdkmLqhjozh9sieKA3ZvnKezeac5v8nKVqylL/ZEl+9iU/nfuH+eFobcaXGeoa0IAGNKAB6wS/AWlV+Jy5CPOVAAAAAElFTkSuQmCC" alt="" width="24" height="17">JP</button>
+                        <button type="button" data-lang="en" onclick="chooseLangFlag('en')"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAABQBAMAAABsc2MHAAAAJ1BMVEX////IEC4BIWnXTWRBWY82T4jxw8pWbJy0vdP0ztS/yNouSITheovD21AgAAABt0lEQVRYw+3ZMU7DQBAF0N8h0e0VfAWkSPSpOEFEywWo6VO5pE1BAeIKXIFboSSOvd75M3+QUoC001m7++TKnvmLDaYaB17PQJkKuHE2fQGvpy0bFCVmwMpDUWICrD0UJWpw5aEoUYJrD0WJCmw8PClRgK1nHsffgdaTYggS70GJEWi9dwyPQgzAnTn6MWBQog8y7wgScZ8BqXcCY9EDuXcGQ9EBHW8CI5GDnncBA5GCrjeDvshA31tAVyRg4FWgJ1ow8mrQEQ0YeiuQiy0Ye2uQig0ovAZk4hpUXgsS8a0Gb5VnQCLWoPQGbNt6AQ53x/pmYLP0aY4jU/UbXqU6mNt8repgBzvYwf8K9n/KHwRZK3Kupesw4LxEWhHSLNWD9D1/w3nRNkvSa9s5IUJ5tuGMRSiPtMShCOWxpj0SoTw6VgQilMcHH1+E8pzRzBWhPG949ES43ijGW0eE8vwBnItQXhARUBHKi0IMJkJ5YcxCRCgvDoKsCOWJqMqIUF4YphERypNxn/kcC08EkjtH9L1EZErEwMuEujUivVTsXInSywXjiyi9ZHQ/i9LLXi5cROmlrz8m8Qf6xz5GhG+n/QAAAABJRU5ErkJggg==" alt="" width="24" height="17">EN</button>
+                    </div>
+                </div>
                 <button id="cart-btn" class="icon-btn cart-btn" onclick="openCart()" aria-label="Сагс">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg><span class="badge" id="cart-badge">0</span>
                 </button>
@@ -642,7 +652,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=20261027bz"></script>
+    <script src="script.js?v=20261027ca"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

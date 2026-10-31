@@ -545,6 +545,7 @@ const $ = (id) => document.getElementById(id);
 const htmlEl = document.documentElement;
 const themeToggleBtn = $('theme-toggle');
 const langSelect = $('lang-select');
+const LANG_FLAG_META = { mn: { img: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAABQBAMAAABsc2MHAAAAKlBMVEXaIDEAZrL/0wBJTYbmWyDzlhD2pwv6tgfugBb+ygLrbhveMCzkTSTgPShIGl0PAAABeklEQVRYw+3Yv0rDUBTH8Qu2Kkk7+AbyJU1baMFHKF3MIhRxKKIgHTKIQwkV/0MpCBUdJCBOBSnYxSWTIDhkdhIHK/VlXFwcCmJ/Q8CcB/hwOeeecy7XmKkxtzQ1VsxfIgVT8HcRq8E7NbglBu39SAteFbta8Lh0JgWtE2ckBbO3xSPtCaEoBe0AR1uUzGaU8F4e3V5KwTGUa0qwBQyEYAagIAQX4cdFnBmcByjrQNsCcHWgZYeAk9OBr0NgJysD820rpBD1dUU5iCfN+HGgA99Ka/mXsJvge2je1b1sJs04sfMQaKwClLt1vhfBzKC5ALaNELRbnBolaDKHRgsaIwV93/d9f08HAoCTYFCeQ2O8jUgKjqESC0ErdL3CeaQDF3BsdxjrwDquV+g1dOA6MAiudWDATf+Dqg4M3ef7gIoObFVbwLIO7HVcD9o68GnXsaGmA3Md16OkbL3PgHJNOhxy/YdEr4DkT2z5kpLnMH3bpN99KZiC/xr8AolEFsgYC3fyAAAAAElFTkSuQmCC', code: 'MN' }, jp: { img: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAABrBAMAAAACzpRpAAAALVBMVEW8AC3////BEzz77fDSVnPacInyzNXgiZ323OLHKU/++frtu8bmna7MPmDpqLfblsEPAAABs0lEQVRo3u3Yr0/DUBAH8EvTdSxQMcaPUiZKICBQRYEhBYkq/0GHxSxoSGhQOMg8SRMMDhDToLA4EhxB8V+QTRBo+665e0dn3jfVn7R9r713B23hgAENaEADGtCAtYLbxy+nwwsxcHcfxln7FAG9M/jJW6oPdmL4lUaoC/71AJqhHuifQC4bmRZ4CYUMdEAvKIKtngb4CCXZ5INdKM0HG0zKwWkuWPYGR7FSJrgDigyY4KsKdHngPChzyAITNeiwwEgN2hxwAZD0GOAcBu4xwAQDHQYYYaBNB/0AAy06uAzAWhVgbGt0ayvBJRy8JoPnODhFBp9wcIYM9nGwSQZjHGyQwQgHbTJ4hYMuGQxwsEUFfahIJnyHlvQ7JD+yuuRxVzmS3ofiG7sv/S0nOOiQwVkcXJn8H7uipjxIV71s8nVZ/uQgfrbxMDDlnA9jxoeHgltqcJUFdtXgM68LiBlPjIJ3KvBdupMKub3evXCv114kL0lVv3xU5q1rNOCdkmLqhjozh9sieKA3ZvnKezeac5v8nKVqylL/ZEl+9iU/nfuH+eFobcaXGeoa0IAGNKAB6wS/AWlV+Jy5CPOVAAAAAElFTkSuQmCC', code: 'JP' }, en: { img: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAABQBAMAAABsc2MHAAAAJ1BMVEX////IEC4BIWnXTWRBWY82T4jxw8pWbJy0vdP0ztS/yNouSITheovD21AgAAABt0lEQVRYw+3ZMU7DQBAF0N8h0e0VfAWkSPSpOEFEywWo6VO5pE1BAeIKXIFboSSOvd75M3+QUoC001m7++TKnvmLDaYaB17PQJkKuHE2fQGvpy0bFCVmwMpDUWICrD0UJWpw5aEoUYJrD0WJCmw8PClRgK1nHsffgdaTYggS70GJEWi9dwyPQgzAnTn6MWBQog8y7wgScZ8BqXcCY9EDuXcGQ9EBHW8CI5GDnncBA5GCrjeDvshA31tAVyRg4FWgJ1ow8mrQEQ0YeiuQiy0Ye2uQig0ovAZk4hpUXgsS8a0Gb5VnQCLWoPQGbNt6AQ53x/pmYLP0aY4jU/UbXqU6mNt8repgBzvYwf8K9n/KHwRZK3Kupesw4LxEWhHSLNWD9D1/w3nRNkvSa9s5IUJ5tuGMRSiPtMShCOWxpj0SoTw6VgQilMcHH1+E8pzRzBWhPG949ES43ijGW0eE8vwBnItQXhARUBHKi0IMJkJ5YcxCRCgvDoKsCOWJqMqIUF4YphERypNxn/kcC08EkjtH9L1EZErEwMuEujUivVTsXInSywXjiyi9ZHQ/i9LLXi5cROmlrz8m8Qf6xz5GhG+n/QAAAABJRU5ErkJggg==', code: 'EN' } };
 const menuBtn = $('menu-btn');
 const closeBtn = $('close-btn');
 const mobileMenu = $('mobile-menu');
@@ -624,6 +625,13 @@ function setupEventListeners() {
     }
 
     langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
+
+    const langFlagBtn = $('lang-flag-btn');
+    if (langFlagBtn) langFlagBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleLangFlag(); });
+    document.addEventListener('click', (e) => {
+        const wrap = $('lang-flag');
+        if (wrap && !wrap.contains(e.target)) toggleLangFlag(false);
+    });
 
     document.querySelectorAll('.mobile-nav-links a').forEach(link => {
         link.addEventListener('click', () => toggleMobileMenu(false));
@@ -733,10 +741,35 @@ function setLanguage(lang) {
     syncMenuControls();
 }
 
+// Desktop header language control with real flag images (Windows browsers cannot render flag emoji in the native <select>)
+function syncLangFlag() {
+    const meta = LANG_FLAG_META[currentLang];
+    const img = $('lang-flag-current');
+    if (!img || !meta) return;
+    img.src = meta.img;
+    $('lang-flag-code').textContent = meta.code;
+    document.querySelectorAll('#lang-flag-menu [data-lang]').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === currentLang);
+    });
+}
+function toggleLangFlag(force) {
+    const menu = $('lang-flag-menu');
+    if (!menu) return;
+    const show = typeof force === 'boolean' ? force : menu.hidden;
+    menu.hidden = !show;
+    const btn = $('lang-flag-btn');
+    if (btn) btn.setAttribute('aria-expanded', String(show));
+}
+function chooseLangFlag(lang) {
+    setLanguage(lang);
+    toggleLangFlag(false);
+}
+
 function syncMenuControls() {
     document.querySelectorAll('.lang-icon-btn[data-lang]').forEach(b => {
         b.classList.toggle('active', b.dataset.lang === currentLang);
     });
+    syncLangFlag();
     const themeBtn = $('menu-theme-btn');
     if (themeBtn) themeBtn.innerHTML = currentTheme === 'dark' ? ICON_MOON : ICON_SUN;
 }

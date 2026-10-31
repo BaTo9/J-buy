@@ -2443,6 +2443,9 @@ body {
     .bottom-nav { display: none; }
     body { padding-bottom: 0; }
     .to-top-btn { bottom: 28px; }
+
+    .header-actions .lang-select { display: none; }
+    .header-actions .lang-flag { display: block; }
 }
 /* ================= TOAST ================= */
 .toast-container {
@@ -2557,6 +2560,60 @@ body {
     padding: 6px 8px;
     text-align: center;
 }
+
+/* Desktop header language control with real flag images (Windows cannot render flag emoji in the native select) */
+.lang-flag { display: none; position: relative; }
+.lang-flag-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+.lang-flag-btn img, .lang-flag-menu img {
+    width: 24px;
+    height: 17px;
+    object-fit: cover;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    flex-shrink: 0;
+}
+.lang-flag-chevron { width: 12px; height: 12px; opacity: 0.7; }
+.lang-flag-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 108px;
+    padding: 4px;
+    background-color: var(--surface-color);
+    border: 1.5px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+    z-index: 1200;
+}
+.lang-flag-menu button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 7px 9px;
+    background: none;
+    border: none;
+    border-radius: 7px;
+    color: var(--text-primary);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+}
+.lang-flag-menu button:hover { background-color: var(--bg-color); }
+.lang-flag-menu button.active { color: var(--primary-color); }
 
 /* Footer socials: lift icons off the bottom divider line */
 .footer-socials { margin-bottom: 22px; }
