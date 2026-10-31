@@ -350,7 +350,7 @@ const translations = {
         cart_empty_desc: 'Бараа нэмэхийн тулд дэлгүүр рүү буцна уу',
         cart_total: 'Нийт дүн', btn_checkout: 'Төлбөр тооцоо', btn_continue: 'Худалдан авалт үргэлжлүүлэх',
         btn_add_cart: 'Сагсанд нэмэх',
-        official_store: 'Брэндийн дэлгүүрт харах', support_chat: 'Админтай чатлах',
+        official_store: 'Брэндийн дэлгүүрт харах', support_chat: 'Админтай чатлах', support_online: 'Ихэвчлэн удахгүй хариулдаг', support_greeting: 'Сайн байна уу! JapanBuy-д тавтай морил. Асуултаа энд бичээрэй — админ танд хариулах болно.', support_name_ph: 'Нэр (заавал биш)', support_contact_ph: 'Утас эсвэл и-мэйл *', support_msg_ph: 'Асуултаа бичээрэй... *', support_send: 'Илгээх', support_sending: 'Илгээж байна...', support_note: 'Мессеж админы и-мэйл рүү шууд очно. Хариуг тан руу утас/и-мэйлээр илгээнэ.', support_messenger: 'Messenger-ээр бичих', support_sent: 'Илгээгдлээ! Админ удахгүй хариулах болно.', support_error: 'Илгээж чадсангүй. Дахин оролдоорой.', support_close: 'Хаах', 
         btn_buy_now: 'Худалдаж авах',
         // Product detail
         detail_size: 'Размер', detail_color: 'Өнгө', detail_qty: 'Тоо ширхэг',
@@ -436,7 +436,7 @@ const translations = {
         cart_empty_desc: 'Go back to shop and add items',
         cart_total: 'Total', btn_checkout: 'Checkout', btn_continue: 'Continue Shopping',
         btn_add_cart: 'Add to Cart',
-        official_store: 'View at brand store', support_chat: 'Chat with admin',
+        official_store: 'View at brand store', support_chat: 'Chat with admin', support_online: 'Usually replies soon', support_greeting: 'Hi! Welcome to JapanBuy. Write your question here — the admin will reply to you.', support_name_ph: 'Name (optional)', support_contact_ph: 'Phone or email *', support_msg_ph: 'Write your question... *', support_send: 'Send', support_sending: 'Sending...', support_note: 'Your message goes straight to the admin\'s email. The reply will be sent to your phone/email.', support_messenger: 'Message on Messenger', support_sent: 'Sent! The admin will reply soon.', support_error: 'Could not send. Please try again.', support_close: 'Close', 
         btn_buy_now: 'Buy Now',
         detail_size: 'Size', detail_color: 'Color', detail_qty: 'Quantity',
         success_title: 'Order Successfully Placed!',
@@ -519,7 +519,7 @@ const translations = {
         cart_empty_desc: 'ショップに戻って商品を追加してください',
         cart_total: '合計', btn_checkout: 'お支払い', btn_continue: '買い物を続ける',
         btn_add_cart: 'カートに追加',
-        official_store: 'ブランドストアで見る', support_chat: '管理者にチャット',
+        official_store: 'ブランドストアで見る', support_chat: '管理者にチャット', support_online: '通常すぐ返信します', support_greeting: 'こんにちは！JapanBuyへようこそ。ご質問をこちらにご記入ください。管理者が返信いたします。', support_name_ph: 'お名前（任意）', support_contact_ph: '電話番号またはメール *', support_msg_ph: 'ご質問をご記入ください... *', support_send: '送信', support_sending: '送信中...', support_note: 'メッセージは管理者のメールに直接届きます。返信はお電話/メールでお送りします。', support_messenger: 'Messengerで連絡', support_sent: '送信しました！管理者がまもなく返信します。', support_error: '送信できませんでした。もう一度お試しください。', support_close: '閉じる', 
         btn_buy_now: '今すぐ購入',
         detail_size: 'サイズ', detail_color: '色', detail_qty: '数量',
         success_title: 'ご注文ありがとうございました！',
@@ -1973,3 +1973,86 @@ async function updateOrderStatus(id, status) {
 }
 
 console.log('✅ JAPANBUY ачаалагдлаа! Хэл:', currentLang, '| Бүтээгдэхүүн:', PRODUCTS.length);
+/* ===== Support chat panel (message goes to admin email via EmailJS) ===== */
+function toggleSupportPanel(force) {
+    const panel = document.getElementById('support-panel');
+    if (!panel) return;
+    const open = typeof force === 'boolean' ? force : !panel.classList.contains('open');
+    panel.classList.toggle('open', open);
+    panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+    if (open) {
+        try {
+            const n = localStorage.getItem('support-name');
+            const c = localStorage.getItem('support-contact');
+            if (n && !document.getElementById('support-name').value) document.getElementById('support-name').value = n;
+            if (c && !document.getElementById('support-contact').value) document.getElementById('support-contact').value = c;
+        } catch (e) { /* ignore */ }
+    }
+}
+
+let supportSending = false;
+async function sendSupportMessage(e) {
+    if (e) e.preventDefault();
+    if (supportSending) return;
+    const t = translations[currentLang] || translations.mn;
+    const name = document.getElementById('support-name').value.trim();
+    const contact = document.getElementById('support-contact').value.trim();
+    const msg = document.getElementById('support-message').value.trim();
+    if (!contact || !msg) return;
+    const cfg = EMAILJS_CONFIG;
+    const btn = document.getElementById('support-send-btn');
+    const details = ['Илгээгч: ' + (name || '—'), 'Холбоо барих: ' + contact, 'Сайтын хэл: ' + currentLang];
+    supportSending = true;
+    if (btn) { btn.disabled = true; btn.textContent = t.support_sending || 'Илгээж байна...'; }
+    let sent = 0;
+    if (cfg.publicKey && cfg.serviceId && cfg.templatePlacedId && window.emailjs) {
+        for (const to of ADMIN_NOTIFY_EMAILS) {
+            try {
+                await window.emailjs.send(cfg.serviceId, cfg.templatePlacedId, {
+                    to_email: to,
+                    to_name: 'JAPANBUY админ',
+                    order_id: '-',
+                    order_total: '-',
+                    order_items: msg,
+                    order_items_html: esc(msg).replace(/\n/g, '<br>'),
+                    payment_method: '-',
+                    customer_phone: contact,
+                    store_name: 'JAPANBUY',
+                    mail_subject: '💬 Сайтаас асуулт ирлээ — JAPANBUY',
+                    mail_greeting: 'Сайн байна уу!',
+                    mail_intro: 'JAPANBUY сайтын support чатаар шинэ асуулт ирлээ.',
+                    mail_items: msg,
+                    mail_items_html: esc(msg).replace(/\n/g, '<br>'),
+                    mail_details: details.join('\n'),
+                    mail_details_html: details.map(d => esc(d)).join('<br>'),
+                    mail_closing: 'Хариулахдаа дээрх утас/и-мэйлээр холбогдоорой. — JAPANBUY'
+                }, { publicKey: cfg.publicKey });
+                sent++;
+            } catch (err) { console.warn('Support send failed', err); }
+        }
+    }
+    supportSending = false;
+    if (btn) { btn.disabled = false; btn.textContent = t.support_send || 'Илгээх'; }
+    if (sent > 0) {
+        try {
+            localStorage.setItem('support-contact', contact);
+            if (name) localStorage.setItem('support-name', name);
+        } catch (e2) { /* ignore */ }
+        const form = document.getElementById('support-form');
+        const ok = document.getElementById('support-success');
+        if (form) form.hidden = true;
+        if (ok) ok.hidden = false;
+        showToast(t.support_sent || 'Илгээгдлээ!');
+    } else {
+        showToast(t.support_error || 'Илгээж чадсангүй. Дахин оролдоорой.', 'error');
+    }
+}
+
+document.addEventListener('click', (e) => {
+    const panel = document.getElementById('support-panel');
+    const btn = document.getElementById('support-chat-btn');
+    if (panel && panel.classList.contains('open') && !panel.contains(e.target) && (!btn || !btn.contains(e.target))) {
+        toggleSupportPanel(false);
+    }
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleSupportPanel(false); });

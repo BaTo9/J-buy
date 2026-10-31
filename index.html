@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="JAPANBUY">
     <title>JAPANBUY - Online Store</title>
-    <link rel="stylesheet" href="style.css?v=20261027bq">
+    <link rel="stylesheet" href="style.css?v=20261027br">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -123,7 +123,29 @@
     </div>
     <div id="overlay" class="overlay"></div>
 
-    <a id="support-chat-btn" class="support-chat-btn" href="https://www.facebook.com/messages/t/61595757882524" target="_blank" rel="noopener" aria-label="Messenger-ээр админтай холбогдох"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.001 11.639C.001 4.949 5.241 0 12.001 0S24 4.95 24 11.639c0 6.689-5.24 11.638-12 11.638-1.21 0-2.38-.16-3.47-.46a.96.96 0 00-.64.05l-2.39 1.05a.96.96 0 01-1.35-.85l-.07-2.14a.97.97 0 00-.32-.68A11.39 11.389 0 01.002 11.64zm8.32-2.19l-3.52 5.6c-.35.53.32 1.139.82.75l3.79-2.87c.26-.2.6-.2.87 0l2.8 2.1c.84.63 2.04.4 2.6-.48l3.52-5.6c.35-.53-.32-1.13-.82-.75l-3.79 2.87c-.25.2-.6.2-.86 0l-2.8-2.1a1.8 1.8 0 00-2.61.48z"/></svg><span class="support-chat-label" data-i18n="support_chat">Админтай чатлах</span><span class="support-chat-dot" aria-hidden="true"></span></a>
+    <button type="button" id="support-chat-btn" class="support-chat-btn" onclick="toggleSupportPanel()" aria-label="Messenger-ээр админтай холбогдох"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.001 11.639C.001 4.949 5.241 0 12.001 0S24 4.95 24 11.639c0 6.689-5.24 11.638-12 11.638-1.21 0-2.38-.16-3.47-.46a.96.96 0 00-.64.05l-2.39 1.05a.96.96 0 01-1.35-.85l-.07-2.14a.97.97 0 00-.32-.68A11.39 11.389 0 01.002 11.64zm8.32-2.19l-3.52 5.6c-.35.53.32 1.139.82.75l3.79-2.87c.26-.2.6-.2.87 0l2.8 2.1c.84.63 2.04.4 2.6-.48l3.52-5.6c.35-.53-.32-1.13-.82-.75l-3.79 2.87c-.25.2-.6.2-.86 0l-2.8-2.1a1.8 1.8 0 00-2.61.48z"/></svg><span class="support-chat-label" data-i18n="support_chat">Админтай чатлах</span><span class="support-chat-dot" aria-hidden="true"></span></button>
+    <div id="support-panel" class="support-panel" aria-hidden="true">
+        <div class="support-panel-head">
+            <img class="support-avatar" src="logo-jb.jpg?v=2" alt="JAPANBUY">
+            <div class="support-head-text">
+                <strong data-i18n="support_chat">Админтай чатлах</strong>
+                <span class="support-status"><span class="support-status-dot"></span><span data-i18n="support_online">Ихэвчлэн удахгүй хариулдаг</span></span>
+            </div>
+            <button type="button" class="support-close" onclick="toggleSupportPanel(false)" data-i18n-aria="support_close" aria-label="Хаах"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <div class="support-panel-body">
+            <div class="support-bubble" data-i18n="support_greeting">Сайн байна уу! JapanBuy-д тавтай морил. Асуултаа энд бичээрэй — админ танд хариулах болно.</div>
+            <form id="support-form" onsubmit="sendSupportMessage(event)">
+                <input type="text" id="support-name" autocomplete="name" data-i18n-placeholder="support_name_ph" placeholder="Нэр (заавал биш)">
+                <input type="text" id="support-contact" autocomplete="email" required data-i18n-placeholder="support_contact_ph" placeholder="Утас эсвэл и-мэйл *">
+                <textarea id="support-message" rows="4" required data-i18n-placeholder="support_msg_ph" placeholder="Асуултаа бичээрэй... *"></textarea>
+                <button type="submit" id="support-send-btn" data-i18n="support_send">Илгээх</button>
+                <p class="support-note" data-i18n="support_note">Мессеж админы и-мэйл рүү шууд очно. Хариуг тан руу утас/и-мэйлээр илгээнэ.</p>
+                <p class="support-alt"><a href="https://www.facebook.com/messages/t/61595757882524" target="_blank" rel="noopener" data-i18n="support_messenger">Messenger-ээр бичих</a></p>
+            </form>
+            <div id="support-success" class="support-success" hidden><span class="support-success-icon">✓</span><span data-i18n="support_sent">Илгээгдлээ! Админ удахгүй хариулах болно.</span></div>
+        </div>
+    </div>
     <button id="to-top-btn" class="to-top-btn" aria-label="Дээшээ" onclick="scrollToTop()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></button>
 
     <main>
@@ -642,7 +664,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=20261027cc"></script>
+    <script src="script.js?v=20261027cd"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
