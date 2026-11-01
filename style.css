@@ -88,6 +88,23 @@ button, input, select {
     font-family: inherit;
 }
 
+/* Order guide modal */
+.order-guide-modal-content { max-width: 680px; }
+.order-guide-header { text-align: center; padding: 4px 24px 20px; }
+.order-guide-icon { display: block; font-size: 2.4rem; margin-bottom: 8px; }
+.order-guide-header h2 { font-size: 1.45rem; line-height: 1.3; margin-bottom: 8px; }
+.order-guide-header p,
+.order-guide-section p,
+.order-guide-section li { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.55; }
+.order-guide-sections { display: grid; gap: 12px; }
+.order-guide-section { display: flex; gap: 14px; padding: 16px; }
+.order-guide-section-icon { flex: 0 0 40px; width: 40px; height: 40px; }
+.order-guide-section h3 { font-size: 1rem; margin-bottom: 6px; }
+.order-guide-section ol { margin: 0; padding-left: 20px; }
+.order-guide-note { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border-color); }
+.order-guide-contact-btn { margin-top: 12px; padding: 8px 14px; font-size: 0.82rem; }
+.order-guide-action { margin-top: 18px; width: 100%; }
+
 /* ================= BUTTONS ================= */
 .btn {
     display: inline-flex;
@@ -1668,7 +1685,7 @@ button.support-chat-btn {
 }
 
 .phone-card {
-    grid-column: 1 / -1;
+    grid-column: auto;
     text-align: left;
     align-items: flex-start;
     padding: 24px 20px;
@@ -2621,7 +2638,10 @@ button.support-chat-btn {
         gap: 16px;
     }
 
-    .phone-card { grid-column: 1 / -1; }
+    .phone-card {
+        grid-column: 4;
+        grid-row: 1;
+    }
 
     .phone-numbers {
         flex-direction: row;

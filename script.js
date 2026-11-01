@@ -283,7 +283,7 @@ const translations = {
         // Hero
         hero_title: 'ЯПОН УЛСААС ХҮССЭН БАРААГАА ЗАХИАЛЪЯ',
         hero_desc: 'Японы шилдэг брэндүүдээс шууд худалдан аваарай. Хурдан, найдвартай, баталгаатай.',
-        btn_shop_now: 'Одоо захиалах',
+        btn_shop_now: 'Дэлгэрэнгүй',
         // Products
         brands_title: 'Бараанууд', brand_all: 'Бүгд',
         login_required_title: 'Барааг үзэхийн тулд нэвтэрнэ үү',
@@ -377,7 +377,7 @@ const translations = {
         nav_home: 'Home', nav_products: 'Products', nav_features: 'Features', nav_contact: 'Contact',
         hero_title: 'ORDER ANYTHING YOU WANT FROM JAPAN',
         hero_desc: 'Shop directly from Japan\'s top brands. Fast, reliable, authentic.',
-        btn_shop_now: 'Shop Now',
+        btn_shop_now: 'Details',
         brands_title: 'Products', brand_all: 'All',
         login_required_title: 'Please login to view products',
         login_required_desc: 'You need to login first to view and order products from our store.',
@@ -460,7 +460,7 @@ const translations = {
         nav_home: 'ホーム', nav_products: '商品', nav_features: '強み', nav_contact: 'お問い合わせ',
         hero_title: '日本から欲しい商品を注文しよう',
         hero_desc: '日本のトップブランドから直接購入。迅速、信頼、本物。',
-        btn_shop_now: '今すぐ購入',
+        btn_shop_now: '詳細',
         brands_title: '商品', brand_all: 'すべて',
         login_required_title: '商品を見るにはログインしてください',
         login_required_desc: '商品を見て注文するには、まずログインする必要があります。',
@@ -561,6 +561,7 @@ const productModal = $('product-modal');
 const cartModal = $('cart-modal');
 const successModal = $('success-modal');
 const favoritesModal = $('favorites-modal');
+const orderGuideModal = $('order-guide-modal');
 const loginPrompt = $('login-prompt');
 const productsWrapper = $('products-wrapper');
 const productGrid = $('product-grid');
@@ -695,7 +696,7 @@ function renderCatChips() {
         renderProducts();
     });
 
-    [authModal, productModal, cartModal, successModal, favoritesModal].forEach(modal => {
+    [authModal, productModal, cartModal, successModal, favoritesModal, orderGuideModal].forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeModal(modal);
         });
@@ -704,7 +705,7 @@ function renderCatChips() {
     // ESC товчоор modal хаах
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            [authModal, productModal, cartModal, successModal, favoritesModal].forEach(closeModal);
+            [authModal, productModal, cartModal, successModal, favoritesModal, orderGuideModal].forEach(closeModal);
             toggleMobileMenu(false);
         }
     });
@@ -1173,6 +1174,16 @@ function removeFavorite(id) {
 
 function scrollToProducts() {
     document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+}
+
+function openOrderGuideModal() {
+    orderGuideModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeOrderGuideModal() {
+    orderGuideModal.classList.remove('active');
+    document.body.style.overflow = '';
 }
 
 function searchProducts() { /* input event handles */ }
