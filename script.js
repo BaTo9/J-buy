@@ -1901,8 +1901,9 @@ async function sendAdminOrderNotification(order, sum) {
     const itemsText = (order.items || []).map(i => itemLine(i, false)).join('\n');
     const itemsHtml = (order.items || []).map(i => itemLine(i, true)).join('<br>');
     const totalMnt = fmtMNT(sum.subtotal + sum.cargoFee) + (sum.delivYen > 0 ? DELIVERY_FEE_MNT : 0);
+    const customerOrderNumber = order.orderNum || ('#' + order.id);
     const details = [
-        `Захиалгын дугаар: ${order.orderNum || ('#' + order.id)}`,
+        `Захиалгын дугаар: ${customerOrderNumber}`,
         `Захиалагч: ${order.name || ''}`,
         `${L.l_phone}: ${order.phone || ''}`,
         `И-мэйл: ${order.email || ''}`,
@@ -1918,16 +1919,17 @@ async function sendAdminOrderNotification(order, sum) {
             await window.emailjs.send(cfg.serviceId, cfg.templatePlacedId, {
                 to_email: to,
                 to_name: 'JAPANBUY админ',
-                order_id: order.id,
+                order_id: customerOrderNumber,
+                order_number: customerOrderNumber,
                 order_total: `¥${(order.total || 0).toLocaleString()}`,
                 order_items: itemsText,
                 order_items_html: itemsHtml,
                 payment_method: payLabel(order.payment_method, 'mn'),
                 customer_phone: order.phone || '',
                 store_name: 'JAPANBUY',
-                mail_subject: `🛎 Шинэ захиалга #${order.id} — JAPANBUY`,
+                mail_subject: `🛎 Шинэ захиалга ${customerOrderNumber} — JAPANBUY`,
                 mail_greeting: 'Сайн байна уу!',
-                mail_intro: `Сайт дээр шинэ захиалга орж ирлээ. Захиалагч: ${order.name || ''} (утас: ${order.phone || ''}).`,
+                mail_intro: `Сайт дээр шинэ захиалга ${customerOrderNumber} орж ирлээ. Захиалагч: ${order.name || ''} (утас: ${order.phone || ''}).`,
                 mail_items: itemsText,
                 mail_items_html: itemsHtml,
                 mail_details: details.join('\n'),

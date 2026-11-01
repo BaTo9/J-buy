@@ -91,11 +91,30 @@ button, input, select {
 /* Order guide modal */
 .order-guide-modal-content { max-width: 680px; }
 .order-guide-header { text-align: center; padding: 4px 24px 20px; }
+.order-guide-logo {
+    width: 76px;
+    height: 76px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin: 0 auto 12px;
+}
 .order-guide-icon { display: block; font-size: 2.4rem; margin-bottom: 8px; }
 .order-guide-header h2 { font-size: 1.45rem; line-height: 1.3; margin-bottom: 8px; }
 .order-guide-header p,
 .order-guide-section p,
 .order-guide-section li { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.55; }
+.order-guide-notice {
+    margin: 0 0 12px;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--primary-light);
+}
+.order-guide-notice h3 { font-size: 1rem; margin-bottom: 8px; }
+.order-guide-notice ul { margin: 0; padding-left: 20px; }
+.order-guide-notice li { margin-bottom: 6px; }
+.order-guide-notice li:last-child { margin-bottom: 0; }
+.order-guide-notice strong { color: var(--text-primary); }
 .order-guide-sections { display: grid; gap: 12px; }
 .order-guide-section { display: flex; gap: 14px; padding: 16px; }
 .order-guide-section-icon { flex: 0 0 40px; width: 40px; height: 40px; }
