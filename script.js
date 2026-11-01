@@ -263,6 +263,15 @@ let currentUser = null; // { id, email, name, role }
 let currentBrandFilter = 'all';
 let currentCategory = 'all';
 let currentSearchQuery = '';
+let brandLogoSelected = false;
+const BRAND_OFFICIAL_URLS = {
+    GAP: 'https://www.gap.co.jp/',
+    UNIQLO: 'https://www.uniqlo.com/jp/ja/',
+    GU: 'https://www.gu-global.com/jp/ja/',
+    ZARA: 'https://www.zara.com/jp/',
+    'H&M': 'https://www2.hm.com/ja_jp/index.html',
+    'MICHAEL KORS': 'https://www.michaelkors.jp/'
+};
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
 function saveWishlist() { localStorage.setItem('wishlist', JSON.stringify(wishlist)); updateFavBadge(); }
@@ -669,6 +678,15 @@ function setupEventListeners() {
         });
         cf.classList.toggle('hidden', currentBrandFilter === 'all' || currentBrandFilter === 'ginza');
         updateCatChips();
+        const officialLink = $('brand-official-link');
+        const officialUrl = brandLogoSelected ? BRAND_OFFICIAL_URLS[currentBrandFilter] : '';
+        if (officialLink) {
+            officialLink.hidden = !officialUrl;
+            if (officialUrl) {
+                officialLink.href = officialUrl;
+                officialLink.textContent = `🔗 ${t.official_store}`;
+            }
+        }
     }
 
     document.querySelectorAll('.brand-tab').forEach(tab => {
@@ -676,6 +694,7 @@ function setupEventListeners() {
             document.querySelectorAll('.brand-tab').forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
             currentBrandFilter = tab.dataset.brand;
+            brandLogoSelected = currentBrandFilter !== 'all';
             currentCategory = 'all';
             renderCatChips();
             renderProducts();
