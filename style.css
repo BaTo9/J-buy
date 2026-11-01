@@ -1144,6 +1144,7 @@ button.support-chat-btn {
 }
 
 .product-count {
+    transform: translateY(4px);
     font-size: 0.85rem;
     color: var(--text-secondary);
     background: var(--primary-light);
