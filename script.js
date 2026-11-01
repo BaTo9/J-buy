@@ -593,6 +593,8 @@ const LANG_META = { mn: 'mn', en: 'en', jp: 'ja' };
 
 // ================= INIT =================
 function init() {
+    if (currentLang === 'ja') currentLang = 'jp';
+    if (!translations[currentLang]) currentLang = 'mn';
     htmlEl.setAttribute('data-theme', currentTheme);
     updateThemeIcon();
     langSelect.value = currentLang;
@@ -749,10 +751,16 @@ function setThemeMode(mode) {
 }
 
 function setLanguage(lang) {
+    lang = lang === 'ja' ? 'jp' : lang;
+    if (!translations[lang]) lang = 'mn';
     currentLang = lang;
     localStorage.setItem('lang', lang);
     if (langSelect) langSelect.value = lang;
     applyLanguage();
+    const officialLink = $('brand-official-link');
+    if (officialLink && !officialLink.hidden && brandLogoSelected) {
+        officialLink.textContent = `🔗 ${(translations[currentLang] || translations.mn).official_store}`;
+    }
     renderProducts();
     renderCart();
     renderCheckout();
