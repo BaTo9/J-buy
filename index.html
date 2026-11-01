@@ -363,8 +363,8 @@
                         <button class="cat-chip" data-cat="women" data-i18n="cat_women">Эмэгтэй</button>
                         <button class="cat-chip" data-cat="kids" data-i18n="cat_kids">Хүүхэд</button>
                     </div>
-                    <a id="brand-official-link" class="brand-official-link" href="#" target="_blank"
-                        rel="noopener" hidden>🔗 Брэндийн албан ёсны сайтад зочилох</a>
+                    <a id="brand-official-link" class="brand-official-link" href="#" target="_blank" rel="noopener"
+                        hidden>🔗 Брэндийн албан ёсны сайтад зочилох</a>
                     <div class="product-grid" id="product-grid"></div>
                 </div>
             </section>
@@ -890,60 +890,70 @@
             <button class="modal-close" onclick="closeOrderGuideModal()" aria-label="Хаах">&times;</button>
             <div class="order-guide-header">
                 <img class="order-guide-logo" src="logo-jb.jpg?v=2" alt="JAPANBUY">
-                <h2 id="order-guide-title">JAPANBUY-ээр хэрхэн захиалга өгөх вэ?</h2>
-                <p>Доорх зааврыг дагаад Японоос хүссэн бараагаа хялбархан захиалаарай.</p>
+                <h2 id="order-guide-title" data-i18n="order_guide_title">JAPANBUY-ээр хэрхэн захиалга өгөх вэ?</h2>
+                <p data-i18n="order_guide_subtitle">Доорх зааврыг дагаад Японоос хүссэн бараагаа хялбархан захиалаарай.
+                </p>
             </div>
             <section class="order-guide-notice">
-                <h3>АНХААРАХ ЗҮЙЛ</h3>
+                <h3 data-i18n="order_notice_title">АНХААРАХ ЗҮЙЛ</h3>
                 <ul>
-                    <li><strong>Барааны үнэ:</strong> Тухайн брэндийн албан ёсны дэлгүүрт байршуулсан барааны үндсэн
-                        үнэд үйлчилгээний ашиг болон бусад холбогдох зардал нэмэгдэн тооцогдоно.</li>
-                    <li><strong>Сайт дээр байхгүй бараа:</strong> Манай сайтад байршуулаагүй барааг тухайн брэндийн
-                        албан ёсны вэбсайтаас үзэж, хүссэн бараагаа сонгоно.</li>
-                    <li><strong>Захиалга өгөх:</strong> Сонгосон барааныхаа screenshot зургийг админ руу мессежээр
-                        илгээж, тоо ширхэг, өнгө, размер зэргийг тохиролцсоны дараа захиалгаа баталгаажуулна.</li>
-                    <li><strong>Их хэмжээний захиалга:</strong> Олон тооны бараа болон их хэмжээний захиалга өгөх
-                        тохиолдолд урьдчилан админтай заавал холбогдож үнийн дүн, хүргэлт болон захиалгын нөхцөлийг
-                        тохиролцоно.</li>
+                    <li><strong data-i18n="order_notice_price_label">Барааны үнэ:</strong> <span
+                            data-i18n="order_notice_price">Тухайн брэндийн албан ёсны дэлгүүрт байршуулсан барааны
+                            үндсэн үнэд үйлчилгээний ашиг болон бусад холбогдох зардал нэмэгдэн тооцогдоно.</span></li>
+                    <li><strong data-i18n="order_notice_missing_label">Сайт дээр байхгүй бараа:</strong> <span
+                            data-i18n="order_notice_missing">Манай сайтад байршуулаагүй барааг тухайн брэндийн албан
+                            ёсны вэбсайтаас үзэж, хүссэн бараагаа сонгоно.</span></li>
+                    <li><strong data-i18n="order_notice_order_label">Захиалга өгөх:</strong> <span
+                            data-i18n="order_notice_order">Сонгосон барааныхаа screenshot зургийг админ руу мессежээр
+                            илгээж, тоо ширхэг, өнгө, размер зэргийг тохиролцсоны дараа захиалгаа баталгаажуулна.</span>
+                    </li>
+                    <li><strong data-i18n="order_notice_bulk_label">Их хэмжээний захиалга:</strong> <span
+                            data-i18n="order_notice_bulk">Олон тооны бараа болон их хэмжээний захиалга өгөх тохиолдолд
+                            урьдчилан админтай заавал холбогдож үнийн дүн, хүргэлт болон захиалгын нөхцөлийг
+                            тохиролцоно.</span></li>
                 </ul>
             </section>
             <div class="order-guide-sections">
                 <section class="order-guide-section">
                     <div class="order-guide-section-icon">🛒</div>
                     <div>
-                        <h3>Сайтыг хэрхэн ашиглах вэ?</h3>
+                        <h3 data-i18n="order_use_title">Сайтыг хэрхэн ашиглах вэ?</h3>
                         <ol>
-                            <li>Нэвтрэх эсвэл бүртгэл үүсгэнэ.</li>
-                            <li>Брэнд, ангиллаас бараагаа сонгож дэлгэрэнгүй мэдээллийг үзнэ.</li>
-                            <li>Размер, өнгө, тоо ширхэгээ сонгоод сагсанд нэмнэ.</li>
-                            <li>Сагсаа шалгаад захиалгын мэдээллээ бөглөнө.</li>
+                            <li data-i18n="order_use_step1">Нэвтрэх эсвэл бүртгэл үүсгэнэ.</li>
+                            <li data-i18n="order_use_step2">Брэнд, ангиллаас бараагаа сонгож дэлгэрэнгүй мэдээллийг
+                                үзнэ.</li>
+                            <li data-i18n="order_use_step3">Размер, өнгө, тоо ширхэгээ сонгоод сагсанд нэмнэ.</li>
+                            <li data-i18n="order_use_step4">Сагсаа шалгаад захиалгын мэдээллээ бөглөнө.</li>
                         </ol>
                     </div>
                 </section>
                 <section class="order-guide-section">
                     <div class="order-guide-section-icon">💳</div>
                     <div>
-                        <h3>Төлбөр төлөх</h3>
-                        <p>Захиалгаа баталгаажуулсны дараа төлбөрийн хэсгээс банкны шилжүүлэг эсвэл PayPay QR сонгон
-                            төлнө. Шилжүүлгийн утгад захиалгын дугаараа бичиж, төлбөрийн баримтаа хадгална.</p>
-                        <p class="order-guide-note">Төлбөр баталгаажсаны дараа бид барааг Япон дахь албан ёсны
-                            дэлгүүрээс захиална.</p>
+                        <h3 data-i18n="order_payment_title">Төлбөр төлөх</h3>
+                        <p data-i18n="order_payment_desc">Захиалгаа баталгаажуулсны дараа төлбөрийн хэсгээс банкны
+                            шилжүүлэг эсвэл PayPay QR сонгон төлнө. Шилжүүлгийн утгад захиалгын дугаараа бичиж,
+                            төлбөрийн баримтаа хадгална.</p>
+                        <p class="order-guide-note" data-i18n="order_payment_note">Төлбөр баталгаажсаны дараа бид барааг
+                            Япон дахь албан ёсны дэлгүүрээс захиална.</p>
                     </div>
                 </section>
                 <section class="order-guide-section">
                     <div class="order-guide-section-icon">💬</div>
                     <div>
-                        <h3>Админтай холбогдох</h3>
-                        <p>Захиалга, төлбөр эсвэл хүргэлтийн талаар асуух зүйл байвал холбоо барих хэсэгт байгаа утас,
-                            и-мэйлээр бидэнтэй холбогдоно уу. Захиалгын дугаараа бичвэл илүү хурдан тусална.</p>
+                        <h3 data-i18n="order_contact_title">Админтай холбогдох</h3>
+                        <p data-i18n="order_contact_desc">Захиалга, төлбөр эсвэл хүргэлтийн талаар асуух зүйл байвал
+                            холбоо барих хэсэгт байгаа утас, и-мэйлээр бидэнтэй холбогдоно уу. Захиалгын дугаараа бичвэл
+                            илүү хурдан тусална.</p>
                         <button type="button" class="btn btn-outline order-guide-contact-btn"
-                            onclick="closeOrderGuideModal(); document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Холбоо
-                            барих хэсэг</button>
+                            onclick="closeOrderGuideModal(); document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })"
+                            data-i18n="order_contact_button">Холбоо барих хэсэг</button>
                     </div>
                 </section>
             </div>
             <button type="button" class="btn btn-primary w-100 order-guide-action"
-                onclick="closeOrderGuideModal(); scrollToProducts()">Бараа сонгож захиалах</button>
+                onclick="closeOrderGuideModal(); scrollToProducts()" data-i18n="order_action">Бараа сонгож
+                захиалах</button>
         </div>
     </div>
 
