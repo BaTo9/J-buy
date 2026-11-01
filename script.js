@@ -618,7 +618,6 @@ const orderGuideModal = $('order-guide-modal');
 const loginPrompt = $('login-prompt');
 const productsWrapper = $('products-wrapper');
 const productGrid = $('product-grid');
-const productCount = $('product-count');
 const cartBadge = $('cart-badge');
 const cartItemsContainer = $('cart-items-container');
 const cartSummary = $('cart-summary');
@@ -1165,7 +1164,6 @@ function renderProducts() {
     }
 
     const t = translations[currentLang];
-    productCount.textContent = `${filtered.length} ${t.product_count}`;
     updateFavBadge();
 
     if (filtered.length === 0) {
