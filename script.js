@@ -350,7 +350,7 @@ const translations = {
         cart_empty_desc: 'Бараа нэмэхийн тулд дэлгүүр рүү буцна уу',
         cart_total: 'Нийт дүн', btn_checkout: 'Төлбөр тооцоо', btn_continue: 'Худалдан авалт үргэлжлүүлэх',
         btn_add_cart: 'Сагсанд нэмэх',
-        official_store: 'Брэндийн дэлгүүрт харах', support_chat: 'Админтай чатлах', support_online: 'Ихэвчлэн удахгүй хариулдаг', support_greeting: 'Сайн байна уу! JapanBuy-д тавтай морил. Асуултаа энд бичээрэй — админ танд хариулах болно.', support_name_ph: 'Нэр (заавал биш)', support_contact_ph: 'Утас эсвэл и-мэйл *', support_msg_ph: 'Асуултаа бичээрэй... *', support_send: 'Илгээх', support_sending: 'Илгээж байна...', support_note: 'Мессеж админы и-мэйл рүү шууд очно. Хариуг тан руу утас/и-мэйлээр илгээнэ.', support_messenger: 'Messenger-ээр бичих', support_sent: 'Илгээгдлээ! Админ удахгүй хариулах болно.', support_error: 'Илгээж чадсангүй. Дахин оролдоорой.', support_close: 'Хаах',
+        official_store: 'Брэндийн албан ёсны сайтад зочилох', support_chat: 'Админтай чатлах', support_online: 'Ихэвчлэн удахгүй хариулдаг', support_greeting: 'Сайн байна уу! JapanBuy-д тавтай морил. Асуултаа энд бичээрэй — админ танд хариулах болно.', support_name_ph: 'Нэр (заавал биш)', support_contact_ph: 'Утас эсвэл и-мэйл *', support_msg_ph: 'Асуултаа бичээрэй... *', support_send: 'Илгээх', support_sending: 'Илгээж байна...', support_note: 'Мессеж админы и-мэйл рүү шууд очно. Хариуг тан руу утас/и-мэйлээр илгээнэ.', support_messenger: 'Messenger-ээр бичих', support_sent: 'Илгээгдлээ! Админ удахгүй хариулах болно.', support_error: 'Илгээж чадсангүй. Дахин оролдоорой.', support_close: 'Хаах',
         btn_buy_now: 'Худалдаж авах',
         // Product detail
         detail_size: 'Размер', detail_color: 'Өнгө', detail_qty: 'Тоо ширхэг',
@@ -436,7 +436,7 @@ const translations = {
         cart_empty_desc: 'Go back to shop and add items',
         cart_total: 'Total', btn_checkout: 'Checkout', btn_continue: 'Continue Shopping',
         btn_add_cart: 'Add to Cart',
-        official_store: 'View at brand store', support_chat: 'Chat with admin', support_online: 'Usually replies soon', support_greeting: 'Hi! Welcome to JapanBuy. Write your question here — the admin will reply to you.', support_name_ph: 'Name (optional)', support_contact_ph: 'Phone or email *', support_msg_ph: 'Write your question... *', support_send: 'Send', support_sending: 'Sending...', support_note: 'Your message goes straight to the admin\'s email. The reply will be sent to your phone/email.', support_messenger: 'Message on Messenger', support_sent: 'Sent! The admin will reply soon.', support_error: 'Could not send. Please try again.', support_close: 'Close',
+        official_store: 'Visit the brand official website', support_chat: 'Chat with admin', support_online: 'Usually replies soon', support_greeting: 'Hi! Welcome to JapanBuy. Write your question here — the admin will reply to you.', support_name_ph: 'Name (optional)', support_contact_ph: 'Phone or email *', support_msg_ph: 'Write your question... *', support_send: 'Send', support_sending: 'Sending...', support_note: 'Your message goes straight to the admin\'s email. The reply will be sent to your phone/email.', support_messenger: 'Message on Messenger', support_sent: 'Sent! The admin will reply soon.', support_error: 'Could not send. Please try again.', support_close: 'Close',
         btn_buy_now: 'Buy Now',
         detail_size: 'Size', detail_color: 'Color', detail_qty: 'Quantity',
         success_title: 'Order Successfully Placed!',
@@ -519,7 +519,7 @@ const translations = {
         cart_empty_desc: 'ショップに戻って商品を追加してください',
         cart_total: '合計', btn_checkout: 'お支払い', btn_continue: '買い物を続ける',
         btn_add_cart: 'カートに追加',
-        official_store: 'ブランドストアで見る', support_chat: '管理者にチャット', support_online: '通常すぐ返信します', support_greeting: 'こんにちは！JapanBuyへようこそ。ご質問をこちらにご記入ください。管理者が返信いたします。', support_name_ph: 'お名前（任意）', support_contact_ph: '電話番号またはメール *', support_msg_ph: 'ご質問をご記入ください... *', support_send: '送信', support_sending: '送信中...', support_note: 'メッセージは管理者のメールに直接届きます。返信はお電話/メールでお送りします。', support_messenger: 'Messengerで連絡', support_sent: '送信しました！管理者がまもなく返信します。', support_error: '送信できませんでした。もう一度お試しください。', support_close: '閉じる',
+        official_store: 'ブランド公式サイトを見る', support_chat: '管理者にチャット', support_online: '通常すぐ返信します', support_greeting: 'こんにちは！JapanBuyへようこそ。ご質問をこちらにご記入ください。管理者が返信いたします。', support_name_ph: 'お名前（任意）', support_contact_ph: '電話番号またはメール *', support_msg_ph: 'ご質問をご記入ください... *', support_send: '送信', support_sending: '送信中...', support_note: 'メッセージは管理者のメールに直接届きます。返信はお電話/メールでお送りします。', support_messenger: 'Messengerで連絡', support_sent: '送信しました！管理者がまもなく返信します。', support_error: '送信できませんでした。もう一度お試しください。', support_close: '閉じる',
         btn_buy_now: '今すぐ購入',
         detail_size: 'サイズ', detail_color: '色', detail_qty: '数量',
         success_title: 'ご注文ありがとうございました！',
@@ -679,6 +679,7 @@ function setupEventListeners() {
             currentCategory = 'all';
             renderCatChips();
             renderProducts();
+            scrollToProducts();
         });
     });
 
@@ -1103,7 +1104,7 @@ function renderProducts() {
 
     productGrid.innerHTML = filtered.map(p => `
         <div class="product-card" onclick="openProductDetail(${p.id})" role="button" tabindex="0">
-            <div class="product-img-wrapper">
+            <div class="product-img-wrapper" aria-label="${p.brand} барааны дэлгэрэнгүйг харах">
                 <img src="${p.img}" alt="${pname(p)}" loading="lazy">
                 <span class="brand-badge" style="background:${BRAND_COLORS[p.brand] || '#333'}">${p.brand}</span>
                 ${productHasAvailable(p) ? '' : `<span class="sold-out-badge">${t.sold_out}</span>`}
@@ -1174,6 +1175,17 @@ function removeFavorite(id) {
 
 function scrollToProducts() {
     document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+}
+
+function showBrandCatalog(brand) {
+    const tab = document.querySelector(`.brand-tab[data-brand="${brand}"]`);
+    if (!tab) return;
+
+    currentSearchQuery = '';
+    const searchInput = $('search-input');
+    if (searchInput) searchInput.value = '';
+    tab.click();
+    requestAnimationFrame(scrollToProducts);
 }
 
 function openOrderGuideModal() {
