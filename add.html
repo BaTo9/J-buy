@@ -43,6 +43,9 @@
   .ok-note { color: #0a7d34; font-size: 13px; }
   details { margin-top: 6px; }
   summary { font-size: 14px; font-weight: 700; cursor: pointer; }
+  .q-row { display: flex; align-items: center; gap: 8px; padding: 9px 10px; background: #f8fafc; border: 1px solid #e3e9f0; border-radius: 8px; margin-top: 8px; font-size: 14px; }
+  .q-row .q-info { flex: 1; line-height: 1.4; }
+  .q-row .q-del { border: none; background: #fdecec; color: #c0392b; font-size: 14px; font-weight: 700; border-radius: 8px; padding: 7px 11px; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -67,11 +70,11 @@
     <details>
       <summary>📖 Хэрхэн хэрэглэх вэ? (5 алхам)</summary>
       <ol class="steps">
-        <li>Доорх маягтыг бөглөнө. Дугаар автоматаар өгөгдөнө — давхцахгүй.</li>
-        <li>«Код бэлдэх» товчийг дарна.</li>
-        <li>Гарсан кодын хэсгүүдийг нэг нэгээр нь хуулж, зааврын дагуу GitHub дээр script.js болон index.html руу буулгана.</li>
-        <li>GitHub дээр «Commit changes» дарна.</li>
-        <li>1–2 минут хүлээгээд сайтаа шинэ холбоосоор нээж, шинэ бараагаа шалгана.</li>
+        <li>Маягтыг бөглөж, «Жагсаалтад нэмэх» дарна. Дугаар автоматаар, дарааллаараа өгөгдөнө — давхцахгүй.</li>
+        <li>Өөр бараа байвал маягтыг дахин бөглөж нэмнэ — хэдэн ч бараа болно.</li>
+        <li>Бүх бараагаа нэмсний дараа «Бүх кодыг бэлдэх» дарна.</li>
+        <li>Гарсан кодын хэсгүүдийг хуулж, зааврын дагуу GitHub дээр script.js болон index.html руу буулгаад, «Commit changes» дарна.</li>
+        <li>1–2 минут хүлээгээд сайтаа шинэ холбоосоор нээж, шинэ бараануудаа шалгана.</li>
       </ol>
     </details>
   </div>
@@ -150,8 +153,16 @@
     <textarea id="f-soldout" placeholder="ブラック|XXL"></textarea>
 
     <div class="err" id="form-err"></div>
-    <button class="btn" id="generate" type="button">Код бэлдэх</button>
+    <button class="btn" id="add-to-queue" type="button">➕ Энэ барааг жагсаалтад нэмэх</button>
     <button class="btn secondary" id="reset" type="button" style="margin-top:8px;">Маягтыг цэвэрлэх</button>
+  </div>
+
+  <div class="card" id="queue-card" style="display:none;">
+    <h2>Нэмэх барааны жагсаалт</h2>
+    <div id="queue-list"></div>
+    <div class="hint" style="margin:8px 0;">Жагсаалтаас хассаны дугаар хоосон үлдэнэ — энэ нь зүгээр, дугаар давхцахгүй байх нь чухал.</div>
+    <button class="btn" id="generate-all" type="button">📋 Бүх кодыг бэлдэх</button>
+    <button class="btn secondary" id="clear-queue" type="button" style="margin-top:8px;">Жагсаалтыг цэвэрлэх</button>
   </div>
 
   <div class="card" id="out-card" style="display:none;">
@@ -168,6 +179,8 @@
 const $ = id => document.getElementById(id);
 const CAT = { maxId: 0, count: 0, colors: new Set(), lastLine: '', lastEndsComma: true, version: '', loaded: false };
 let nextId = null;
+const QUEUE = [];        // collected products waiting for code generation
+const sessionTr = {};    // color -> {mn, en} translations entered this session
 
 function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
 
@@ -206,6 +219,7 @@ function applyCatalog(s, h) {
 function renderStatus() {
   $('status').innerHTML = '✅ Каталогт <b>' + CAT.count + '</b> бараа байна. Сүүлийн дугаар: <b>' + CAT.maxId + '</b>' +
     '<br>Шинэ бараа <b>' + nextId + '</b> дугаартай болно.' +
+    (QUEUE.length ? '<br>Жагсаалтад <b>' + QUEUE.length + '</b> бараа хүлээж байна.' : '') +
     (CAT.version ? '<br>Одоогийн хувилбар: <span class="mono">v=' + esc(CAT.version) + '</span>' : '');
 }
 
@@ -266,8 +280,8 @@ function renderColorRows() {
   if (!missing.length) { box.innerHTML = '<div class="ok-note" style="margin-top:8px;">✅ Бүх өнгөний орчуулга өмнө нь байгаа.</div>'; return; }
   box.innerHTML = '<label>Шинэ өнгөний орчуулга</label>' + missing.map(c =>
     '<div class="color-row"><span class="cname">' + esc(c) + '</span>' +
-    '<input type="text" placeholder="Монгол нэр" data-color="' + esc(c) + '" data-lang="mn">' +
-    '<input type="text" placeholder="Англи нэр" data-color="' + esc(c) + '" data-lang="en"></div>').join('');
+    '<input type="text" placeholder="Монгол нэр" data-color="' + esc(c) + '" data-lang="mn" value="' + esc((sessionTr[c] || {}).mn || '') + '">' +
+    '<input type="text" placeholder="Англи нэр" data-color="' + esc(c) + '" data-lang="en" value="' + esc((sessionTr[c] || {}).en || '') + '"></div>').join('');
 }
 $('f-colors').addEventListener('change', renderColorRows);
 
@@ -282,10 +296,17 @@ function nextVersion(v) {
 
 function splitList(txt, sep) { return txt.split(sep).map(x => x.trim()).filter(Boolean); }
 
-// ---- generate ----
-$('generate').addEventListener('click', () => {
+function clearForm(keepSelections) {
+  ['f-name', 'f-namemn', 'f-nameen', 'f-price', 'f-img', 'f-images', 'f-desc', 'f-descen', 'f-descjp', 'f-colors', 'f-sizes', 'f-url', 'f-soldout'].forEach(id => { $(id).value = ''; });
+  if (!keepSelections) $('f-sale').checked = false;
+  $('price-out').textContent = ''; $('img-msg').textContent = ''; $('img-preview').style.display = 'none';
+  $('color-tr-box').innerHTML = ''; imgOk = null;
+}
+
+// ---- collect one product from the form into the queue ----
+function collectProduct() {
   const err = $('form-err'); err.textContent = '';
-  if (nextId === null) { err.textContent = 'Эхлээд каталогийн байдлыг уншуулна уу (эсвэл гараар оруулна уу).'; return; }
+  if (nextId === null) { err.textContent = 'Эхлээд каталогийн байдлыг уншуулна уу (эсвэл гараар оруулна уу).'; return null; }
   const type = $('f-type').value;
   const brand = brandVal();
   const cat = $('f-cat').value;
@@ -308,16 +329,35 @@ $('generate').addEventListener('click', () => {
   if (!url) problems.push('албан ёсны хуудасны холбоос');
   if (!colors.length) problems.push('өнгө');
   if (!sizes.length) problems.push('размер');
-  if (problems.length) { err.textContent = 'Дутуу байна: ' + problems.join(', '); return; }
+  if (problems.length) { err.textContent = 'Дутуу байна: ' + problems.join(', '); return null; }
+
+  // color translations (must be filled for catalog-new colors)
+  const trInputs = {};
+  document.querySelectorAll('#color-tr-box input[data-color]').forEach(inp => {
+    trInputs[inp.dataset.color] = trInputs[inp.dataset.color] || {};
+    trInputs[inp.dataset.color][inp.dataset.lang] = inp.value.trim();
+  });
+  const colorTr = {};
+  const unfilled = [];
+  for (const c of colors) {
+    if (CAT.colors.has(c)) continue;
+    const mn = (trInputs[c] && trInputs[c].mn) || (sessionTr[c] && sessionTr[c].mn) || '';
+    const en = (trInputs[c] && trInputs[c].en) || (sessionTr[c] && sessionTr[c].en) || '';
+    if (!mn) { unfilled.push(c); continue; }
+    colorTr[c] = { mn, en: en || c };
+  }
+  if (unfilled.length) { err.textContent = 'Эдгээр өнгөний монгол орчуулгыг бөглөнө үү: ' + unfilled.join(', ') + ' (өнгөний доорх орчуулгын мөрнүүдийг харна уу)'; renderColorRows(); return null; }
+
+  // sold-out variants
+  const soldLines = splitList($('f-soldout').value, '\n');
+  const badSold = soldLines.filter(v => { const parts = v.split('|'); return parts.length !== 2 || !colors.includes(parts[0].trim()) || !sizes.includes(parts[1].trim()); });
+  if (badSold.length) { err.textContent = 'Дууссан хувилбар буруу байна: ' + badSold.join(', ') + ' («Өнгө|Размер» хэлбэрээр, өнгө/размер нь дээрх жагсаалтад байх ёстой)'; return null; }
 
   const sale = $('f-sale').checked;
   const suffixMn = ' (' + brand + ' Japan' + (sale ? ', хямдрал' : '') + ')';
   const suffixEn = ' (' + brand + ' Japan' + (sale ? ', sale' : '') + ')';
   const suffixJp = '（' + brand + ' Japan' + (sale ? '、セール' : '') + '）';
   const withSuffix = (txt, suf) => { txt = (txt || '').trim(); if (!txt) return ''; return txt.includes('Japan') ? txt : txt + suf; };
-  const desc = withSuffix($('f-desc').value, suffixMn);
-  const descEn = withSuffix($('f-descen').value, suffixEn);
-  const descJp = withSuffix($('f-descjp').value || name, suffixJp);
   const images = [img, ...splitList($('f-images').value, '\n')].filter((v, i, a) => a.indexOf(v) === i);
 
   const p = {};
@@ -326,57 +366,87 @@ $('generate').addEventListener('click', () => {
   if (type === 'brand' && $('f-brandonly').checked) p.brandOnly = true;
   p.name = name; p.nameMn = nameMn; p.nameEn = nameEn;
   p.price = official + 500; p.weightKg = weight; p.img = img;
-  p.desc = desc; p.descEn = descEn; p.descJp = descJp;
+  p.desc = withSuffix($('f-desc').value, suffixMn);
+  p.descEn = withSuffix($('f-descen').value, suffixEn);
+  p.descJp = withSuffix($('f-descjp').value || name, suffixJp);
   p.colors = colors; p.url = url; p.sizes = sizes; p.images = images;
-  const productLine = JSON.stringify(p) + ',';
 
-  // color translations for new colors
-  const trInputs = {};
-  document.querySelectorAll('#color-tr-box input[data-color]').forEach(inp => {
-    trInputs[inp.dataset.color] = trInputs[inp.dataset.color] || {};
-    trInputs[inp.dataset.color][inp.dataset.lang] = inp.value.trim();
-  });
-  const newColors = colors.filter(c => !CAT.colors.has(c));
-  const unfilled = newColors.filter(c => !trInputs[c] || !trInputs[c].mn);
-  let assignLine = '';
-  if (newColors.length && !unfilled.length) {
-    const entries = newColors.map(c => JSON.stringify(c) + ': {"mn":' + JSON.stringify(trInputs[c].mn) + ',"en":' + JSON.stringify(trInputs[c].en || c) + '}').join(', ');
-    assignLine = 'Object.assign(COLOR_TR, {' + entries + '});';
+  const item = {
+    id: nextId, nameMn, brand, price: p.price, imgOk,
+    productLine: JSON.stringify(p) + ',',
+    registryLine: soldLines.length ? '    ' + nextId + ': { variants: [' + soldLines.map(v => JSON.stringify(v.replace(/\s*\|\s*/, '|'))).join(',') + '] },' : '',
+    colorTr
+  };
+  for (const [c, v] of Object.entries(colorTr)) if (!sessionTr[c]) sessionTr[c] = v;
+  QUEUE.push(item);
+  CAT.count++; CAT.maxId = nextId; nextId++;
+  renderStatus();
+  return item;
+}
+
+function renderQueue() {
+  const card = $('queue-card');
+  if (!QUEUE.length) { card.style.display = 'none'; return; }
+  card.style.display = 'block';
+  $('queue-list').innerHTML = QUEUE.map((it, i) =>
+    '<div class="q-row"><div class="q-info"><b>' + it.id + '</b> — ' + esc(it.nameMn) + ' (' + esc(it.brand) + ')<br>¥' + it.price.toLocaleString('en-US') + '</div>' +
+    '<button class="q-del" type="button" data-del="' + i + '">✕ Хасах</button></div>').join('');
+  $('generate-all').textContent = '📋 Бүх кодыг бэлдэх (' + QUEUE.length + ' бараа)';
+  document.querySelectorAll('[data-del]').forEach(btn => btn.addEventListener('click', () => {
+    QUEUE.splice(parseInt(btn.dataset.del, 10), 1);
+    CAT.count--;
+    renderQueue(); renderStatus();
+  }));
+}
+
+$('add-to-queue').addEventListener('click', () => {
+  const item = collectProduct();
+  if (!item) return;
+  renderQueue();
+  clearForm(true);
+  $('queue-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+
+$('clear-queue').addEventListener('click', () => {
+  QUEUE.length = 0;
+  renderQueue(); renderStatus();
+  $('out-card').style.display = 'none';
+});
+
+// ---- generate combined code for the whole queue ----
+$('generate-all').addEventListener('click', () => {
+  if (!QUEUE.length) {
+    const item = collectProduct();
+    if (!item) return;
+    renderQueue();
   }
+  const productText = QUEUE.map(it => it.productLine).join('\n');
+  const mergedTr = {};
+  for (const it of QUEUE) for (const [c, v] of Object.entries(it.colorTr)) if (!mergedTr[c]) mergedTr[c] = v;
+  const assignLine = Object.keys(mergedTr).length
+    ? 'Object.assign(COLOR_TR, {' + Object.entries(mergedTr).map(([c, v]) => JSON.stringify(c) + ': {"mn":' + JSON.stringify(v.mn) + ',"en":' + JSON.stringify(v.en) + '}').join(', ') + '});'
+    : '';
+  const registryText = QUEUE.map(it => it.registryLine).filter(Boolean).join('\n');
 
-  // sold-out variants
-  const soldLines = splitList($('f-soldout').value, '\n');
-  const badSold = soldLines.filter(v => { const parts = v.split('|'); return parts.length !== 2 || !colors.includes(parts[0].trim()) || !sizes.includes(parts[1].trim()); });
-  let registryLine = '';
-  if (soldLines.length && !badSold.length) {
-    registryLine = '    ' + nextId + ': { variants: [' + soldLines.map(v => JSON.stringify(v.replace(/\s*\|\s*/, '|'))).join(',') + '] },';
-  }
-
-  // outputs
-  const blocks = [];
-  blocks.push({ title: '1) Барааны мөр — script.js руу', text: productLine });
+  const blocks = [{ title: '1) Барааны мөрнүүд — script.js руу', text: productText }];
   if (assignLine) blocks.push({ title: '2) Өнгөний орчуулга — script.js руу', text: assignLine });
-  if (registryLine) blocks.push({ title: '3) Дууссан хувилбар — script.js руу', text: registryLine });
+  if (registryText) blocks.push({ title: '3) Дууссан хувилбарууд — script.js руу', text: registryText });
 
   const nv = CAT.version ? nextVersion(CAT.version) : '';
   const steps = [];
   steps.push('GitHub дээр <b>BaTo9/J-buy</b> санг нээж, <span class="mono">script.js</span> файлыг нээнэ. Засварлах (харандаа) товчийг дарна.');
-  steps.push('Барааны мөрийг: сүүлийн барааны мөрний <b>доод талд</b> шинэ мөрөнд буулгана.' + (CAT.lastLine ? ' Сүүлийн мөр одоо: <span class="mono">' + esc(CAT.lastLine.slice(0, 60)) + '…</span>' : '') + (!CAT.lastEndsComma ? ' ⚠️ Тэр мөр таслалаар төгсөөгүй бол төгсгөлд нь <b>таслал (,)</b> нэмээрэй.' : ''));
+  steps.push('Барааны мөрнүүдийг: сүүлийн барааны мөрний <b>доод талд</b> бүгдийг нь нэг дор буулгана.' + (CAT.lastLine ? ' Сүүлийн мөр одоо: <span class="mono">' + esc(CAT.lastLine.slice(0, 60)) + '…</span>' : '') + (!CAT.lastEndsComma ? ' ⚠️ Тэр мөр таслалаар төгсөөгүй бол төгсгөлд нь <b>таслал (,)</b> нэмээрэй.' : ''));
   if (assignLine) steps.push('Өнгөний орчуулгыг: <span class="mono">COLOR_TR</span> гэж хайж, тэр мөрний <b>доод талд</b> шинэ мөрөнд буулгана.');
-  if (registryLine) steps.push('Дууссан хувилбарыг: <span class="mono">SOLD_OUT_VARIANTS</span> гэж хайж, тэр мөрний <b>доод талд</b> шинэ мөрөнд буулгана.');
+  if (registryText) steps.push('Дууссан хувилбаруудыг: <span class="mono">SOLD_OUT_VARIANTS</span> гэж хайж, тэр мөрний <b>доод талд</b> буулгана.');
   if (nv) steps.push('<span class="mono">index.html</span> файлыг нээж, <span class="mono">v=' + esc(CAT.version) + '</span> гэгийг <span class="mono">v=' + esc(nv) + '</span> болгож өөрчилнө (сайт шинэ хувилбарыг татахын тулд).');
-  steps.push('«Commit changes» дарна. 1–2 минутын дараа сайтаа нээж, шинэ бараагаа шалгана (хуучин хувилбар харагдаж байвал хуудсыг дахин ачаална).');
+  steps.push('«Commit changes» дарна. 1–2 минутын дараа сайтаа нээж, шинэ бараануудаа шалгана (хуучин хувилбар харагдаж байвал хуудсыг дахин ачаална). GitHub руу оруулж дууссаныхаа дараа «Жагсаалтыг цэвэрлэх» дарна.');
 
   $('out-blocks').innerHTML = blocks.map((b, i) =>
     '<div class="out-block"><div class="lbl">' + esc(b.title) + '</div>' +
     '<textarea readonly id="out-' + i + '">' + esc(b.text) + '</textarea>' +
     '<button class="copy-btn" type="button" data-copy="' + i + '">Хуулах</button></div>').join('');
   $('out-steps').innerHTML = steps.map(s => '<li>' + s + '</li>').join('');
-  const notes = [];
-  notes.push('✅ ' + nextId + ' дугаартай бараа бэлэн боллоо: ' + nameMn + ' (' + brand + ') — сайт дээр ¥' + (official + 500).toLocaleString('en-US'));
-  if (imgOk === false) notes.push('⚠️ Зургийн холбоос ачаалагдахгүй байсан — шалгасан эсэхээ нягтална уу.');
-  if (unfilled.length) notes.push('⚠️ Эдгээр өнгөний монгол орчуулга дутуу тул орчуулгын мөр гарсангүй: ' + unfilled.join(', ') + '. Өнгөний орчуулгыг бөглөөд дахин «Код бэлдэх» дарна уу.');
-  if (badSold.length) notes.push('⚠️ Дууссан хувилбарын мөр буруу бичигдсэн тул гарсангүй: ' + badSold.join(', ') + ' («Өнгө|Размер» хэлбэрээр, өнгө/размер нь дээрх жагсаалтад байх ёстой).');
+  const notes = QUEUE.map(it => '✅ ' + it.id + ': ' + it.nameMn + ' (' + it.brand + ') — ¥' + it.price.toLocaleString('en-US') + (it.imgOk === false ? ' ⚠️ зураг ачаалагдахгүй байсан' : ''));
   $('out-note').innerHTML = notes.map(esc).join('<br>');
   $('out-card').style.display = 'block';
   $('out-card').scrollIntoView({ behavior: 'smooth' });
@@ -388,22 +458,16 @@ $('generate').addEventListener('click', () => {
     catch (e) { document.execCommand('copy'); btn.textContent = '✅ Хуулагдлаа'; }
     setTimeout(() => { btn.textContent = 'Хуулах'; }, 2000);
   }));
-
-  // reserve the id + colors for the next product in this session
-  colors.forEach(c => CAT.colors.add(c));
-  CAT.count++; CAT.maxId = nextId; nextId++;
-  renderStatus();
 });
 
 $('reset').addEventListener('click', () => {
-  ['f-name', 'f-namemn', 'f-nameen', 'f-price', 'f-img', 'f-images', 'f-desc', 'f-descen', 'f-descjp', 'f-colors', 'f-sizes', 'f-url', 'f-soldout'].forEach(id => { $(id).value = ''; });
-  $('f-sale').checked = false;
-  $('price-out').textContent = ''; $('img-msg').textContent = ''; $('img-preview').style.display = 'none';
-  $('color-tr-box').innerHTML = ''; $('form-err').textContent = '';
+  clearForm(false);
+  $('form-err').textContent = '';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 loadCatalog();
+
 </script>
 </body>
 </html>
