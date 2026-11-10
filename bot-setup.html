@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bot setup</title>
+<style>
+  body { font-family: sans-serif; max-width: 560px; margin: 40px auto; padding: 0 16px; }
+  label { display: block; margin: 16px 0 4px; font-weight: bold; }
+  input { width: 100%; padding: 10px; font-size: 15px; box-sizing: border-box; }
+  button { margin-top: 20px; padding: 12px 20px; font-size: 16px; cursor: pointer; }
+  #result { margin-top: 20px; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Messenger bot — one-time setup</h1>
+<p>Paste the setup key and the Facebook Page access token, then press Save. This page stops working after one successful save.</p>
+<label for="key">Setup key</label>
+<input id="key" type="text" autocomplete="off">
+<label for="token">Page access token</label>
+<input id="token" type="text" autocomplete="off">
+<button id="save" type="button">Save</button>
+<p id="result"></p>
+<script>
+document.getElementById('save').addEventListener('click', async () => {
+  const key = document.getElementById('key').value.trim();
+  const token = document.getElementById('token').value.trim();
+  const result = document.getElementById('result');
+  result.textContent = 'Saving...';
+  try {
+    const res = await fetch('https://japanbuy-messenger-bot.degi-bato.workers.dev/setup/page-token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-setup-key': key },
+      body: JSON.stringify({ token })
+    });
+    result.textContent = (res.ok ? 'SUCCESS: ' : 'FAILED (' + res.status + '): ') + (await res.text());
+  } catch (e) {
+    result.textContent = 'ERROR: ' + e.message;
+  }
+});
+</script>
+</body>
+</html>
