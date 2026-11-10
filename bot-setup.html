@@ -17,11 +17,38 @@
 <p>Paste the setup key and the Facebook Page access token, then press Save. This page stops working after one successful save.</p>
 <label for="key">Setup key</label>
 <input id="key" type="text" autocomplete="off">
-<label for="token">Page access token</label>
+<button id="pasteSave" type="button" style="display:block; width:100%; font-size:18px; padding:16px;">Paste token from clipboard &amp; Save</button>
+<label for="token">Page access token (manual paste, if the button does not work)</label>
 <input id="token" type="text" autocomplete="off">
 <button id="save" type="button">Save</button>
 <p id="result"></p>
 <script>
+async function submitToken(key, token) {
+  const result = document.getElementById('result');
+  result.textContent = 'Saving...';
+  try {
+    const res = await fetch('https://japanbuy-messenger-bot.degi-bato.workers.dev/setup/page-token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-setup-key': key },
+      body: JSON.stringify({ token })
+    });
+    result.textContent = (res.ok ? 'SUCCESS: ' : 'FAILED (' + res.status + '): ') + (await res.text());
+  } catch (e) {
+    result.textContent = 'ERROR: ' + e.message;
+  }
+}
+document.getElementById('pasteSave').addEventListener('click', async () => {
+  const key = document.getElementById('key').value.trim();
+  const result = document.getElementById('result');
+  try {
+    const token = (await navigator.clipboard.readText()).trim();
+    if (!token) { result.textContent = 'ERROR: clipboard is empty'; return; }
+    document.getElementById('token').value = token;
+    await submitToken(key, token);
+  } catch (e) {
+    result.textContent = 'ERROR: cannot read clipboard: ' + e.message;
+  }
+});
 document.getElementById('save').addEventListener('click', async () => {
   const key = document.getElementById('key').value.trim();
   const token = document.getElementById('token').value.trim();
