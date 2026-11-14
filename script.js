@@ -551,6 +551,7 @@ const SOLD_OUT_VARIANTS = {
     // 2026-10-31 албан ёсны сайтуудаас дахин шалгасан нөөц (stock-check)
     69: { variants: ["ブラウンプレイド|L","ブラウンプレイド|M","ブラウンプレイド|S","ブラウンプレイド|XS"] },
     70: { "variants": ["フロストアイボリー|80cm", "フロストアイボリー|90cm"] },
+    71: { variants: ["クジラ|80cm"] }, // 2026-11-14 GAP шалгалт
     73: { variants: ["シティスケープミルク|110cm","シティスケープミルク|140cm","シティスケープミルク|150cm","シティスケープミルク|160cm","ビーチピンク|140cm","ビーチピンク|150cm","ビーチピンク|160cm","フラワープリント|140cm"] },
     82: { variants: ["PINK|XS","PINK|S","PINK|M","PINK|L","PINK|XL","PINK|XXL","PINK|3XL","PINK|4XL","RED|XS","RED|S","RED|M","RED|L","RED|XL","RED|XXL","RED|3XL","RED|4XL","GREEN|XS","GREEN|S","GREEN|M","GREEN|L","GREEN|XL","GREEN|XXL","GREEN|3XL","GREEN|4XL","DARK GREEN|XS","DARK GREEN|S","DARK GREEN|M","DARK GREEN|L","DARK GREEN|XL","DARK GREEN|XXL","DARK GREEN|3XL","DARK GREEN|4XL"] },
     83: { "variants": ["PURPLE|XS", "PURPLE|S", "PURPLE|M", "PURPLE|3XL", "PURPLE|4XL"] },
@@ -589,7 +590,7 @@ const SOLD_OUT_VARIANTS = {
     193: { variants: ["プリミティブピンク|150cm","プリミティブピンク|160cm"] },
     196: { variants: ["ブラック|110cm","ブラック|120cm"] },
     199: { variants: ["ラベンダー|110cm","ラベンダー|120cm","ラベンダー|130cm","ラベンダー|140cm","ラベンダー|160cm"] },
-    201: { variants: ["ブルー|110cm","ブルー|120cm"] },
+    201: { variants: ["ブルー|110cm","ブルー|120cm","ブルー|130cm"] }, // 2026-11-14 GAP шалгалт
     202: { variants: ["セイルブルー|110cm","セイルブルー|120cm","セイルブルー|150cm","セイルブルー|160cm"] },
     203: { variants: ["ソーラーシステム|130cm","ソーラーシステム|140cm","ソーラーシステム|150cm","ソーラーシステム|160cm"] },
     210: { variants: ["NAVY|3XL","NAVY|XL","NAVY|XXL"] },
@@ -714,10 +715,9 @@ const SOLD_OUT_VARIANTS = {
     556: { variants: ["グレー|L"] },
     565: { variants: ["ブラック|M","ブラック|L","アイボリー|M"] },
     570: { variants: ["GRAY|XXL"] },
-    574: { variants: ["ライトウォッシュ|24","ライトウォッシュ|25"] },
-    575: { variants: ["ダークヘザーグレー|XL"] },
-    579: { variants: ["ヴァンパイアレッド|XXS"] },
-    581: { variants: ["へザーチャコール|XXS","へザーチャコール|XS","へザーチャコール|M","へザーチャコール|XL"] },
+    574: { variants: ["ライトウォッシュ|23","ライトウォッシュ|24","ライトウォッシュ|27"] }, // 2026-11-14 GAP шалгалт (25 эргэж нөөцөд орсон)
+    579: { variants: ["ヴァンパイアレッド|XXS","ヴァンパイアレッド|XS"] }, // 2026-11-14 GAP шалгалт
+    581: { variants: ["へザーチャコール|XXS","へザーチャコール|XS","へザーチャコール|S","へザーチャコール|M","へザーチャコール|XL"] }, // 2026-11-14 GAP шалгалт
     582: { variants: ["テラブラウン|XS","テラブラウン|S","テラブラウン|XXS"] },
     583: { variants: ["リンスシエンヌ|XS","リンスシエンヌ|S"] },
     627: { variants: ["Brown|S","Brown|XL"] },
