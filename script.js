@@ -1028,7 +1028,7 @@ const translations = {
         ship_info: 'Хүргэлтийн мэдээлэл', pay_info: 'Төлбөрийн мэдээлэл',
         pay_visa: 'Visa карт', pay_visa_off: 'Түр боломжгүй', pay_visa_notice: 'Картаар төлөх боломж одоогоор байхгүй байна. Дансаар шилжүүлнэ үү.', pay_bank: 'Банкны шилжүүлэг', pay_method_label: 'Төлбөрийн хэлбэр:',
         pay_bank_note: 'Дээрх данснуудын аль нэг рүү шилжүүлэг хийнэ үү. Шилжүүлэг хийгдсэний дараа таны захиалга баталгаажна.',
-        bank_mn_title: 'Монгол данс', bank_jp_title: 'Япон данс',
+        bank_mn_title: 'Хаан банк', bank_jp_title: 'М Банк',
         bank_label_bank: 'Банк', bank_label_branch: 'Салбар', bank_label_number: 'Дансны дугаар', bank_label_holder: 'Дансны нэр',
         btn_copy: 'Хуулах', msg_copied: 'Хуулагдлаа',
         cat_men: 'Эрэгтэй', cat_women: 'Эмэгтэй', cat_kids: 'Хүүхэд', cat_skin: 'Арьс арчилгаа', cat_makeup: 'Нүүр будалт', cat_sun: 'Нарны хамгаалалт', tab_beauty: 'ГОО САЙХАН', tab_ginza: 'GINZA',
@@ -1138,7 +1138,7 @@ const translations = {
         ship_info: 'Shipping Information', pay_info: 'Payment Information',
         pay_visa: 'Visa card', pay_visa_off: 'Temporarily unavailable', pay_visa_notice: 'Card payment is not available yet. Please pay by bank transfer.', pay_bank: 'Bank transfer', pay_method_label: 'Payment method:',
         pay_bank_note: 'Please transfer to one of the accounts above. Your order is confirmed once the transfer arrives.',
-        bank_mn_title: 'Mongolian account', bank_jp_title: 'Japanese account',
+        bank_mn_title: 'Khan Bank', bank_jp_title: 'M Bank',
         bank_label_bank: 'Bank', bank_label_branch: 'Branch', bank_label_number: 'Account number', bank_label_holder: 'Account name',
         btn_copy: 'Copy', msg_copied: 'Copied',
         cat_men: 'Men', cat_women: 'Women', cat_kids: 'Kids', cat_skin: 'Skin Care', cat_makeup: 'Makeup', cat_sun: 'Sunscreen', tab_beauty: 'BEAUTY', tab_ginza: 'GINZA',
@@ -1244,7 +1244,7 @@ const translations = {
         ship_info: '配送情報', pay_info: 'お支払い情報',
         pay_visa: 'Visaカード', pay_visa_off: '一時利用不可', pay_visa_notice: 'カード払いは現在ご利用いただけません。銀行振込でお支払いください。', pay_bank: '銀行振込', pay_method_label: 'お支払い方法:',
         pay_bank_note: '上記の口座のいずれかにお振込みください。お振込み確認後に注文が確定します。',
-        bank_mn_title: 'モンゴルの口座', bank_jp_title: '日本の口座',
+        bank_mn_title: 'Khan Bank口座', bank_jp_title: 'M Bank口座',
         bank_label_bank: '銀行', bank_label_branch: '支店', bank_label_number: '口座番号', bank_label_holder: '口座名義',
         btn_copy: 'コピー', msg_copied: 'コピーしました',
         cat_men: 'メンズ', cat_women: 'レディース', cat_kids: 'キッズ', cat_skin: 'スキンケア', cat_makeup: 'メイク', cat_sun: '日焼け止め', tab_beauty: 'ビューティー', tab_ginza: 'GINZA',
@@ -2331,8 +2331,8 @@ const PAYPAY_QR_URL = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmN
 
 // Банкны данснууд — шилжүүлгийн хэсэгт харагдана
 const BANK_ACCOUNTS = {
-    mn: { bank: 'М Банк', number: 'MN970039008000004436', holder: 'Дармаа Батдэлгэр' },
-    jp: { bank: 'ソニー銀行', branch: '001', number: '7403210', holder: 'ダルマー バタデルゲル' }
+    mn: { bank: 'Хаан банк', number: 'MN820005005629006694', holder: 'ЦОГТОО АЛТАНТУЯА' },
+    mn2: { bank: 'М Банк', number: 'MN970039008000004436', holder: 'Дармаа Батдэлгэр' }
 };
 
 function copyText(elId) {
@@ -2386,10 +2386,9 @@ function fillBankDetails() {
     set('bank-mn-bank', BANK_ACCOUNTS.mn.bank);
     set('bank-mn-number', BANK_ACCOUNTS.mn.number);
     set('bank-mn-holder', BANK_ACCOUNTS.mn.holder);
-    set('bank-jp-bank', BANK_ACCOUNTS.jp.bank);
-    set('bank-jp-branch', BANK_ACCOUNTS.jp.branch);
-    set('bank-jp-number', BANK_ACCOUNTS.jp.number);
-    set('bank-jp-holder', BANK_ACCOUNTS.jp.holder);
+    set('bank-mn2-bank', BANK_ACCOUNTS.mn2.bank);
+    set('bank-mn2-number', BANK_ACCOUNTS.mn2.number);
+    set('bank-mn2-holder', BANK_ACCOUNTS.mn2.holder);
 }
 let selectedPaymentMethod = 'bank';
 
