@@ -1043,6 +1043,19 @@ const translations = {
         msg_password_updated: 'Нууц үг шинэчлэгдлээ', msg_login_error: 'Имэйл эсвэл нууц үг буруу байна',
         msg_order_error: 'Захиалга хадгалахад алдаа гарлаа. Дахин оролдоно уу.',
         admin_orders_title: 'Захиалгууд (Админ)', admin_order_number: 'Захиалгын дугаар:', admin_no_orders: 'Захиалга одоогоор алга',
+        tab_ready: 'БЭЛЭН БАРАА', cat_other: 'Бусад',
+        admin_listings_title: 'Миний бараа (БЭЛЭН БАРАА)', btn_add_listing: 'Бараа оруулах', admin_no_listings: 'Оруулсан бараа одоогоор алга',
+        lf_add_title: 'Бараа оруулах', lf_edit_title: 'Бараа засах', lf_photos: 'Зураг (олон сонгож болно)', lf_add_photo: 'Зураг нэмэх',
+        lf_name: 'Барааны нэр', lf_category: 'Ангилал', lf_condition: 'Байдал', lf_description: 'Тайлбар',
+        lf_price: 'Үнэ (¥)', lf_weight: 'Жин (кг)', lf_delivery: 'Хүргэх хугацаа', lf_delivery_ph: 'ж.нь 1–2 өдөр',
+        lf_save: 'Оруулах', lf_update: 'Хадгалах', lf_cancel: 'Болих', lf_uploading: 'Хадгалж байна...',
+        cond_new: 'Шинэ', cond_likenew: 'Бараг шинэ', cond_used_good: 'Хэрэглэсэн — сайн', cond_used: 'Хэрэглэсэн',
+        listing_condition_label: 'Байдал', listing_delivery_label: 'Хүргэх хугацаа',
+        btn_edit: 'Засах', btn_delete: 'Устгах', btn_mark_sold: 'Дууссан гэж тэмдэглэх', btn_mark_active: 'Идэвхтэй болгох',
+        listing_status_active: 'Идэвхтэй', listing_status_sold: 'Дууссан',
+        msg_listing_saved: 'Бараа орлоо', msg_listing_updated: 'Бараа шинэчлэгдлээ', msg_listing_deleted: 'Бараа устгагдлаа',
+        msg_listing_need: 'Нэр, үнэ болон дор хаяж нэг зураг оруулна уу', msg_listing_error: 'Бараа хадгалахад алдаа гарлаа',
+        confirm_delete_listing: 'Энэ барааг устгах уу?',
         msg_status_updated: 'Төлөв шинэчлэгдлээ', sold_out: 'Дууссан', msg_variant_sold_out: 'Энэ өнгө/размер дууссан байна', msg_paid_email_sent: 'Захиалагчид баталгаажсан и-мэйл илгээлээ', msg_paid_email_failed: 'Төлөв шинэчлэгдсэн ч и-мэйл илгээгдсэнгүй', msg_placed_email_sent: 'Захиалгын мэдээлэл таны и-мэйл рүү илгээгдлээ', btn_back_home: 'Нүүр хуудас руу буцах',
         st_new: 'Шинэ', st_paid: 'Төлбөр төлөгдсөн', st_shipped: 'Илгээгдсэн', st_done: 'Дууссан', st_cancelled: 'Цуцлагдсан',
         pay_paypay_note: 'PayPay QR код энд гарна',
@@ -1140,6 +1153,19 @@ const translations = {
         msg_password_updated: 'Password updated', msg_login_error: 'Wrong email or password',
         msg_order_error: 'Could not save the order. Please try again.',
         admin_orders_title: 'Orders (Admin)', admin_order_number: 'Order number:', admin_no_orders: 'No orders yet',
+        tab_ready: 'In Stock', cat_other: 'Other',
+        admin_listings_title: 'My Items (In Stock)', btn_add_listing: 'Add item', admin_no_listings: 'No items yet',
+        lf_add_title: 'Add item', lf_edit_title: 'Edit item', lf_photos: 'Photos (multiple allowed)', lf_add_photo: 'Add photo',
+        lf_name: 'Item name', lf_category: 'Category', lf_condition: 'Condition', lf_description: 'Description',
+        lf_price: 'Price (¥)', lf_weight: 'Weight (kg)', lf_delivery: 'Delivery time', lf_delivery_ph: 'e.g. 1–2 days',
+        lf_save: 'Publish', lf_update: 'Save', lf_cancel: 'Cancel', lf_uploading: 'Saving...',
+        cond_new: 'New', cond_likenew: 'Like new', cond_used_good: 'Used — good', cond_used: 'Used',
+        listing_condition_label: 'Condition', listing_delivery_label: 'Delivery',
+        btn_edit: 'Edit', btn_delete: 'Delete', btn_mark_sold: 'Mark as sold', btn_mark_active: 'Mark as active',
+        listing_status_active: 'Active', listing_status_sold: 'Sold',
+        msg_listing_saved: 'Item published', msg_listing_updated: 'Item updated', msg_listing_deleted: 'Item deleted',
+        msg_listing_need: 'Please add a name, price and at least one photo', msg_listing_error: 'Could not save the item',
+        confirm_delete_listing: 'Delete this item?',
         msg_status_updated: 'Status updated', sold_out: 'Sold out', msg_variant_sold_out: 'This color/size is sold out', msg_paid_email_sent: 'Confirmation email sent to the customer', msg_paid_email_failed: 'Status updated, but the email was not sent', msg_placed_email_sent: 'Order details were emailed to you', btn_back_home: 'Back to home',
         st_new: 'New', st_paid: 'Paid', st_shipped: 'Shipped', st_done: 'Done', st_cancelled: 'Cancelled',
         pay_paypay_note: 'PayPay QR code will appear here',
@@ -1233,6 +1259,19 @@ const translations = {
         msg_password_updated: 'パスワードを更新しました', msg_login_error: 'メールまたはパスワードが違います',
         msg_order_error: '注文を保存できませんでした。もう一度お試しください。',
         admin_orders_title: '注文一覧（管理者）', admin_order_number: '注文番号:', admin_no_orders: '注文はまだありません',
+        tab_ready: '在庫あり', cat_other: 'その他',
+        admin_listings_title: 'マイ商品（在庫あり）', btn_add_listing: '商品を追加', admin_no_listings: '登録した商品はまだありません',
+        lf_add_title: '商品を追加', lf_edit_title: '商品を編集', lf_photos: '写真（複数可）', lf_add_photo: '写真を追加',
+        lf_name: '商品名', lf_category: 'カテゴリー', lf_condition: '状態', lf_description: '説明',
+        lf_price: '価格（¥）', lf_weight: '重量（kg）', lf_delivery: '配送目安', lf_delivery_ph: '例：1〜2日',
+        lf_save: '出品する', lf_update: '保存する', lf_cancel: 'キャンセル', lf_uploading: '保存中...',
+        cond_new: '新品', cond_likenew: 'ほぼ新品', cond_used_good: '中古 — 良好', cond_used: '中古',
+        listing_condition_label: '状態', listing_delivery_label: '配送',
+        btn_edit: '編集', btn_delete: '削除', btn_mark_sold: '完売にする', btn_mark_active: '販売中に戻す',
+        listing_status_active: '販売中', listing_status_sold: '完売',
+        msg_listing_saved: '商品を登録しました', msg_listing_updated: '商品を更新しました', msg_listing_deleted: '商品を削除しました',
+        msg_listing_need: '商品名・価格・写真（1枚以上）を入力してください', msg_listing_error: '保存できませんでした',
+        confirm_delete_listing: 'この商品を削除しますか？',
         msg_status_updated: 'ステータスを更新しました', sold_out: '完売', msg_variant_sold_out: 'このカラー/サイズは完売しています', msg_paid_email_sent: 'お客様へ確認メールを送信しました', msg_paid_email_failed: 'ステータスは更新されましたが、メールは送信されませんでした', msg_placed_email_sent: '注文内容をメールでお送りしました', btn_back_home: 'ホームに戻る',
         st_new: '新規', st_paid: '支払済', st_shipped: '発送済', st_done: '完了', st_cancelled: 'キャンセル',
         pay_paypay_note: 'PayPay QRコードがここに表示されます',
@@ -1564,6 +1603,7 @@ function applyLanguage() {
     // 7. Динамик контентыг дахин render
     updateAuthUI();
     renderProducts();
+    renderAdminListings();
     if (cartModal.classList.contains('active')) renderCart();
     if (checkoutView.classList.contains('active')) renderCheckout();
     if (successModal.classList.contains('active')) renderSuccessMessage();
@@ -1645,11 +1685,13 @@ async function applySession(session) {
     localStorage.setItem('isLoggedIn', 'true');
     updateAuthUI();
     renderProducts();
+    renderAdminListings();
 }
 
 async function initSupabase() {
     if (!USE_SUPABASE || !window.supabase) return;
     sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    loadReadyListings();
     try {
         const { data } = await sb.auth.getSession();
         if (data && data.session) await applySession(data.session);
@@ -1824,6 +1866,7 @@ function productInFilter(p, f) {
     if (f === 'all') return !p.sec && !p.brandOnly;
     if (f === 'beauty') return p.sec === 'beauty';
     if (f === 'ginza') return p.sec === 'ginza';
+    if (f === 'ready') return p.sec === 'ready';
     return p.brand === f;
 }
 
@@ -1859,6 +1902,7 @@ function renderProducts() {
             <div class="product-info">
                 <h3>${pname(p)}</h3>
                 <p class="brand-name">${p.brand}</p>
+                ${p.isListing ? `<p class="listing-card-meta">${esc(listingConditionLabel(p))}${p.deliveryTime ? ` · 🚚 ${esc(p.deliveryTime)}` : ''}</p>` : ''}
                 <p class="price">¥${p.price.toLocaleString()}</p>
                 <p class="price-mnt">${t.price_mnt_label}: ${fmtMNT(p.price).toLocaleString()}₮</p>
                 ${cardAddButtonHtml(p)}
@@ -1958,6 +2002,7 @@ function openProductDetail(id, keepOpen = false) {
         selectedColor = firstAvail ? firstAvail.color : ((p.colors && p.colors.length) ? p.colors[0] : 'black');
         selectedQty = 1;
     }
+    if (p.isListing) { selectedColor = 'スタンダード'; selectedSize = ''; }
 
     const colors = [
         { name: 'black', hex: '#000000' }, { name: 'white', hex: '#ffffff' },
@@ -1994,7 +2039,8 @@ function openProductDetail(id, keepOpen = false) {
                 <p class="detail-weight">${t.checkout_weight}: ${Math.round((p.weightKg || 0) * 1000)} г</p>
                 <p class="desc">${pdesc(p)}</p>
                 ${p.url ? `<a class="official-link" href="${p.url}" target="_blank" rel="noopener">🔗 ${t.official_store}</a>` : ''}
-
+                ${p.isListing ? `<div class="detail-listing-meta">${listingConditionLabel(p) ? `<span>${t.listing_condition_label}: <strong>${esc(listingConditionLabel(p))}</strong></span>` : ''}${p.deliveryTime ? `<span>${t.listing_delivery_label}: <strong>${esc(p.deliveryTime)}</strong></span>` : ''}</div>` : ''}
+                ${p.isListing ? '' : `
                 <div class="selector-group">
                     <label>${t.detail_color}: <span id="selected-color-name" class="selected-value">${cname(selectedColor)}</span></label>
                     <div class="color-options">
@@ -2008,6 +2054,7 @@ function openProductDetail(id, keepOpen = false) {
                         ${sizes.map(s => `<button type="button" class="size-btn ${s === selectedSize ? 'active' : ''}${isVariantSoldOut(p, selectedColor, s) ? ' sold-out' : ''}" data-size="${s}" onclick="selectSize(this, '${s}')" ${isVariantSoldOut(p, selectedColor, s) ? 'disabled' : ''}>${s}${isVariantSoldOut(p, selectedColor, s) ? `<span class="variant-out-label">${t.sold_out}</span>` : ''}</button>`).join('')}
                     </div>
                 </div>
+                `}
 
                 <div class="selector-group">
                     <label>${t.detail_qty}</label>
@@ -2158,9 +2205,10 @@ function quickAddToCart(id) {
     const p = PRODUCTS.find(x => x.id === id);
     if (!p) return;
     const defColor = (p.colors && p.colors.length) ? p.colors[0] : 'black';
-    const existing = cart.find(i => i.id === id && i.size === 'M' && i.color === defColor);
+    const defSize = p.isListing ? '' : 'M';
+    const existing = cart.find(i => i.id === id && i.size === defSize && i.color === defColor);
     if (existing) existing.qty += 1;
-    else cart.push({ id: p.id, brand: p.brand, name: p.name, price: p.price, img: p.img, size: 'M', color: defColor, qty: 1 });
+    else cart.push({ id: p.id, brand: p.brand, name: p.name, price: p.price, img: p.img, size: defSize, color: defColor, qty: 1 });
     saveCart();
     showToast(translations[currentLang].msg_added_to_cart, 'success');
 }
@@ -2520,6 +2568,7 @@ function navigateTo(viewName) {
     if (viewName === 'admin' && adminView) {
         adminView.classList.add('active');
         loadAdminOrders();
+        renderAdminListings();
     }
     toggleMobileMenu(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2745,6 +2794,242 @@ async function updateOrderStatus(id, status) {
         showToast(translations[currentLang][sent ? 'msg_paid_email_sent' : 'msg_paid_email_failed'], sent ? 'success' : 'warning');
     }
 }
+
+// ================= БЭЛЭН БАРАА (Supabase listings — админы өөрийн бараа) =================
+let readyListings = []; // listings хүснэгтийн мөрнүүд
+let listingFormState = { editId: null, existing: [], files: [] };
+
+function isAdminUser() { return !!(isLoggedIn && currentUser && currentUser.role === 'admin'); }
+
+function listingConditionLabel(p) {
+    const t = translations[currentLang];
+    if (!p || !p.condition) return '';
+    return t['cond_' + p.condition] || p.condition;
+}
+
+// uuid-аас тогтвортой, каталогийн id-тай мөргөлдөхгүй тоон id гаргана
+// (сайтын onclick handler-ууд тоон id шаарддаг тул)
+function listingNumericId(uuid) {
+    const s = String(uuid);
+    let h = 0;
+    for (let i = 0; i < s.length; i++) h = ((h * 31) + s.charCodeAt(i)) >>> 0;
+    let id = 9000000 + (h % 900000);
+    while (PRODUCTS.some(p => p.id === id)) id++;
+    return id;
+}
+
+function listingToProduct(row) {
+    const pid = listingNumericId(row.id);
+    const imgs = (Array.isArray(row.images) ? row.images : []).filter(Boolean);
+    const p = {
+        id: pid, listingId: row.id, isListing: true,
+        brand: 'JAPANBUY', cat: row.category || 'other', sec: 'ready',
+        name: row.name || '', nameMn: row.name || '', nameEn: row.name || '',
+        price: Number(row.price_jpy) || 0,
+        weightKg: Number(row.weight_kg) || 0,
+        img: imgs[0] || '', images: imgs,
+        desc: row.description || '', descEn: row.description || '', descJp: row.description || '',
+        colors: ['スタンダード'], sizes: ['NS'], url: '',
+        condition: row.condition || '', deliveryTime: row.delivery_time || '',
+        listingStatus: row.status || 'active'
+    };
+    if (p.listingStatus === 'sold') SOLD_OUT_VARIANTS[pid] = { colors: ['スタンダード'] };
+    return p;
+}
+
+// Таб зөвхөн идэвхтэй бараа ≥1 болсон үед л харагдана; тэр хүртэл бүрэн далд
+function updateReadyTabVisibility() {
+    const hasActive = PRODUCTS.some(p => p.sec === 'ready' && p.listingStatus === 'active');
+    document.querySelectorAll('.brand-tab[data-brand="ready"]').forEach(el => { el.style.display = hasActive ? '' : 'none'; });
+    const menuItem = $('ready-menu-item');
+    if (menuItem) menuItem.style.display = hasActive ? '' : 'none';
+    if (!hasActive && currentBrandFilter === 'ready') {
+        currentBrandFilter = 'all';
+        currentCategory = 'all';
+        document.querySelectorAll('.brand-tab').forEach(tb => tb.classList.toggle('active', tb.dataset.brand === 'all'));
+        const cf = $('category-filter');
+        if (cf) cf.classList.add('hidden');
+    }
+    if (typeof updateBrandArrows === 'function') updateBrandArrows();
+}
+
+async function loadReadyListings() {
+    if (!(USE_SUPABASE && sb)) return;
+    try {
+        const { data, error } = await sb.from('listings').select('*').order('created_at', { ascending: false });
+        if (error) return; // хүснэгт байхгүй/унших эрхгүй бол хэсэг далд хэвээр үлдэнэ
+        for (let i = PRODUCTS.length - 1; i >= 0; i--) {
+            if (PRODUCTS[i].isListing) { delete SOLD_OUT_VARIANTS[PRODUCTS[i].id]; PRODUCTS.splice(i, 1); }
+        }
+        readyListings = data || [];
+        readyListings.forEach(row => PRODUCTS.push(listingToProduct(row)));
+        updateReadyTabVisibility();
+        renderProducts();
+        renderAdminListings();
+    } catch (err) { /* сүлжээний алдаа — хэсэг далд хэвээр үлдэнэ */ }
+}
+
+function renderAdminListings() {
+    const box = $('admin-listings');
+    if (!box) return;
+    if (!isAdminUser()) { box.innerHTML = ''; return; }
+    const t = translations[currentLang];
+    if (!readyListings.length) { box.innerHTML = '<p class="admin-note">' + esc(t.admin_no_listings) + '</p>'; return; }
+    box.innerHTML = readyListings.map(row => {
+        const img = (row.images && row.images[0]) || '';
+        const sold = row.status === 'sold';
+        return `<div class="admin-listing">
+            ${img ? `<img src="${esc(img)}" alt="" loading="lazy">` : ''}
+            <div class="admin-listing-main">
+                <div class="admin-listing-name">${esc(row.name)}</div>
+                <div class="admin-listing-meta">¥${(Number(row.price_jpy) || 0).toLocaleString()} · <span class="${sold ? 'listing-status-sold' : 'listing-status-active'}">${esc(sold ? t.listing_status_sold : t.listing_status_active)}</span></div>
+            </div>
+            <div class="admin-listing-actions">
+                <button type="button" class="btn btn-outline" onclick="openListingForm('${row.id}')">${esc(t.btn_edit)}</button>
+                <button type="button" class="btn btn-outline" onclick="toggleListingStatus('${row.id}')">${esc(sold ? t.btn_mark_active : t.btn_mark_sold)}</button>
+                <button type="button" class="btn btn-outline" onclick="deleteListing('${row.id}')">${esc(t.btn_delete)}</button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function openListingForm(editId) {
+    if (!isAdminUser()) return;
+    const t = translations[currentLang];
+    const row = editId ? readyListings.find(r => r.id === editId) : null;
+    listingFormState = { editId: row ? row.id : null, existing: row ? (row.images || []).slice() : [], files: [] };
+    const titleEl = $('listing-form-title');
+    if (titleEl) titleEl.textContent = row ? t.lf_edit_title : t.lf_add_title;
+    $('lf-name').value = row ? (row.name || '') : '';
+    $('lf-category').value = row && row.category ? row.category : 'other';
+    $('lf-condition').value = row && row.condition ? row.condition : 'new';
+    $('lf-desc').value = row ? (row.description || '') : '';
+    $('lf-price').value = row ? (row.price_jpy || '') : '';
+    $('lf-weight').value = row && row.weight_kg != null ? row.weight_kg : '';
+    $('lf-delivery').value = row ? (row.delivery_time || '') : '';
+    const saveBtn = $('lf-save-btn');
+    if (saveBtn) saveBtn.textContent = row ? t.lf_update : t.lf_save;
+    renderListingPhotoPreviews();
+    const modal = $('listing-modal');
+    if (modal) modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeListingForm() {
+    const modal = $('listing-modal');
+    if (modal) modal.classList.remove('active');
+    document.body.style.overflow = '';
+    const inp = $('lf-images-input');
+    if (inp) inp.value = '';
+}
+
+function onListingPhotosSelected(input) {
+    if (!input || !input.files) return;
+    Array.from(input.files).forEach(f => listingFormState.files.push(f));
+    input.value = '';
+    renderListingPhotoPreviews();
+}
+
+function renderListingPhotoPreviews() {
+    const box = $('lf-photo-previews');
+    if (!box) return;
+    const parts = [];
+    listingFormState.existing.forEach((url, i) => {
+        parts.push(`<div class="lf-photo-item"><img src="${esc(url)}" alt=""><button type="button" class="lf-photo-remove" onclick="removeListingExistingPhoto(${i})" aria-label="×">✕</button></div>`);
+    });
+    listingFormState.files.forEach((f, i) => {
+        const url = URL.createObjectURL(f);
+        parts.push(`<div class="lf-photo-item"><img src="${url}" alt=""><button type="button" class="lf-photo-remove" onclick="removeListingNewPhoto(${i})" aria-label="×">✕</button></div>`);
+    });
+    box.innerHTML = parts.join('');
+}
+
+function removeListingExistingPhoto(i) { listingFormState.existing.splice(i, 1); renderListingPhotoPreviews(); }
+function removeListingNewPhoto(i) { listingFormState.files.splice(i, 1); renderListingPhotoPreviews(); }
+
+async function saveListing(e) {
+    if (e) e.preventDefault();
+    const t = translations[currentLang];
+    if (!isAdminUser() || !(USE_SUPABASE && sb)) { showToast(t.msg_listing_error, 'error'); return; }
+    const name = $('lf-name').value.trim();
+    const price = parseInt($('lf-price').value, 10);
+    const totalPhotos = listingFormState.existing.length + listingFormState.files.length;
+    if (!name || !price || price <= 0 || totalPhotos === 0) { showToast(t.msg_listing_need, 'warning'); return; }
+    const saveBtn = $('lf-save-btn');
+    if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = t.lf_uploading; }
+    try {
+        const urls = listingFormState.existing.slice();
+        for (let i = 0; i < listingFormState.files.length; i++) {
+            const f = listingFormState.files[i];
+            const ext = ((f.name || '').split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
+            const path = `${currentUser.id}/${Date.now()}-${i}.${ext}`;
+            const { error: upErr } = await sb.storage.from('listing-images').upload(path, f, { contentType: f.type || 'image/jpeg' });
+            if (upErr) throw upErr;
+            const { data: pub } = sb.storage.from('listing-images').getPublicUrl(path);
+            urls.push(pub.publicUrl);
+        }
+        const payload = {
+            name,
+            category: $('lf-category').value || 'other',
+            condition: $('lf-condition').value || 'new',
+            description: $('lf-desc').value.trim(),
+            price_jpy: price,
+            delivery_time: $('lf-delivery').value.trim(),
+            weight_kg: parseFloat($('lf-weight').value) || 0,
+            images: urls
+        };
+        let error = null;
+        if (listingFormState.editId) {
+            ({ error } = await sb.from('listings').update(payload).eq('id', listingFormState.editId));
+        } else {
+            ({ error } = await sb.from('listings').insert(payload));
+        }
+        if (error) throw error;
+        showToast(listingFormState.editId ? t.msg_listing_updated : t.msg_listing_saved, 'success');
+        closeListingForm();
+        await loadReadyListings();
+    } catch (err) {
+        showToast(t.msg_listing_error, 'error');
+    } finally {
+        if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = listingFormState.editId ? t.lf_update : t.lf_save; }
+    }
+}
+
+async function toggleListingStatus(uuid) {
+    const t = translations[currentLang];
+    if (!isAdminUser() || !(USE_SUPABASE && sb)) return;
+    const row = readyListings.find(r => r.id === uuid);
+    if (!row) return;
+    const next = row.status === 'sold' ? 'active' : 'sold';
+    const { error } = await sb.from('listings').update({ status: next }).eq('id', uuid);
+    if (error) { showToast(t.msg_listing_error, 'error'); return; }
+    showToast(t.msg_listing_updated, 'success');
+    await loadReadyListings();
+}
+
+async function deleteListing(uuid) {
+    const t = translations[currentLang];
+    if (!isAdminUser() || !(USE_SUPABASE && sb)) return;
+    if (!window.confirm(t.confirm_delete_listing)) return;
+    const row = readyListings.find(r => r.id === uuid);
+    const { error } = await sb.from('listings').delete().eq('id', uuid);
+    if (error) { showToast(t.msg_listing_error, 'error'); return; }
+    try {
+        const paths = ((row && row.images) || []).map(u => {
+            const parts = String(u).split('/listing-images/');
+            return parts.length > 1 ? decodeURIComponent(parts[1].split('?')[0]) : null;
+        }).filter(Boolean);
+        if (paths.length) await sb.storage.from('listing-images').remove(paths);
+    } catch (err) { /* зургийн устгал бүтэлгүйтсэн ч үргэлжилнэ */ }
+    showToast(t.msg_listing_deleted, 'success');
+    await loadReadyListings();
+}
+
+// Listing modal-ийн гадна талд дарвал хаагдана (бусад modal-тай ижил)
+(function () {
+    const lm = document.getElementById('listing-modal');
+    if (lm) lm.addEventListener('click', (e) => { if (e.target === lm) closeListingForm(); });
+})();
 
 console.log('✅ JAPANBUY ачаалагдлаа! Хэл:', currentLang, '| Бүтээгдэхүүн:', PRODUCTS.length);
 /* ===== Support chat panel (message goes to admin email via EmailJS) ===== */
