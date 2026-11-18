@@ -3729,6 +3729,11 @@ button.support-chat-btn {
     z-index: 3;
 }
 
+/* Сагс/тооцоон дахь дууссан бараа — идэвхгүй харагдана */
+.cart-item.unavailable, .checkout-item.unavailable { opacity: .55; }
+.cart-item .sold-out-badge, .checkout-item .sold-out-badge { position: static; display: inline-block; margin: 2px 0; }
+.cart-item.unavailable .cart-item-qty button { cursor: not-allowed; }
+
 .color-swatch.sold-out,
 .color-chip.sold-out,
 .size-btn.sold-out {

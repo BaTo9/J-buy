@@ -918,6 +918,13 @@ function cardAddButtonHtml(p) {
         ? `<button class="add-to-cart-btn" onclick="event.stopPropagation(); quickAddToCart(${p.id})">${t.btn_add_cart}</button>`
         : `<button class="add-to-cart-btn" disabled>${t.sold_out}</button>`;
 }
+function cartItemUnavailable(item) {
+    const p = PRODUCTS.find(x => x.id === item.id);
+    if (!p) return true; // бараа каталогoос хасагдсан бол захиалах боломжгүй
+    return isVariantSoldOut(p, item.color, item.size);
+}
+function availableCartItems() { return cart.filter(i => !cartItemUnavailable(i)); }
+function cartHasUnavailable() { return cart.some(i => cartItemUnavailable(i)); }
 
 // Холбоо барих мэдээлэл — хажуугийн цэсний доод хэсэгт харагдана
 const CONTACT_PHONE = '';
@@ -1057,7 +1064,7 @@ const translations = {
         msg_listing_saved: 'Бараа орлоо', msg_listing_updated: 'Бараа шинэчлэгдлээ', msg_listing_deleted: 'Бараа устгагдлаа',
         msg_listing_need: 'Нэр, үнэ болон дор хаяж нэг зураг оруулна уу', msg_listing_error: 'Бараа хадгалахад алдаа гарлаа',
         confirm_delete_listing: 'Энэ барааг устгах уу?',
-        msg_status_updated: 'Төлөв шинэчлэгдлээ', sold_out: 'Дууссан', msg_variant_sold_out: 'Энэ өнгө/размер дууссан байна', msg_paid_email_sent: 'Захиалагчид баталгаажсан и-мэйл илгээлээ', msg_paid_email_failed: 'Төлөв шинэчлэгдсэн ч и-мэйл илгээгдсэнгүй', msg_placed_email_sent: 'Захиалгын мэдээлэл таны и-мэйл рүү илгээгдлээ', btn_back_home: 'Нүүр хуудас руу буцах',
+        msg_status_updated: 'Төлөв шинэчлэгдлээ', sold_out: 'Дууссан', msg_variant_sold_out: 'Энэ өнгө/размер дууссан байна', msg_cart_sold_out: 'Сагсанд дууссан бараа байна. Дууссан барааг устгаад дахин оролдоно уу', msg_paid_email_sent: 'Захиалагчид баталгаажсан и-мэйл илгээлээ', msg_paid_email_failed: 'Төлөв шинэчлэгдсэн ч и-мэйл илгээгдсэнгүй', msg_placed_email_sent: 'Захиалгын мэдээлэл таны и-мэйл рүү илгээгдлээ', btn_back_home: 'Нүүр хуудас руу буцах',
         st_new: 'Шинэ', st_paid: 'Төлбөр төлөгдсөн', st_shipped: 'Илгээгдсэн', st_done: 'Дууссан', st_cancelled: 'Цуцлагдсан',
         pay_paypay_note: 'PayPay QR код энд гарна',
         pay_paypay_hint: 'QR кодыг PayPay аппаараа уншуулж төлбөрөө хийгээд, захиалгаа баталгаажуулна уу.',
@@ -1167,7 +1174,7 @@ const translations = {
         msg_listing_saved: 'Item published', msg_listing_updated: 'Item updated', msg_listing_deleted: 'Item deleted',
         msg_listing_need: 'Please add a name, price and at least one photo', msg_listing_error: 'Could not save the item',
         confirm_delete_listing: 'Delete this item?',
-        msg_status_updated: 'Status updated', sold_out: 'Sold out', msg_variant_sold_out: 'This color/size is sold out', msg_paid_email_sent: 'Confirmation email sent to the customer', msg_paid_email_failed: 'Status updated, but the email was not sent', msg_placed_email_sent: 'Order details were emailed to you', btn_back_home: 'Back to home',
+        msg_status_updated: 'Status updated', sold_out: 'Sold out', msg_variant_sold_out: 'This color/size is sold out', msg_cart_sold_out: 'Your cart contains a sold-out item. Please remove it and try again', msg_paid_email_sent: 'Confirmation email sent to the customer', msg_paid_email_failed: 'Status updated, but the email was not sent', msg_placed_email_sent: 'Order details were emailed to you', btn_back_home: 'Back to home',
         st_new: 'New', st_paid: 'Paid', st_shipped: 'Shipped', st_done: 'Done', st_cancelled: 'Cancelled',
         pay_paypay_note: 'PayPay QR code will appear here',
         pay_paypay_hint: 'Scan the QR code with your PayPay app to pay, then confirm your order.',
@@ -1273,7 +1280,7 @@ const translations = {
         msg_listing_saved: '商品を登録しました', msg_listing_updated: '商品を更新しました', msg_listing_deleted: '商品を削除しました',
         msg_listing_need: '商品名・価格・写真（1枚以上）を入力してください', msg_listing_error: '保存できませんでした',
         confirm_delete_listing: 'この商品を削除しますか？',
-        msg_status_updated: 'ステータスを更新しました', sold_out: '完売', msg_variant_sold_out: 'このカラー/サイズは完売しています', msg_paid_email_sent: 'お客様へ確認メールを送信しました', msg_paid_email_failed: 'ステータスは更新されましたが、メールは送信されませんでした', msg_placed_email_sent: '注文内容をメールでお送りしました', btn_back_home: 'ホームに戻る',
+        msg_status_updated: 'ステータスを更新しました', sold_out: '完売', msg_variant_sold_out: 'このカラー/サイズは完売しています', msg_cart_sold_out: 'カートに完売した商品があります。削除してから再度お試しください', msg_paid_email_sent: 'お客様へ確認メールを送信しました', msg_paid_email_failed: 'ステータスは更新されましたが、メールは送信されませんでした', msg_placed_email_sent: '注文内容をメールでお送りしました', btn_back_home: 'ホームに戻る',
         st_new: '新規', st_paid: '支払済', st_shipped: '発送済', st_done: '完了', st_cancelled: 'キャンセル',
         pay_paypay_note: 'PayPay QRコードがここに表示されます',
         pay_paypay_hint: 'PayPayアプリでQRコードを読み取ってお支払い後、注文を確定してください。',
@@ -2279,25 +2286,26 @@ function renderCart() {
         return;
     }
 
-    cartItemsContainer.innerHTML = cart.map((item, idx) => `
-        <div class="cart-item">
+    cartItemsContainer.innerHTML = cart.map((item, idx) => { const un = cartItemUnavailable(item); return `
+        <div class="cart-item${un ? ' unavailable' : ''}">
             <img src="${item.img}" alt="${iname(item)}">
             <div class="cart-item-info">
                 <h4>${iname(item)}</h4>
                 <p class="brand">${item.brand}</p>
                 <p class="attrs">${item.size} | ${cname(item.color)} | x${item.qty}</p>
+                ${un ? `<span class="sold-out-badge">${t.sold_out}</span>` : ''}
                 <p class="price">¥${(item.price * item.qty).toLocaleString()}</p>
                 <div class="cart-item-qty">
-                    <button onclick="updateCartQty(${idx}, -1)">−</button>
+                    <button onclick="updateCartQty(${idx}, -1)" ${un ? 'disabled' : ''}>−</button>
                     <span>${item.qty}</span>
-                    <button onclick="updateCartQty(${idx}, 1)">+</button>
+                    <button onclick="updateCartQty(${idx}, 1)" ${un ? 'disabled' : ''}>+</button>
                 </div>
             </div>
             <button class="cart-item-remove" onclick="removeFromCart(${idx})" aria-label="Устгах">🗑️</button>
         </div>
-    `).join('');
+    `; }).join('');
 
-    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const total = availableCartItems().reduce((s, i) => s + i.price * i.qty, 0);
     cartSummary.innerHTML = `
         <div class="cart-total">
             <span>${t.cart_total}</span>
@@ -2305,7 +2313,7 @@ function renderCart() {
         </div>
         <div class="cart-buttons">
             <button class="btn btn-outline" onclick="closeCart()">${t.btn_continue}</button>
-            <button class="btn btn-primary" onclick="goToCheckout()">${t.btn_checkout}</button>
+            <button class="btn btn-primary" onclick="goToCheckout()" ${availableCartItems().length ? '' : 'disabled'}>${t.btn_checkout}</button>
         </div>`;
 }
 
@@ -2408,15 +2416,15 @@ function selectPaymentMethod(method, el) {
 
 function itemWeight(i) { const p = PRODUCTS.find(x => x.id === i.id); return (p && p.weightKg) || i.weight || 0; }
 function itemWeightGrams(i) { return Math.round(itemWeight(i) * 1000); }
-function cartGoodsWeightGrams() { return cart.reduce((sum, i) => sum + itemWeightGrams(i) * i.qty, 0); }
+function cartGoodsWeightGrams() { return availableCartItems().reduce((sum, i) => sum + itemWeightGrams(i) * i.qty, 0); }
 function cartBilledWeightGrams() { if (!cart.length) return 0; return cartGoodsWeightGrams() + PACKAGING_GRAMS; }
 function cargoFeeForGrams(grams) { return Math.round(grams * CARGO_RATE_PER_KG / 1000); }
 function fmtMNT(yen) { return Math.round(yen * EXCHANGE_RATE / 100) * 100; }
 function deliveryFeeYen() { return Math.round(DELIVERY_FEE_MNT / EXCHANGE_RATE); }
 function paintSummary() {
-    const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+    const subtotal = availableCartItems().reduce((sum, i) => sum + i.price * i.qty, 0);
     const billed = cartBilledWeightGrams();
-    const cargoFee = cart.length ? (cartGoodsWeightGrams() < 1000 ? MIN_CARGO_FEE_JPY : cargoFeeForGrams(billed)) : 0;
+    const cargoFee = availableCartItems().length ? (cartGoodsWeightGrams() < 1000 ? MIN_CARGO_FEE_JPY : cargoFeeForGrams(billed)) : 0;
     const delivChecked = !!($('city-delivery') && $('city-delivery').checked);
     const delivYen = delivChecked ? deliveryFeeYen() : 0;
     checkoutSubtotal.textContent = `¥${subtotal.toLocaleString()}`;
@@ -2428,10 +2436,10 @@ function paintSummary() {
     const dEl = $('checkout-delivery'); if (dEl) dEl.textContent = `¥${delivYen.toLocaleString()}`;
     const total = subtotal + cargoFee + delivYen;
     checkoutTotal.textContent = `¥${total.toLocaleString()}`;
-    if (checkoutExchange) checkoutExchange.textContent = cart.length ? `${translations[currentLang].price_mnt_label}: ${((fmtMNT(subtotal + cargoFee)) + (delivChecked ? DELIVERY_FEE_MNT : 0)).toLocaleString()}₮` : '';
+    if (checkoutExchange) checkoutExchange.textContent = availableCartItems().length ? `${translations[currentLang].price_mnt_label}: ${((fmtMNT(subtotal + cargoFee)) + (delivChecked ? DELIVERY_FEE_MNT : 0)).toLocaleString()}₮` : '';
     return { subtotal, cargoFee, delivYen, total };
 }
-function updateConfirmState() { const cb = $('accept-prices'); const btn = $('confirm-order-btn'); if (btn) btn.disabled = !(cb && cb.checked); }
+function updateConfirmState() { const cb = $('accept-prices'); const btn = $('confirm-order-btn'); if (btn) btn.disabled = !(cb && cb.checked) || cartHasUnavailable(); }
 
 function renderCheckout() {
     const t = translations[currentLang];
@@ -2453,16 +2461,17 @@ function renderCheckout() {
         return;
     }
 
-    checkoutItems.innerHTML = cart.map(item => `
-        <div class="checkout-item">
+    checkoutItems.innerHTML = cart.map(item => { const un = cartItemUnavailable(item); return `
+        <div class="checkout-item${un ? ' unavailable' : ''}">
             <img src="${item.img}" alt="${iname(item)}">
             <div class="checkout-item-info">
                 <p><strong>${iname(item)}</strong></p>
                 <p class="small">${item.brand} | ${item.size} | ${cname(item.color)} | x${item.qty} | ${itemWeightGrams(item)} г</p>
                 <p class="price">¥${(item.price * item.qty).toLocaleString()}</p>
+                ${un ? `<span class="sold-out-badge">${t.sold_out}</span>` : ''}
             </div>
         </div>
-    `).join('');
+    `; }).join('');
 
     paintSummary();
 }
@@ -2490,6 +2499,7 @@ async function processPayment() {
     if (orderProcessing) return;
     if (!isLoggedIn) { openAuthModal('login'); return; }
     if (cart.length === 0) { showToast(t.msg_cart_empty, 'warning'); return; }
+    if (cartHasUnavailable()) { showToast(t.msg_cart_sold_out, 'error'); return; }
     const acceptCb = $('accept-prices');
     if (!acceptCb || !acceptCb.checked) { showToast(t.msg_accept_prices, 'warning'); return; }
 
@@ -2865,6 +2875,8 @@ async function loadReadyListings() {
         readyListings.forEach(row => PRODUCTS.push(listingToProduct(row)));
         updateReadyTabVisibility();
         renderProducts();
+        renderCart();
+        if (checkoutView.classList.contains('active')) renderCheckout();
         renderAdminListings();
     } catch (err) { /* сүлжээний алдаа — хэсэг далд хэвээр үлдэнэ */ }
 }
