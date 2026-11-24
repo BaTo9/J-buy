@@ -66,6 +66,7 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    font-synthesis: none;
 }
 
 .container {
@@ -621,15 +622,21 @@ select {
 
 .menu-socials {
     display: flex;
-    gap: 10px;
     margin-bottom: 16px;
+}
+
+.menu-socials .social-icon + .social-icon {
+    margin-left: 10px;
 }
 
 .social-icons {
     display: flex;
     align-items: center;
-    gap: 12px;
     flex-wrap: nowrap;
+}
+
+.social-icons .social-icon + .social-icon {
+    margin-left: 12px;
 }
 
 .social-icons .social-icon {
@@ -778,6 +785,7 @@ body {
 .to-top-btn {
     position: fixed;
     outline: none;
+    -webkit-tap-highlight-color: transparent;
     right: 18px;
     bottom: calc(102px + env(safe-area-inset-bottom));
     width: 48px;
@@ -811,6 +819,10 @@ body {
 
 .to-top-btn:active {
     transform: scale(0.94);
+}
+
+.to-top-btn:focus {
+    outline: none;
 }
 
 /* Floating support chat button (Messenger) */
