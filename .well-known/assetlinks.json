@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "shop.japanbuy.app",
+    "sha256_cert_fingerprints": ["FB:0C:A6:E4:30:24:DC:77:2C:0C:8D:64:28:B4:D5:AC:97:26:6F:C2:BB:34:32:E8:B7:11:02:F4:FE:4A:D4:1D"]
+  }
+}]
