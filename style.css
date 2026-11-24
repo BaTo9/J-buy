@@ -43,6 +43,50 @@
     --phone-item-bg: #262626;
 }
 
+
+/* Mongolian letters Ү/Ө: Inter's main cyrillic subset lacks these glyphs;
+   serve them from the cyrillic-ext file so every browser renders them in Inter. */
+@font-face {
+    font-family: 'InterMN';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
+    unicode-range: U+04AE, U+04AF, U+04E8, U+04E9;
+}
+@font-face {
+    font-family: 'InterMN';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
+    unicode-range: U+04AE, U+04AF, U+04E8, U+04E9;
+}
+@font-face {
+    font-family: 'InterMN';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
+    unicode-range: U+04AE, U+04AF, U+04E8, U+04E9;
+}
+@font-face {
+    font-family: 'InterMN';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
+    unicode-range: U+04AE, U+04AF, U+04E8, U+04E9;
+}
+@font-face {
+    font-family: 'InterMN';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
+    unicode-range: U+04AE, U+04AF, U+04E8, U+04E9;
+}
+
 /* ================= RESET ================= */
 *,
 *::before,
@@ -60,7 +104,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'InterMN', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-primary);
     line-height: 1.6;
