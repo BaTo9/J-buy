@@ -96,6 +96,14 @@
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
+a, button, [role="button"], [tabindex] {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a:focus, button:focus, [role="button"]:focus, [tabindex]:focus {
+    outline: none;
+}
+
 
 html {
     scroll-behavior: smooth;
